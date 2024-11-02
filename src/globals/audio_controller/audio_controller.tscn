@@ -16,8 +16,8 @@ script = ExtResource("1_a2i5f")
 [node name="MusicController" type="Node" parent="."]
 script = ExtResource("3_fum7x")
 music = {
-0: ExtResource("4_14rgq"),
-1: ExtResource("5_bv782")
+-1: ExtResource("4_14rgq"),
+0: ExtResource("5_bv782")
 }
 
 [node name="SFXController" type="Node" parent="."]
