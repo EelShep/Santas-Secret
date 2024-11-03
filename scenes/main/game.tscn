@@ -1,24 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://ducb6nwnf0e6j"]
+[gd_scene load_steps=5 format=3 uid="uid://ducb6nwnf0e6j"]
 
 [ext_resource type="Script" path="res://scenes/main/game.gd" id="1_8scqg"]
+[ext_resource type="Script" path="res://scenes/ui/pause_screen_ui.gd" id="2_wt6m8"]
+[ext_resource type="Script" path="res://scenes/ui/screen_manager/pause_screens/pause_screens.gd" id="3_jmoiw"]
+[ext_resource type="PackedScene" uid="uid://dt1s2x2oymdsv" path="res://scenes/ui/screen_manager/pause_screens/pause_screen.tscn" id="4_uvvqy"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("play_time_label")]
 script = ExtResource("1_8scqg")
+play_time_label = NodePath("GameUI/MarginContainer/PlayTimeLabel")
 
 [node name="LevelManager" type="Node2D" parent="."]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GameUI" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
-layout_mode = 1
+[node name="BackgroundRect" type="ColorRect" parent="GameUI"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -26,18 +21,54 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.219501, 0.219501, 0.219501, 1)
 
-[node name="TitleLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
+[node name="MarginContainer" type="MarginContainer" parent="GameUI"]
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -32.0
-offset_bottom = 32.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="TitleLabel" type="RichTextLabel" parent="GameUI/MarginContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
 text = "[center][shake rate=9.0 level=9 connected=1][color=orangered]Game[/color][/shake] "
 scroll_active = false
+
+[node name="PlayTimeLabel" type="Label" parent="GameUI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="PauseScreenUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("background", "pause_screens")]
+process_mode = 3
+script = ExtResource("2_wt6m8")
+background = NodePath("BackgroundRect")
+pause_screens = NodePath("PauseScreens")
+
+[node name="BackgroundRect" type="ColorRect" parent="PauseScreenUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.169245, 0.169245, 0.169245, 1)
+
+[node name="PauseScreens" type="Control" parent="PauseScreenUI" node_paths=PackedStringArray("screens")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_jmoiw")
+screens = [NodePath("PauseScreen")]
+button_groups = Array[String](["pause_buttons"])
+
+[node name="PauseScreen" parent="PauseScreenUI/PauseScreens" instance=ExtResource("4_uvvqy")]
+layout_mode = 1

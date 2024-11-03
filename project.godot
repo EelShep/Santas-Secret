@@ -23,6 +23,7 @@ buses/default_bus_layout="res://src/resources/default_bus_layout.tres"
 
 Events="*res://src/globals/events.gd"
 AudioController="*res://src/globals/audio_controller/audio_controller.tscn"
+GameData="*res://src/globals/game_data.gd"
 
 [file_customization]
 
