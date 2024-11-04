@@ -11,6 +11,8 @@ func _on_button_pressed(button: ScreenButton) -> void:
 			exit_screens.emit(self, true)
 			change_screen(null)
 		"PauseQuit":
+			SceneTransition.fade_out_in()
+			await SceneTransition.transition_ready
 			get_tree().change_scene_to_file(MAIN_MENU_SCENE_PATH)
 
 
