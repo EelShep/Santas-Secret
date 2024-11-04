@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://fftq2dc66y2r" path="res://assets/audio/sound_effects/placeholder_ui/UINegative2.ogg" id="9_tivn7"]
 
 [node name="AudioController" type="Node"]
+process_mode = 3
 script = ExtResource("1_a2i5f")
 
 [node name="MusicController" type="Node" parent="."]
