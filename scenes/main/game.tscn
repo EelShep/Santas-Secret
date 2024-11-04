@@ -1,12 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://ducb6nwnf0e6j"]
+[gd_scene load_steps=2 format=3 uid="uid://ducb6nwnf0e6j"]
 
 [ext_resource type="Script" path="res://scenes/main/game.gd" id="1_8scqg"]
-[ext_resource type="Script" path="res://assets/scripts/playerController.gd" id="2_m07rh"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_r7gqn"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pujq7"]
-size = Vector2(20, 50)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_8scqg")
@@ -47,15 +41,3 @@ theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
 text = "[center][shake rate=9.0 level=9 connected=1][color=orangered]Game[/color][/shake] "
 scroll_active = false
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_r7gqn")
-script = ExtResource("2_m07rh")
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="AnimatedSprite2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/CharacterBody2D"]
-position = Vector2(449, 442)
-shape = SubResource("RectangleShape2D_pujq7")
-one_way_collision_margin = 0.0
-debug_color = Color(8.66354e-06, 0.843623, 0.971956, 1)
