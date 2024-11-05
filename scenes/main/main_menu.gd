@@ -8,13 +8,14 @@ const GAME_SCENE_PATH: String = "res://scenes/main/game.tscn"
 func _ready() -> void:
 	get_tree().paused = false
 	Events.main_menu_ready.emit()
-
 	main_menu_screens.start_game.connect(_on_play_pressed)
 	main_menu_screens.quit_game.connect(_on_quit_pressed)
 	main_menu_screens.on_enter()
 
 
 func _on_play_pressed() -> void:
+	SceneTransition.fade_out_in()
+	await SceneTransition.transition_ready
 	get_tree().change_scene_to_file(GAME_SCENE_PATH)
 
 
