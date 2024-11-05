@@ -8,6 +8,10 @@
 
 config_version=5
 
+[addons]
+
+metroidvania_system/settings_file="res://MetSysSettings.tres"
+
 [application]
 
 config/name="Github GameOff"
@@ -25,6 +29,7 @@ Events="*res://src/globals/events.gd"
 AudioController="*res://src/globals/audio_controller/audio_controller.tscn"
 GameData="*res://src/globals/game_data.gd"
 SceneTransition="*res://src/globals/scene_transition/scene_transition.tscn"
+MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"
 
 [display]
 
@@ -32,9 +37,14 @@ window/size/viewport_width=1024
 window/size/viewport_height=576
 window/stretch/mode="viewport"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/MetroidvaniaSystem/EditorExtension/plugin.cfg", "res://addons/MetroidvaniaSystem/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
+"res://addons/": "gray",
 "res://assets/": "green",
 "res://scenes/": "orange",
 "res://src/": "red"

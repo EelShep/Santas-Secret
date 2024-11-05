@@ -1,4 +1,4 @@
-class_name Game extends Node2D
+class_name TestGame extends Node2D
 
 signal new_second
 
