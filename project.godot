@@ -30,6 +30,7 @@ SceneTransition="*res://src/globals/scene_transition/scene_transition.tscn"
 
 window/size/viewport_width=1024
 window/size/viewport_height=576
+window/stretch/mode="viewport"
 
 [file_customization]
 
