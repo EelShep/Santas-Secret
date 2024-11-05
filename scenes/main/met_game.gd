@@ -6,17 +6,9 @@ const SAVE_PATH = "user://example_save_data.sav"
 
 # The game starts in this map. Note that it's scene name only, just like MetSys refers to rooms.
 @export var starting_map: String
-
-# Number of collected collectibles. Setting it also updates the counter.
-var collectibles: int:
-	set(count):
-		collectibles = count
-		%CollectibleCount.text = "%d/6" % count
-
 # The coordinates of generated rooms. MetSys does not keep this list, so it needs to be done manually.
 var generated_rooms: Array[Vector3i]
-# The typical array of game events. It's supplementary to the storable objects.
-var events: Array[String]
+
 # For Custom Runner integration.
 var custom_run: bool
 
@@ -26,23 +18,17 @@ func _init() -> void:
 	instance = self
 
 func _ready() -> void:
-	# A trick for static object reference (before static vars were a thing).
-	get_script().set_meta(&"singleton", self)
-	# Make sure MetSys is in initial state.
-	# Does not matter in this project, but normally this ensures that the game works correctly when you exit to menu and start again.
-	MetSys.reset_state()
-	# Assign player for MetSysGame.
-	set_player($TestPlayer)
+	Events.game_ready.emit()
+	
+	MetSys.reset_state() # Make sure MetSys is in initial state.
+	set_player($TestPlayer) # Assign player for MetSysGame.
 	
 	if FileAccess.file_exists(SAVE_PATH):
 		# If save data exists, load it using MetSys SaveManager.
 		var save_manager := SaveManager.new()
 		save_manager.load_from_text(SAVE_PATH)
 		# Assign loaded values.
-		collectibles = save_manager.get_value("collectible_count")
 		generated_rooms.assign(save_manager.get_value("generated_rooms"))
-		events.assign(save_manager.get_value("events"))
-		player.abilities.assign(save_manager.get_value("abilities"))
 		
 		if not custom_run:
 			var loaded_starting_map: String = save_manager.get_value("current_room")
@@ -64,8 +50,7 @@ func _ready() -> void:
 	
 	# Reset position tracking (feature specific to this project).
 	reset_map_starting_coords.call_deferred()
-	# Add module for room transitions.
-	add_module("RoomTransitions.gd")
+	add_module("RoomTransitions.gd") # Add module for room transitions.
 
 # Save game using MetSys SaveManager.
 func save_game():
@@ -79,4 +64,4 @@ func reset_map_starting_coords():
 
 func init_room():
 	MetSys.get_current_room_instance().adjust_camera_limits(%Camera2D)
-	player.on_enter()
+	#player.on_enter()
