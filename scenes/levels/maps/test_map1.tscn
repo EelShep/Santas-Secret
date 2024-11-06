@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=4 uid="uid://2sd02d51ffpd"]
+[gd_scene load_steps=4 format=4 uid="uid://2sd02d51ffpd"]
 
-[ext_resource type="PackedScene" uid="uid://ujuwg0fbq72c" path="res://scenes/levels/test_level_template.tscn" id="1_sbapw"]
+[ext_resource type="PackedScene" path="res://scenes/levels/test_level_template.tscn" id="1_sbapw"]
+[ext_resource type="PackedScene" uid="uid://cqchpn4x44pav" path="res://scenes/entities/npc/npc.tscn" id="2_7pqrn"]
+[ext_resource type="PackedScene" uid="uid://cdkfvx081psyy" path="res://scenes/interactables/dialogue/dialogue.tscn" id="3_ut30r"]
 
 [node name="TestMap1" instance=ExtResource("1_sbapw")]
 
@@ -12,3 +14,8 @@ tile_map_data = PackedByteArray("AAD+/w4AAQAIAAAAAAD//w4AAQAIAAAAAAAAAA4AAQAIAAA
 
 [node name="SavePoint" type="Node2D" parent="." index="2"]
 position = Vector2(731, 443)
+
+[node name="NPC" parent="." index="3" instance=ExtResource("2_7pqrn")]
+position = Vector2(856, 449)
+
+[node name="Dialogue" parent="NPC" index="3" instance=ExtResource("3_ut30r")]

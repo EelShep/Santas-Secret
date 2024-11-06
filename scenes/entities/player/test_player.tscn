@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://da2h4ftgveeb7"]
+[gd_scene load_steps=11 format=3 uid="uid://da2h4ftgveeb7"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/test_player.gd" id="1_8eavo"]
 [ext_resource type="Texture2D" uid="uid://hre3d6c2wbwo" path="res://assets/visual/sprites/MC.png" id="2_7y3dc"]
@@ -100,8 +100,13 @@ _data = {
 "Run": SubResource("Animation_r5q3a")
 }
 
-[node name="TestPlayer" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_nu3fp"]
+radius = 30.0
+
+[node name="TestPlayer" type="CharacterBody2D" node_paths=PackedStringArray("interaction_finder")]
+collision_layer = 2
 script = ExtResource("1_8eavo")
+interaction_finder = NodePath("InteractionFinder")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -20)
@@ -117,3 +122,12 @@ vframes = 2
 libraries = {
 "": SubResource("AnimationLibrary_sert5")
 }
+
+[node name="InteractionFinder" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionFinder"]
+position = Vector2(0, -30)
+shape = SubResource("CircleShape2D_nu3fp")
+debug_color = Color(0.588503, 0.377368, 1, 0.42)

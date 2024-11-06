@@ -17,6 +17,7 @@ var play_time: float:
 
 func _ready() -> void:
 	Events.game_ready.emit()
+	
 	new_second.connect(_on_new_second)
 	play_time = 0
 	

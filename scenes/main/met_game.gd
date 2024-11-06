@@ -17,8 +17,16 @@ func _init() -> void:
 	if instance == null: print("Previous instance: " + str(self))
 	instance = self
 
+
+func _on_events_dialogue_toggle(value: bool) -> void:
+	Events.can_pause.emit(!value)
+	get_tree().paused = value
+
+
 func _ready() -> void:
 	Events.game_ready.emit()
+	
+	Events.dialogue_toggle.connect(_on_events_dialogue_toggle)
 	
 	MetSys.reset_state() # Make sure MetSys is in initial state.
 	set_player($TestPlayer) # Assign player for MetSysGame.
