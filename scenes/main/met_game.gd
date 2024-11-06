@@ -3,30 +3,49 @@ class_name Game
 
 const SaveManager = preload("res://addons/MetroidvaniaSystem/Template/Scripts/SaveManager.gd")
 const SAVE_PATH = "user://example_save_data.sav"
-
 # The game starts in this map. Note that it's scene name only, just like MetSys refers to rooms.
 @export var starting_map: String
+@export_category("Setup")
+@export var level_manager: Node2D
+@export var day_night: DayNight
+@export var play_time_label: Label
 # The coordinates of generated rooms. MetSys does not keep this list, so it needs to be done manually.
 var generated_rooms: Array[Vector3i]
-
-# For Custom Runner integration.
-var custom_run: bool
+var custom_run: bool # For Custom Runner integration.
 
 static var instance: Game
 func _init() -> void:
 	if instance == null: print("Previous instance: " + str(self))
 	instance = self
 
-
+signal new_second
+var total_play_time: float
+var last_second: int = -1
+var play_time: float:
+	set(value):
+		play_time = value
+		var current_second: int = int(play_time)
+		if current_second == last_second: return
+		last_second = current_second
+		new_second.emit()
+func _process(delta: float) -> void:
+	total_play_time += delta
+	play_time += delta
+	
+#region Signal Functions
+func _on_new_second() -> void:
+	play_time_label.text = GameData.convert_time(play_time)
+	
 func _on_events_dialogue_toggle(value: bool) -> void:
 	Events.can_pause.emit(!value)
 	get_tree().paused = value
-
+#endregion
+	
 
 func _ready() -> void:
 	Events.game_ready.emit()
-	
 	Events.dialogue_toggle.connect(_on_events_dialogue_toggle)
+	new_second.connect(_on_new_second)
 	
 	MetSys.reset_state() # Make sure MetSys is in initial state.
 	set_player($TestPlayer) # Assign player for MetSysGame.
@@ -72,4 +91,15 @@ func reset_map_starting_coords():
 
 func init_room():
 	MetSys.get_current_room_instance().adjust_camera_limits(%Camera2D)
-	#player.on_enter()
+	player.on_enter()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not OS.has_feature("editor"): return
+	if event.is_action_pressed(GameConst.INPUT_SELECT):
+		var music_bus: int = AudioConst.BUS_MUSIC_IDX
+		AudioServer.set_bus_mute(music_bus, !AudioServer.is_bus_mute(music_bus))
+	elif event is InputEventKey and event.pressed:
+		match event.keycode:
+			KEY_R:
+				get_tree().reload_current_scene()

@@ -13,8 +13,10 @@ script = ExtResource("1_x2t1b")
 metadata/_edit_lock_ = true
 
 [node name="Background" type="TileMapLayer" parent="TileMaps"]
+light_mask = 2
 tile_set = ExtResource("3_bfciy")
 
 [node name="Ground" type="TileMapLayer" parent="TileMaps"]
+light_mask = 2
 tile_set = ExtResource("3_bfciy")
 metadata/_edit_lock_ = true

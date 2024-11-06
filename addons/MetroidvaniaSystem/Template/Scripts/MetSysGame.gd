@@ -45,7 +45,7 @@ func load_room(path: String):
 		map = null
 	
 	map = load(path).instantiate()
-	add_child(map)
+	Game.instance.level_manager.add_child(map)
 	
 	MetSys.current_layer = MetSys.get_current_room_instance().get_layer()
 	map_changing = false
