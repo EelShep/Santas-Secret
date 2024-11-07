@@ -1,7 +1,0 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://degv876gs75ob"]
-
-[ext_resource type="FontFile" uid="uid://b6qs2he4hrvos" path="res://src/resources/fonts/Liver.ttf" id="1_b1sih"]
-
-[resource]
-default_font = ExtResource("1_b1sih")
-default_font_size = 48
