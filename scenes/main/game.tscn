@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/main/met_game.gd" id="1_tjrnh"]
 [ext_resource type="Script" path="res://scenes/levels/day_night.gd" id="2_ldkdj"]
 [ext_resource type="Script" path="res://scenes/ui/pause_screen_ui.gd" id="2_wt6m8"]
-[ext_resource type="Gradient" uid="uid://dv75y3trn3ns7" path="res://src/resources/daynight-gradient-texture.tres" id="3_5mp8n"]
+[ext_resource type="Gradient" path="res://src/resources/daynight-gradient-texture.tres" id="3_5mp8n"]
 [ext_resource type="Script" path="res://scenes/ui/screen_manager/pause_screens/pause_screens.gd" id="3_jmoiw"]
 [ext_resource type="PackedScene" uid="uid://da2h4ftgveeb7" path="res://scenes/entities/player/test_player.tscn" id="3_vdxjv"]
 [ext_resource type="PackedScene" uid="uid://dt1s2x2oymdsv" path="res://scenes/ui/screen_manager/pause_screens/pause_screen.tscn" id="4_uvvqy"]

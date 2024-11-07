@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=4 uid="uid://b838hti665p1i"]
 
-[ext_resource type="PackedScene" uid="uid://ujuwg0fbq72c" path="res://scenes/levels/test_level_template.tscn" id="1_0r4sx"]
+[ext_resource type="PackedScene" path="res://scenes/levels/map_template.tscn" id="1_0r4sx"]
 
 [node name="TestMap2" instance=ExtResource("1_0r4sx")]
 

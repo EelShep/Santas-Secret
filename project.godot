@@ -32,10 +32,6 @@ SceneTransition="*res://src/globals/scene_transition/scene_transition.tscn"
 MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
-[dialogue_manager]
-
-general/balloon_path="res://scenes/interactables/dialogue/balloon/balloon.tscn"
-
 [display]
 
 window/size/viewport_width=1024
