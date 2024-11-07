@@ -11,13 +11,14 @@
 [ext_resource type="AudioStream" uid="uid://fftq2dc66y2r" path="res://assets/audio/sound_effects/placeholder_ui/UINegative2.ogg" id="9_tivn7"]
 
 [node name="AudioController" type="Node"]
+process_mode = 3
 script = ExtResource("1_a2i5f")
 
 [node name="MusicController" type="Node" parent="."]
 script = ExtResource("3_fum7x")
 music = {
-0: ExtResource("4_14rgq"),
-1: ExtResource("5_bv782")
+-1: ExtResource("4_14rgq"),
+0: ExtResource("5_bv782")
 }
 
 [node name="SFXController" type="Node" parent="."]
