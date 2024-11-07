@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://u2ubyj7wh74q"]
+
+[ext_resource type="Shader" path="res://scenes/tests/recolor-elf.gdshader" id="1_k7gok"]
+[ext_resource type="Script" path="res://scenes/tests/recolor_elf.gd" id="1_ygkdo"]
+[ext_resource type="Texture2D" uid="uid://8utji0ndbjhg" path="res://assets/visual/sprites/palette.png" id="2_amskg"]
+[ext_resource type="Texture2D" uid="uid://cqbbqnaby4oq6" path="res://assets/visual/sprites/elf.png" id="3_ptvk7"]
+[ext_resource type="Texture2D" uid="uid://6u4ucxy0fvbo" path="res://assets/visual/sprites/elf-skin.png" id="5_g725d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gg2kp"]
+shader = ExtResource("1_k7gok")
+shader_parameter/skip_first_row = false
+shader_parameter/use_palette_alpha = false
+shader_parameter/fps = 0.0
+shader_parameter/row = 0.0
+shader_parameter/palette = ExtResource("2_amskg")
+
+[node name="Recolor-elf" type="Node2D"]
+script = ExtResource("1_ygkdo")
+
+[node name="Elf1" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_gg2kp")
+position = Vector2(-34, -52)
+texture = ExtResource("3_ptvk7")
+
+[node name="Elf2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_gg2kp")
+position = Vector2(-34, -52)
+texture = ExtResource("5_g725d")
