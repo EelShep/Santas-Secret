@@ -7,6 +7,9 @@
 radius = 140.0
 
 [node name="NPC" type="Area2D" node_paths=PackedStringArray("sprite", "action_timer")]
+z_index = 1
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_167qq")
 sprite = NodePath("Sprite2D")
 action_timer = NodePath("ActionTimer")
