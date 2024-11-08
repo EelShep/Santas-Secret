@@ -12,6 +12,7 @@ sprite = NodePath("Sprite2D")
 action_timer = NodePath("ActionTimer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 32
 position = Vector2(0, -30)
 texture = ExtResource("1_oj21o")
 hframes = 7
