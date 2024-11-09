@@ -21,10 +21,20 @@ var prev_on_floor: bool
 var airtime: float = 0
 var speed: float = SPEED_MIN
 
+@export var interaction_finder: Area2D
+
 static var instance: TestPlayer
 func _init() -> void:
 	if instance == null: print("Previous instance: " + str(self))
 	instance = self
+
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed(GameConst.INPUT_INTERACT):
+		var areas = interaction_finder.get_overlapping_areas()
+		print(areas.size())
+		if areas.size() < 1: return
+		for area in areas:
+			if area is Interactable: (area as Interactable).handle_action()
 
 func _ready() -> void:
 	on_enter()

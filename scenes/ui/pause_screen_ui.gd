@@ -3,11 +3,14 @@ class_name PauseScreenUI extends CanvasLayer
 @export var background: ColorRect
 @export var pause_screens: ScreensManager
 
+var can_pause: bool = true
 func _unhandled_input(event: InputEvent) -> void:
+	if !can_pause: return
 	if event.is_action_pressed(GameConst.INPUT_START):
 		if get_tree().paused != true: show_pause_screen()
 
 func _ready() -> void:
+	Events.can_pause.connect(func(value: bool) -> void: can_pause = value)
 	get_tree().paused = false
 	set_process_unhandled_input(true)
 	pause_screens.exit_screens.connect(_on_screens_exited.unbind(2))
