@@ -1,4 +1,4 @@
-class_name Map extends Node2D
+class_name Level extends Node2D
 
 enum Area {
 	Area1 = -1,
@@ -8,7 +8,7 @@ enum Area {
 @export var id: int
 @export var area: Area
 
-static var instance: Map
+static var instance: Level
 func _init() -> void:
 	if instance == null: print("Previous instance: " + str(self))
 	instance = self
