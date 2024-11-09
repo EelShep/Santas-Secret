@@ -10,6 +10,10 @@ const DAY_TIME: String = "day_time"
 var data: Dictionary = {}
 
 
+func set_curr_room() -> void:
+	data[CURR_ROOM] = MetSys.get_current_room_name()
+
+
 func reset_data() -> void:
 	data = {}
 

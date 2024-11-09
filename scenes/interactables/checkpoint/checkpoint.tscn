@@ -1,16 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckank5xl1ccdj"]
+[gd_scene load_steps=5 format=3 uid="uid://ckank5xl1ccdj"]
 
 [ext_resource type="Script" path="res://scenes/interactables/checkpoint/checkpoint.gd" id="1_v44ii"]
+[ext_resource type="Texture2D" uid="uid://cihtig8sq6fuj" path="res://assets/visual/sprites/Tiles.png" id="2_706el"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ls8gg"]
+atlas = ExtResource("2_706el")
+region = Rect2(48, 128, 128, 224)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u7vik"]
-radius = 24.0
+radius = 42.0
 
 [node name="Checkpoint" type="Area2D" node_paths=PackedStringArray("canvas_layer", "prompt_control")]
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("1_v44ii")
 canvas_layer = NodePath("CanvasLayer")
 prompt_control = NodePath("CanvasLayer/MarginContainer/PromptControl")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -111)
+texture = SubResource("AtlasTexture_ls8gg")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -21)
 shape = SubResource("CircleShape2D_u7vik")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -57,4 +69,4 @@ offset_right = 20.0
 offset_bottom = 24.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "Press Interact to Talk"
+text = "Press Interact to Save"

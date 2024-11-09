@@ -9,10 +9,14 @@ const SAVE_PATH = "user://example_save_data.sav"
 @export_category("Setup")
 @export var level_manager: Node2D
 @export var game_ui: GameUI
+@export_category("Day Night Cycle")
 @export var day_night: DayNight
-#@export var play_time_label: Label
+@export var INITIAL_HOUR: int = 6
+var day_time: float = -1.0
+var curr_hour: int
+
 # The coordinates of generated rooms. MetSys does not keep this list, so it needs to be done manually.
-var generated_rooms: Array[Vector3i]
+#TODO var generated_rooms: Array[Vector3i]
 
 
 static var instance: Game
@@ -44,15 +48,16 @@ func _on_events_player_died() -> void:
 	save_game()
 	get_tree().paused = true
 	Events.can_pause.emit(false)
+	SceneTransition.transition_ready.connect(reload_scene, CONNECT_ONE_SHOT)
 	SceneTransition.fade_out()
-	await SceneTransition.transition_ready
+
+
+func reload_scene() -> void:
 	get_tree().paused = false
 	Events.can_pause.emit(true)
 	get_tree().reload_current_scene()
 
-@export var INITIAL_HOUR: int = 6
-var day_time: float = -1.0
-var curr_hour: int
+
 func _on_day_night_time_tick(day:int, hour:int, minute:int) -> void:
 	if curr_hour == hour: return
 	curr_hour = hour
@@ -60,6 +65,11 @@ func _on_day_night_time_tick(day:int, hour:int, minute:int) -> void:
 		var player: TestPlayer = TestPlayer.instance
 		player.on_day_night(hour)
 		game_ui.on_day_night(hour)
+
+func _on_events_checkpoint_activated() -> void:
+	game_ui.display_message("Checkpoint Activated")
+	GameData.set_curr_room()
+
 #endregion
 
 func _ready() -> void:
@@ -67,6 +77,8 @@ func _ready() -> void:
 	Events.game_ready.emit()
 	Events.dialogue_toggle.connect(_on_events_dialogue_toggle)
 	Events.player_died.connect(_on_events_player_died)
+	Events.checkpoint_activated.connect(_on_events_checkpoint_activated)
+	
 	day_night.time_tick.connect(_on_day_night_time_tick)
 	#NOTE Setup Dependancies
 	
@@ -87,7 +99,7 @@ func _ready() -> void:
 	load_room(starting_map)
 	
 	# Find the save point and teleport the player to it, to start at the save point.
-	var start := map.get_node_or_null(^"SavePoint")
+	var start := map.get_node_or_null(^"Checkpoint")
 	if custom_run or !start: start = map.get_node_or_null(^"PlayerSpawn")
 	if start:
 		player.position = start.position
@@ -99,18 +111,23 @@ func _ready() -> void:
 # Save game using MetSys SaveManager.
 func save_game():
 	var data: Dictionary = {
-		GameData.CURR_ROOM: MetSys.get_current_room_name(),
+		#GameData.CURR_ROOM: MetSys.get_current_room_name(),
 		GameData.PLAY_TIME: play_time,
 		GameData.DAY_TIME: day_night.time
 	}
 	GameData.save_data(data)
 
+const STARTING_MAP: String = "test_map.tscn"
 func load_game() -> void:
-	if GameData.load_data().is_empty(): return
+	if GameData.load_data().is_empty():
+		GameData.set_curr_room()
+		return
 	var data: Dictionary = GameData.load_data()
 	
+	var room_data = data.get(GameData.CURR_ROOM)
+	
 	if not custom_run:
-		starting_map = data.get(GameData.CURR_ROOM)
+		starting_map = room_data if room_data != null else STARTING_MAP
 	play_time = data.get(GameData.PLAY_TIME)
 	day_time = data.get(GameData.DAY_TIME)
 	
