@@ -114,6 +114,7 @@ position = Vector2(0, -20)
 shape = SubResource("RectangleShape2D_vb85q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 8
 position = Vector2(0, -30)
 texture = ExtResource("2_7y3dc")
 hframes = 7
@@ -139,7 +140,7 @@ position = Vector2(0, -16)
 color = Color(0.988235, 1, 0.760784, 0.4)
 range_layer_min = -100
 range_layer_max = 512
-range_item_cull_mask = 10
+range_item_cull_mask = 42
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 shadow_item_cull_mask = 4

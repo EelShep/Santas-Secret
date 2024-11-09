@@ -19,8 +19,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 
 func _ready() -> void:
-	Events.main_menu_ready.connect(handle_main_menu_ready)
-	Events.game_ready.connect(handle_game_ready)
+	Events.main_menu_ready.connect(on_events_main_menu_ready)
+	Events.game_ready.connect(on_events_game_ready)
+	Events.map_ready.connect(on_events_map_ready)
 	
 	AudioServer.set_bus_volume_db(AudioConst.BUS_SFX_IDX, -15.0)
 
@@ -41,13 +42,18 @@ func toggle_bus_effect(bus_idx: int, effect_idx: int, value: bool) -> void:
 	AudioServer.set_bus_effect_enabled(bus_idx, effect_idx, value)
 
 
-func handle_main_menu_ready() -> void:
+#region Events Signal Functions
+func on_events_main_menu_ready() -> void:
 	music_controller.play_music(AudioConst.MUSIC_TITLE)
 	reset_music_effects()
 
-func handle_game_ready() -> void:
+func on_events_game_ready() -> void:
 	music_controller.play_music(AudioConst.MUSIC_TRACK_0)
 	reset_music_effects()
+	
+func on_events_map_ready(area: int) -> void:
+	music_controller.play_music(area)
+#endregion
 
 func reset_music_effects() -> void:
 	music_controller.music_player.pitch_scale = 1.0
