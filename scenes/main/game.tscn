@@ -1,28 +1,28 @@
-[gd_scene load_steps=9 format=3 uid="uid://ducb6nwnf0e6j"]
+[gd_scene load_steps=10 format=3 uid="uid://ducb6nwnf0e6j"]
 
 [ext_resource type="Script" path="res://scenes/main/met_game.gd" id="1_tjrnh"]
 [ext_resource type="Script" path="res://scenes/levels/day_night.gd" id="2_ldkdj"]
 [ext_resource type="Script" path="res://scenes/ui/pause_screen_ui.gd" id="2_wt6m8"]
-[ext_resource type="Gradient" path="res://src/resources/daynight-gradient-texture.tres" id="3_5mp8n"]
+[ext_resource type="Gradient" uid="uid://dv75y3trn3ns7" path="res://src/resources/daynight-gradient-texture.tres" id="3_5mp8n"]
 [ext_resource type="Script" path="res://scenes/ui/screen_manager/pause_screens/pause_screens.gd" id="3_jmoiw"]
 [ext_resource type="PackedScene" uid="uid://da2h4ftgveeb7" path="res://scenes/entities/player/test_player.tscn" id="3_vdxjv"]
 [ext_resource type="PackedScene" uid="uid://dt1s2x2oymdsv" path="res://scenes/ui/screen_manager/pause_screens/pause_screen.tscn" id="4_uvvqy"]
+[ext_resource type="Script" path="res://scenes/ui/game_ui.gd" id="5_vgo4j"]
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_pj03m"]
 gradient = ExtResource("3_5mp8n")
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("level_manager", "day_night", "play_time_label")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("level_manager", "game_ui", "day_night")]
 script = ExtResource("1_tjrnh")
-starting_map = "test_map1.tscn"
+starting_map = "test_map.tscn"
 level_manager = NodePath("LevelManager")
+game_ui = NodePath("GameUI")
 day_night = NodePath("DayNight")
-play_time_label = NodePath("GameUI/MarginContainer/PlayTimeLabel")
 
 [node name="DayNight" type="CanvasModulate" parent="."]
 script = ExtResource("2_ldkdj")
 gradient_texture = SubResource("GradientTexture1D_pj03m")
 game_speed = 25.0
-initial_hour = 0
 
 [node name="LevelManager" type="Node2D" parent="."]
 
@@ -33,8 +33,12 @@ position = Vector2(516, 369)
 [node name="Camera2D" type="Camera2D" parent="TestPlayer"]
 unique_name_in_owner = true
 
-[node name="GameUI" type="CanvasLayer" parent="."]
+[node name="GameUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("play_time_label", "day_night_label", "timer")]
 layer = 10
+script = ExtResource("5_vgo4j")
+play_time_label = NodePath("MarginContainer/HBoxContainer/PlayTimeLabel")
+day_night_label = NodePath("MarginContainer/HBoxContainer/DayNightLabel")
+timer = NodePath("Timer")
 
 [node name="MarginContainer" type="MarginContainer" parent="GameUI"]
 anchors_preset = 15
@@ -47,10 +51,21 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="PlayTimeLabel" type="Label" parent="GameUI/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GameUI/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 8
+
+[node name="DayNightLabel" type="Label" parent="GameUI/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 0
+
+[node name="PlayTimeLabel" type="Label" parent="GameUI/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+horizontal_alignment = 2
+
+[node name="Timer" type="Timer" parent="GameUI"]
 
 [node name="PauseScreenUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("background", "pause_screens")]
 process_mode = 3

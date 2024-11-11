@@ -1,13 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://ujuwg0fbq72c"]
 
-[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_x2t1b"]
+[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_lulk4"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_17mij"]
 [ext_resource type="TileSet" uid="uid://dmwiwck3i7scd" path="res://src/resources/test_tileset.tres" id="3_bfciy"]
 
-[node name="TestLevelTemplate" type="Node2D"]
-script = ExtResource("1_x2t1b")
+[node name="LevelTemplate" type="Node2D"]
+script = ExtResource("1_lulk4")
+
+[node name="PlayerSpawn" type="Node2D" parent="."]
 
 [node name="RoomInstance" parent="." instance=ExtResource("2_17mij")]
+metadata/_edit_lock_ = true
 
 [node name="TileMaps" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -15,6 +18,7 @@ metadata/_edit_lock_ = true
 [node name="Background" type="TileMapLayer" parent="TileMaps"]
 light_mask = 2
 tile_set = ExtResource("3_bfciy")
+metadata/_edit_lock_ = true
 
 [node name="Ground" type="TileMapLayer" parent="TileMaps"]
 light_mask = 2

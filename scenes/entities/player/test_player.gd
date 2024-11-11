@@ -104,3 +104,7 @@ func kill():
 func on_enter():
 	# Position for kill system. Assigned when entering new room (see Game.gd).
 	reset_position = position
+	
+func on_day_night(hour: int) -> void:
+	var value: bool = hour > 18
+	$PointLight2D.enabled = value

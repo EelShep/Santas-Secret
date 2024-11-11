@@ -9,16 +9,25 @@ const GAME_MINUTE_DURATION: float = (2 * PI) / MINUTES_PER_DAY
 @export var gradient_texture: GradientTexture1D
 @export_category("Settings")
 @export var game_speed: float = 1.0
-@export var initial_hour: int = 1:
+
+var hour: int = 0:
 	set(hour):
-		initial_hour = hour
-		time = GAME_MINUTE_DURATION * initial_hour * MINUTES_PER_HOUR
+		hour = hour
+		time = GAME_MINUTE_DURATION * hour * MINUTES_PER_HOUR
 
 var time: float = 0.0
 var past_minute:float = -1.0
 
+
+func setup(game: Game) -> void:
+	if game.day_time < 0.0:
+		hour = game.INITIAL_HOUR
+	else: time = game.day_time
+
+
 func _ready() -> void:
-	time = GAME_MINUTE_DURATION * initial_hour * MINUTES_PER_HOUR
+	time = GAME_MINUTE_DURATION * hour * MINUTES_PER_HOUR
+
 
 func _process(delta: float) -> void:
 	time += delta * GAME_MINUTE_DURATION * game_speed
