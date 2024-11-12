@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqchpn4x44pav"]
 
 [ext_resource type="Script" path="res://scenes/entities/npc/npc.gd" id="1_167qq"]
-[ext_resource type="Texture2D" uid="uid://hre3d6c2wbwo" path="res://assets/visual/sprites/MC.png" id="1_oj21o"]
+[ext_resource type="Texture2D" uid="uid://hre3d6c2wbwo" path="res://assets/visual/sprites/placeholder/MC.png" id="1_oj21o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q75f"]
 radius = 140.0
