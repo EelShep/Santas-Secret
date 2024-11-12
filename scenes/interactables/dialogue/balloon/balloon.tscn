@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://73jm5qjy52vq"]
+[gd_scene load_steps=11 format=3 uid="uid://73jm5qjy52vq"]
 
 [ext_resource type="Script" path="res://scenes/interactables/dialogue/balloon/balloon.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
+[ext_resource type="Texture2D" uid="uid://dewwklnme5hrp" path="res://assets/visual/sprites/9-slice.png" id="2_eh5f4"]
 [ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="3_72ixx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
@@ -63,6 +64,18 @@ MarginContainer/constants/margin_right = 30
 MarginContainer/constants/margin_top = 15
 Panel/styles/panel = SubResource("StyleBoxFlat_uy0d5")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_syigy"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.780392, 0.364706, 0.372549, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [node name="Balloon" type="CanvasLayer"]
 process_mode = 3
 layer = 100
@@ -78,7 +91,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_qq3yp")
 
-[node name="Panel" type="Panel" parent="Balloon"]
+[node name="Panel" type="NinePatchRect" parent="Balloon"]
 clip_children = 2
 layout_mode = 1
 anchors_preset = 12
@@ -92,6 +105,11 @@ offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
+texture = ExtResource("2_eh5f4")
+patch_margin_left = 42
+patch_margin_top = 42
+patch_margin_right = 42
+patch_margin_bottom = 42
 
 [node name="Dialogue" type="MarginContainer" parent="Balloon/Panel"]
 layout_mode = 1
@@ -109,6 +127,8 @@ unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
 text = "Character"
 fit_content = true
@@ -118,6 +138,8 @@ scroll_active = false
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
 text = "Dialogue..."
 
 [node name="Responses" type="MarginContainer" parent="Balloon"]
@@ -144,6 +166,8 @@ response_template = NodePath("ResponseExample")
 
 [node name="ResponseExample" type="Button" parent="Balloon/Responses/ResponsesMenu"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_syigy")
 text = "Response example"
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
