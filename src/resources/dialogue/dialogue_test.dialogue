@@ -6,3 +6,33 @@ Player: Hi Test.
 Test: Good luck out there, Player. 
 
 => END
+
+
+~ test1
+
+Test: Hello There. 
+Player: Hi Test.
+Test: Would you like to hear more?
+- Sure =>< another_title
+- No => END
+
+Test: Welcome back from another_title
+Test: Good luck out there, Player.
+
+=> END
+
+
+~ another_title
+
+Test: I will say this.
+
+% Test: And then I might say this
+% Test: Or maybe this
+% Test: Or even this?
+
+Test: Also...
+
+%3 Test: This line has a 60% chance of being picked
+%2 Test: This line has a 40% chance of being picked
+
+=> END

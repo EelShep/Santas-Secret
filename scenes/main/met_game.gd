@@ -5,20 +5,26 @@ const SaveManager = preload("res://addons/MetroidvaniaSystem/Template/Scripts/Sa
 const SAVE_PATH = "user://example_save_data.sav"
 # The game starts in this map. Note that it's scene name only, just like MetSys refers to rooms.
 @export var starting_map: String
+@export var custom_run: bool # For Custom Runner integration.
 @export_category("Setup")
 @export var level_manager: Node2D
+@export var game_ui: GameUI
+@export_category("Day Night Cycle")
 @export var day_night: DayNight
-@export var play_time_label: Label
+@export var INITIAL_HOUR: int = 6
+var day_time: float = -1.0
+var curr_hour: int
+
 # The coordinates of generated rooms. MetSys does not keep this list, so it needs to be done manually.
-var generated_rooms: Array[Vector3i]
-var custom_run: bool # For Custom Runner integration.
+#TODO var generated_rooms: Array[Vector3i]
+
 
 static var instance: Game
 func _init() -> void:
 	if instance == null: print("Previous instance: " + str(self))
 	instance = self
 
-signal new_second
+signal new_second(play_time: float)
 var total_play_time: float
 var last_second: int = -1
 var play_time: float:
@@ -27,43 +33,65 @@ var play_time: float:
 		var current_second: int = int(play_time)
 		if current_second == last_second: return
 		last_second = current_second
-		new_second.emit()
+		new_second.emit(play_time)
 func _process(delta: float) -> void:
 	total_play_time += delta
 	play_time += delta
 	
 #region Signal Functions
-func _on_new_second() -> void:
-	play_time_label.text = GameData.convert_time(play_time)
-	
 func _on_events_dialogue_toggle(value: bool) -> void:
 	Events.can_pause.emit(!value)
 	get_tree().paused = value
+
+
+func _on_events_player_died() -> void:
+	save_game()
+	get_tree().paused = true
+	Events.can_pause.emit(false)
+	SceneTransition.transition_ready.connect(reload_scene, CONNECT_ONE_SHOT)
+	SceneTransition.fade_out()
+
+
+func reload_scene() -> void:
+	get_tree().paused = false
+	Events.can_pause.emit(true)
+	get_tree().reload_current_scene()
+
+
+func _on_day_night_time_tick(day:int, hour:int, minute:int) -> void:
+	if curr_hour == hour: return
+	curr_hour = hour
+	if curr_hour == 8 || curr_hour == 19:
+		var player: Player = Player.instance
+		player.on_day_night(hour)
+		game_ui.on_day_night(hour)
+
+func _on_events_checkpoint_activated() -> void:
+	game_ui.display_message("Checkpoint Activated")
+	GameData.set_curr_room()
+
 #endregion
-	
 
 func _ready() -> void:
+	#NOTE Connect signals
 	Events.game_ready.emit()
 	Events.dialogue_toggle.connect(_on_events_dialogue_toggle)
-	new_second.connect(_on_new_second)
+	Events.player_died.connect(_on_events_player_died)
+	Events.checkpoint_activated.connect(_on_events_checkpoint_activated)
+	
+	day_night.time_tick.connect(_on_day_night_time_tick)
+	#NOTE Setup Dependancies
+	
+	game_ui.setup(self)
 	
 	MetSys.reset_state() # Make sure MetSys is in initial state.
-	set_player($TestPlayer) # Assign player for MetSysGame.
+	set_player($Player) # Assign player for MetSysGame.
 	
-	if FileAccess.file_exists(SAVE_PATH):
-		# If save data exists, load it using MetSys SaveManager.
-		var save_manager := SaveManager.new()
-		save_manager.load_from_text(SAVE_PATH)
-		# Assign loaded values.
-		generated_rooms.assign(save_manager.get_value("generated_rooms"))
-		
-		if not custom_run:
-			var loaded_starting_map: String = save_manager.get_value("current_room")
-			if not loaded_starting_map.is_empty(): # Some compatibility problem.
-				starting_map = loaded_starting_map
-	else:
-		# If no data exists, set empty one.
-		MetSys.set_save_data()
+	MetSys.set_save_data()
+	if not GameData.load_data().is_empty():
+		load_game()
+
+	day_night.setup(self)
 	
 	# Initialize room when it changes.
 	room_loaded.connect(init_room, CONNECT_DEFERRED)
@@ -71,8 +99,9 @@ func _ready() -> void:
 	load_room(starting_map)
 	
 	# Find the save point and teleport the player to it, to start at the save point.
-	var start := map.get_node_or_null(^"SavePoint")
-	if start and not custom_run:
+	var start := map.get_node_or_null(^"Checkpoint")
+	if custom_run or !start: start = map.get_node_or_null(^"PlayerSpawn")
+	if start:
 		player.position = start.position
 	
 	# Reset position tracking (feature specific to this project).
@@ -81,16 +110,38 @@ func _ready() -> void:
 
 # Save game using MetSys SaveManager.
 func save_game():
-	var save_manager := SaveManager.new()
-	save_manager.set_value("current_room", MetSys.get_current_room_name())
-	save_manager.save_as_text(SAVE_PATH)
+	var data: Dictionary = {
+		#GameData.CURR_ROOM: MetSys.get_current_room_name(),
+		GameData.PLAY_TIME: play_time,
+		GameData.DAY_TIME: day_night.time
+	}
+	GameData.save_data(data)
+
+const STARTING_MAP: String = "test_map.tscn"
+func load_game() -> void:
+	if GameData.load_data().is_empty():
+		GameData.set_curr_room()
+		return
+	var data: Dictionary = GameData.load_data()
+	
+	var room_data = data.get(GameData.CURR_ROOM)
+	
+	if not custom_run:
+		starting_map = room_data if room_data != null else STARTING_MAP
+	play_time = data.get(GameData.PLAY_TIME)
+	day_time = data.get(GameData.DAY_TIME)
+	
+func reset_data() -> void:
+	GameData.reset_data()
 
 func reset_map_starting_coords():
 	pass
 	#$UI/MapWindow.reset_starting_coords()
 
+
 func init_room():
 	MetSys.get_current_room_instance().adjust_camera_limits(%Camera2D)
+	SceneTransition.fade_in()
 	player.on_enter()
 
 

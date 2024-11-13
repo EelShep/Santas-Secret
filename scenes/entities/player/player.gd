@@ -1,4 +1,4 @@
-class_name TestPlayer extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 const SPEED_MIN = 300.0
 const SPEED_MAX = 400.0
@@ -23,7 +23,7 @@ var speed: float = SPEED_MIN
 
 @export var interaction_finder: Area2D
 
-static var instance: TestPlayer
+static var instance: Player
 func _init() -> void:
 	if instance == null: print("Previous instance: " + str(self))
 	instance = self
