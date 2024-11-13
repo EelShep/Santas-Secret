@@ -20,6 +20,8 @@ var double_jump: bool
 var prev_on_floor: bool
 var airtime: float = 0
 var speed: float = SPEED_MIN
+var can_pick = false
+
 
 @export var interaction_finder: Area2D
 

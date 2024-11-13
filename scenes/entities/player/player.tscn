@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cus86duxmepnn"]
+[gd_scene load_steps=13 format=3 uid="uid://cus86duxmepnn"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_euw2l"]
 [ext_resource type="Texture2D" uid="uid://hre3d6c2wbwo" path="res://assets/visual/sprites/placeholder/MC.png" id="2_1jd5e"]
 [ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="3_axwlt"]
+[ext_resource type="Script" path="res://scenes/entities/player/direction.gd" id="4_ia72w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vb85q"]
 size = Vector2(16, 40)
@@ -145,3 +146,7 @@ shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 shadow_item_cull_mask = 4
 texture = ExtResource("3_axwlt")
+
+[node name="direction" type="Marker2D" parent="." groups=["direction"]]
+position = Vector2(-21, -53)
+script = ExtResource("4_ia72w")

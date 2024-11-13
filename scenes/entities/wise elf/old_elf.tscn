@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2dfatdkt85li"]
+
+[ext_resource type="PackedScene" uid="uid://cdkfvx081psyy" path="res://scenes/interactables/dialogue/dialogue.tscn" id="1_dm4ck"]
+[ext_resource type="Resource" uid="uid://6uoi1lk4u0ck" path="res://scenes/interactables/old elf/dialogue.dialogue" id="2_s2eed"]
+
+[node name="old elf" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.839216, 0.00392157, 0.956863, 1)
+
+[node name="Dialogue" parent="." instance=ExtResource("1_dm4ck")]
+position = Vector2(21, 19)
+dialogue_resource = ExtResource("2_s2eed")
+dialogue_start = "wise_elf"

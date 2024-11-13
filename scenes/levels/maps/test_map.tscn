@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://c85gjjuk8pfja"]
+[gd_scene load_steps=9 format=4 uid="uid://c85gjjuk8pfja"]
 
 [ext_resource type="PackedScene" uid="uid://ujuwg0fbq72c" path="res://scenes/levels/level_template.tscn" id="1_8tbgg"]
 [ext_resource type="PackedScene" uid="uid://dhg2k50sekyxu" path="res://scenes/entities/hazards/spikes.tscn" id="2_fj3fs"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cqchpn4x44pav" path="res://scenes/entities/npc/npc.tscn" id="3_dkt4l"]
 [ext_resource type="PackedScene" uid="uid://cdkfvx081psyy" path="res://scenes/interactables/dialogue/dialogue.tscn" id="4_bmnwb"]
 [ext_resource type="PackedScene" uid="uid://ckank5xl1ccdj" path="res://scenes/interactables/checkpoint/checkpoint.tscn" id="5_te38c"]
+[ext_resource type="PackedScene" uid="uid://cpto4d4anmhf3" path="res://scenes/entities/objects/object_1.tscn" id="7_q3x3i"]
+[ext_resource type="PackedScene" uid="uid://b2dfatdkt85li" path="res://scenes/entities/wise elf/old_elf.tscn" id="8_hyd1w"]
 
 [node name="TestMap" instance=ExtResource("1_8tbgg")]
 
@@ -41,3 +43,9 @@ dialogue_start = "test1"
 
 [node name="Checkpoint" parent="." index="6" instance=ExtResource("5_te38c")]
 position = Vector2(1320, 928)
+
+[node name="object_1" parent="." index="7" instance=ExtResource("7_q3x3i")]
+position = Vector2(1436, 823)
+
+[node name="old elf" parent="." index="8" instance=ExtResource("8_hyd1w")]
+position = Vector2(1793, 825)
