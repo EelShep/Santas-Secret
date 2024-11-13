@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://scenes/ui/pause_screen_ui.gd" id="2_wt6m8"]
 [ext_resource type="Gradient" uid="uid://dv75y3trn3ns7" path="res://src/resources/daynight-gradient-texture.tres" id="3_5mp8n"]
 [ext_resource type="Script" path="res://scenes/ui/screen_manager/pause_screens/pause_screens.gd" id="3_jmoiw"]
-[ext_resource type="PackedScene" uid="uid://da2h4ftgveeb7" path="res://scenes/entities/player/test_player.tscn" id="3_vdxjv"]
 [ext_resource type="PackedScene" uid="uid://dt1s2x2oymdsv" path="res://scenes/ui/screen_manager/pause_screens/pause_screen.tscn" id="4_uvvqy"]
+[ext_resource type="PackedScene" uid="uid://cus86duxmepnn" path="res://scenes/entities/player/player.tscn" id="4_x01mj"]
 [ext_resource type="Script" path="res://scenes/ui/game_ui.gd" id="5_vgo4j"]
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_pj03m"]
@@ -26,11 +26,9 @@ game_speed = 25.0
 
 [node name="LevelManager" type="Node2D" parent="."]
 
-[node name="TestPlayer" parent="." instance=ExtResource("3_vdxjv")]
-z_index = 1
-position = Vector2(516, 369)
+[node name="Player" parent="." instance=ExtResource("4_x01mj")]
 
-[node name="Camera2D" type="Camera2D" parent="TestPlayer"]
+[node name="Camera2D" type="Camera2D" parent="Player"]
 unique_name_in_owner = true
 
 [node name="GameUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("play_time_label", "day_night_label", "timer")]
