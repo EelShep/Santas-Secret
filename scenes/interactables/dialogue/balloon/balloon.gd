@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-signal line_ended()
+signal line_ended(line: DialogueLine)
 signal dialogue_ended()
 
 ## The action to use for advancing the dialogue
@@ -40,6 +40,7 @@ var dialogue_line: DialogueLine:
 			await ready
 
 		dialogue_line = next_dialogue_line
+		line_ended.emit(dialogue_line)
 
 		character_label.visible = not dialogue_line.character.is_empty()
 		character_label.text = tr(dialogue_line.character, "dialogue")

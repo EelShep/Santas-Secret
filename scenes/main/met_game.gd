@@ -62,7 +62,7 @@ func _on_day_night_time_tick(day:int, hour:int, minute:int) -> void:
 	if curr_hour == hour: return
 	curr_hour = hour
 	if curr_hour == 8 || curr_hour == 19:
-		var player: TestPlayer = TestPlayer.instance
+		var player: Player = Player.instance
 		player.on_day_night(hour)
 		game_ui.on_day_night(hour)
 
@@ -85,7 +85,7 @@ func _ready() -> void:
 	game_ui.setup(self)
 	
 	MetSys.reset_state() # Make sure MetSys is in initial state.
-	set_player($TestPlayer) # Assign player for MetSysGame.
+	set_player($Player) # Assign player for MetSysGame.
 	
 	MetSys.set_save_data()
 	if not GameData.load_data().is_empty():
