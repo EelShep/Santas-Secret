@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=9 format=3 uid="uid://dmwiwck3i7scd"]
 
-[ext_resource type="Texture2D" uid="uid://cihtig8sq6fuj" path="res://assets/visual/sprites/placeholder/Tiles.png" id="1_4hous"]
+[ext_resource type="Texture2D" uid="uid://cihtig8sq6fuj" path="res://assets/visual/sprites/Tiles.png" id="1_4hous"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gwjrq"]
 polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
@@ -62,10 +62,10 @@ texture_region_size = Vector2i(32, 32)
 7:1/0 = 0
 7:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_8x6j6")
 7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-8:1/next_alternative_id = 2
+8:1/next_alternative_id = 3
 8:1/0 = 0
 8:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-8:1/1 = 1
+8:1/2 = 2
 9:1/0 = 0
 9:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_8x6j6")
 9:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
