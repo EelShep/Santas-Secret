@@ -16,3 +16,9 @@ func _init() -> void:
 
 func _ready() -> void:
 	Events.map_ready.emit(area)
+	if EnemyManager.instance and has_node("Enemies"):
+		var enemies = []
+		for item in get_node("Enemies").get_children():
+			if item is Enemy:
+				enemies.append(item)
+		EnemyManager.instance.register($TileMaps/Ground, enemies)
