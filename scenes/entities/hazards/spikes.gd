@@ -6,10 +6,10 @@ func _ready() -> void:
 	body_exited.connect(_on_body_exited)
 	
 func _on_body_entered(body: Node2D) -> void:
-	if body is not TestPlayer: return
+	if body is not Player: return
 	Events.player_died.emit()
 	
 
 func _on_body_exited(body: Node2D) -> void:
-	if body is not TestPlayer: return
+	if body is not Player: return
 	
