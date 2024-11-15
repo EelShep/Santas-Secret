@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ujuwg0fbq72c" path="res://scenes/levels/map_template.tscn" id="1_di08m"]
 [ext_resource type="PackedScene" uid="uid://ckank5xl1ccdj" path="res://scenes/interactables/checkpoint/checkpoint.tscn" id="2_elu1q"]
-[ext_resource type="TileSet" uid="uid://i7mf02rj7f2i" path="res://src/resources/tilesets/tile_set.tres" id="2_rrroa"]
+[ext_resource type="TileSet" uid="uid://i7mf02rj7f2i" path="res://src/resources/tilesets/tileset.tres" id="2_rrroa"]
 [ext_resource type="PackedScene" uid="uid://dhg2k50sekyxu" path="res://scenes/entities/hazards/spikes.tscn" id="3_2txhi"]
 [ext_resource type="Script" path="res://scenes/enemies/enemy_manager.gd" id="5_rdyjd"]
 [ext_resource type="PackedScene" uid="uid://ctl63onj30x7c" path="res://scenes/enemies/enemy.tscn" id="5_xl7lx"]
