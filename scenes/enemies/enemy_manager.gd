@@ -12,11 +12,11 @@ func entity_position_to_coords(position):
 	return tilemap.local_to_map(position + position_offset)
 
 func register(tilemap: TileMapLayer, enemies: Array):
+	prints("registering enemy map")
 	self.tilemap = tilemap
 	self.enemies = enemies
-	if enemies:
-		make_map(tilemap, enemies)
-		show_map(tilemap)
+	make_map(tilemap, enemies)
+	show_map(tilemap)
 
 func _process(delta):
 	cleanup(delta)
