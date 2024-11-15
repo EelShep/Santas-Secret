@@ -4,8 +4,8 @@ extends Node
 
 static var instance: EnemyManager
 func _init() -> void:
-	if instance == null:
-		instance = self
+	instance = self
+		
 
 
 func entity_position_to_coords(position):
