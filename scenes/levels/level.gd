@@ -22,3 +22,25 @@ func _ready() -> void:
 			if item is Enemy:
 				enemies.append(item)
 		EnemyManager.instance.register($TileMaps/Ground, enemies)
+	add_stacks()
+
+
+var props = [preload("res://scenes/props/gift/gift_prop.tscn"), preload("res://scenes/props/gift/gift_prop2.tscn")]
+
+func add_stacks():
+	var num = 50
+	var stacked = 7
+	var walkable = []
+	for i in EnemyManager.instance.map:
+		if EnemyManager.instance.map[i].kind == EnemyManager.MapTileDataKind.WALKABLE:
+			walkable.append(EnemyManager.instance.tilemap.map_to_local(i))
+	walkable.shuffle()
+	prints("adding stacks of gifts to", len(walkable))
+	for i in min(num, len(walkable)):
+		var stack_height = 0
+		var stack_offset = walkable[i] + Vector2(8,16)
+		for j in randi()%stacked:
+			var prop = props[randi()%len(props)].instantiate()
+			$BackgroundProps.add_child(prop)
+			prop.position = stack_offset + Vector2(randi_range(-3,3),stack_height)
+			stack_height -= prop.stack_height
