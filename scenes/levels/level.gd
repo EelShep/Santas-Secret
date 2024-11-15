@@ -25,7 +25,7 @@ func _ready() -> void:
 	add_stacks()
 
 
-var props = [preload("res://scenes/props/gift/gift_prop.tscn"), preload("res://scenes/props/gift/gift_prop2.tscn")]
+var props = [preload("res://scenes/props/gift/gift_prop.tscn"), preload("res://scenes/props/gift/gift_prop2.tscn"), preload("res://scenes/props/gift/gift_prop3.tscn")]
 
 func add_stacks():
 	var num = 50
