@@ -193,10 +193,11 @@ func make_plan(from: Vector2i, to: Vector2i, tile_owner: Node2D, ignore_occupanc
 				queue.append([neighbor, path])
 
 		else:
-			for neighbor in map[coords].neighbors: 
-				if neighbor in visited:
-					continue
-				queue.append([neighbor, path])
+			if coords in map:
+				for neighbor in map[coords].neighbors: 
+					if neighbor in visited:
+						continue
+					queue.append([neighbor, path])
 	return []
 
 
