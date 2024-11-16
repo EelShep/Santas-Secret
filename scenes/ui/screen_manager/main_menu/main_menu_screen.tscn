@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dk4slfuxcswtw"]
 
 [ext_resource type="Script" path="res://src/scripts/screen_manager/screen.gd" id="1_n5erg"]
-[ext_resource type="PackedScene" uid="uid://qouyoin7wkol" path="res://scenes/ui/screen_manager/screen_button.tscn" id="1_t6vh3"]
+[ext_resource type="PackedScene" uid="uid://c8yuyke35wqn4" path="res://scenes/ui/screen_manager/screen_button_9_slice.tscn" id="2_2fiif"]
 
 [node name="MainMenuScreen" type="Control" node_paths=PackedStringArray("focus_button")]
 layout_mode = 3
@@ -59,15 +59,16 @@ offset_right = 43.0
 offset_bottom = 59.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 32
 
-[node name="MainMenuStart" parent="MarginContainer/VBoxContainer/Bottom/ButtonsContainer" instance=ExtResource("1_t6vh3")]
+[node name="MainMenuStart" parent="MarginContainer/VBoxContainer/Bottom/ButtonsContainer" instance=ExtResource("2_2fiif")]
 layout_mode = 2
 text = "Start"
 group = "main_menu_buttons"
 button_type = 1
 
-[node name="MainMenuQuit" parent="MarginContainer/VBoxContainer/Bottom/ButtonsContainer" instance=ExtResource("1_t6vh3")]
+[node name="MainMenuQuit" parent="MarginContainer/VBoxContainer/Bottom/ButtonsContainer" instance=ExtResource("2_2fiif")]
 layout_mode = 2
 text = "Quit"
 group = "main_menu_buttons"
-button_type = 4
+button_type = 1

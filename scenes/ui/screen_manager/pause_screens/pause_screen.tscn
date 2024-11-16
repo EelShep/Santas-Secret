@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dt1s2x2oymdsv"]
 
 [ext_resource type="Script" path="res://src/scripts/screen_manager/screen.gd" id="1_okyfy"]
-[ext_resource type="PackedScene" uid="uid://qouyoin7wkol" path="res://scenes/ui/screen_manager/screen_button.tscn" id="2_nqubf"]
+[ext_resource type="PackedScene" uid="uid://c8yuyke35wqn4" path="res://scenes/ui/screen_manager/screen_button_9_slice.tscn" id="2_xcwrp"]
 
 [node name="PauseScreen" type="Control" node_paths=PackedStringArray("focus_button")]
 layout_mode = 3
@@ -10,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_okyfy")
 focus_button = NodePath("MarginContainer/VBoxContainer/Bottom/ButtonsContainer/PauseResume")
 
@@ -20,13 +21,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Top" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="TitleLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Top"]
 custom_minimum_size = Vector2(0, 64)
@@ -37,6 +41,7 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
 text = "[center][shake rate=9.0 level=9 connected=1][color=orangered]Paused[/color][/shake] "
@@ -45,8 +50,10 @@ scroll_active = false
 [node name="Bottom" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="ButtonsContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Bottom"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -59,14 +66,16 @@ offset_right = 43.0
 offset_bottom = 59.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 32
 
-[node name="PauseResume" parent="MarginContainer/VBoxContainer/Bottom/ButtonsContainer" instance=ExtResource("2_nqubf")]
+[node name="PauseResume" parent="MarginContainer/VBoxContainer/Bottom/ButtonsContainer" instance=ExtResource("2_xcwrp")]
 layout_mode = 2
 text = "Resume"
 group = "pause_buttons"
 button_type = 1
 
-[node name="PauseQuit" parent="MarginContainer/VBoxContainer/Bottom/ButtonsContainer" instance=ExtResource("2_nqubf")]
+[node name="PauseQuit" parent="MarginContainer/VBoxContainer/Bottom/ButtonsContainer" instance=ExtResource("2_xcwrp")]
 layout_mode = 2
 text = "Quit"
 group = "pause_buttons"
