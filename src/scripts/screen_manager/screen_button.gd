@@ -5,6 +5,10 @@ signal clicked(button: ScreenButton)
 
 @export var group: String = "screen_buttons"
 @export var button_type: ButtonType = ButtonType.NONE
+@export_category("9 Patch")
+@export var nine_patch_rect: NinePatchRect
+@export var unfocused_texture: Texture
+@export var focused_texture: Texture
 
 enum ButtonType{
 	Click = AudioConst.UI_SFX_CLICK,
@@ -21,6 +25,9 @@ func _ready() -> void:
 	pressed.connect(_on_pressed)
 	focus_entered.connect(_on_focus_entered)
 	focus_exited.connect(_on_focus_exited)
+	mouse_entered.connect(_on_focus_entered)
+	mouse_exited.connect(_on_focus_exited)
+	
 
 
 func _on_focus_entered() -> void:
@@ -28,10 +35,13 @@ func _on_focus_entered() -> void:
 		AudioController.play_ui_sfx(AudioConst.UI_SFX_HOVER, 7)
 		is_clicked = false
 	else: is_clicked = false
+	if nine_patch_rect:
+		nine_patch_rect.texture = focused_texture
 
 
 func _on_focus_exited() -> void:
-	pass
+	if nine_patch_rect:
+		nine_patch_rect.texture = unfocused_texture
 
 	
 func _on_pressed() -> void:
