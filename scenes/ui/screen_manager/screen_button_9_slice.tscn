@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8yuyke35wqn4"]
+
+[ext_resource type="Texture2D" uid="uid://dmnlhi88emytw" path="res://assets/visual/sprites/9-patch-small.png" id="1_luwff"]
+[ext_resource type="Script" path="res://src/scripts/screen_manager/screen_button.gd" id="1_xbvyk"]
+[ext_resource type="Texture2D" uid="uid://cn65xgigjl64m" path="res://assets/visual/sprites/9-patch-small_unfocused.png" id="2_72rua"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0d00i"]
+content_margin_left = 32.0
+content_margin_right = 32.0
+
+[node name="ScreenButton_9Slice" type="Button" node_paths=PackedStringArray("nine_patch_rect")]
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0d00i")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_0d00i")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_0d00i")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_0d00i")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_0d00i")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_0d00i")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0d00i")
+text = "Hello"
+script = ExtResource("1_xbvyk")
+nine_patch_rect = NodePath("NinePatchRect")
+unfocused_texture = ExtResource("2_72rua")
+focused_texture = ExtResource("1_luwff")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_72rua")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
