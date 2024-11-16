@@ -1,6 +1,4 @@
-[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://dmwiwck3i7scd"]
-
-[ext_resource type="Texture2D" uid="uid://cihtig8sq6fuj" path="res://assets/visual/sprites/placeholder/Tiles.png" id="1_4hous"]
+[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://dmwiwck3i7scd"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gwjrq"]
 polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
@@ -21,7 +19,6 @@ polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ycp1h"]
-texture = ExtResource("1_4hous")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
