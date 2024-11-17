@@ -1,7 +1,7 @@
 class_name Enemy extends CharacterBody2D
 
 const SPEED_MIN = 300.0
-const SPEED_MAX = 300.0
+@export var SPEED_MAX = 250.0
 const ACCEL = 50.0
 const JUMP_VELOCITY = -450.0
 const MAX_FALL_SPEED = 900.0

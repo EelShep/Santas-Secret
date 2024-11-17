@@ -52,7 +52,7 @@ func make_map(tilemap: TileMapLayer, enemies: Array):
 			var coords = Vector2i(x,y)
 			var kind = MapTileDataKind.EMPTY
 			var data := tilemap.get_cell_tile_data(coords) as TileData
-			for layer_id in 1: # TODO add additional layers for half-tiles
+			for layer_id in 2: # TODO add additional layers for half-tiles
 				if data and data.get_collision_polygons_count(layer_id) > 0:
 					if data.is_collision_polygon_one_way(layer_id, 0):
 						kind = MapTileDataKind.HALF
@@ -152,11 +152,15 @@ func cleanup(delta):
 func manhattan_distance(a: Vector2i,b: Vector2i) -> int:
 	return abs(a.x-b.x) + abs(a.y-b.y)
 
+var make_plan_cache = {}
 func make_plan(from: Vector2i, to: Vector2i, tile_owner: Node2D, ignore_occupancies=false, capabilities=[]):
+	var cache_key = Rect2i(from, to)
+	if cache_key in make_plan_cache:
+		return make_plan_cache[cache_key]
 	var queue = [[from, []]]
 	var visited = []
 	
-	prints("make_plan", tile_owner, from, to, len(used_tiles))
+	#prints("make_plan", tile_owner, from, to, len(used_tiles))
 	if from == to:
 		return []
 	var max_attempts = 100
@@ -169,6 +173,7 @@ func make_plan(from: Vector2i, to: Vector2i, tile_owner: Node2D, ignore_occupanc
 		max_attempts -= 1
 		if max_attempts <=0:
 			prints("make_plan failed with max attempts")
+			make_plan_cache[cache_key] = []
 			return []
 
 		
@@ -181,6 +186,7 @@ func make_plan(from: Vector2i, to: Vector2i, tile_owner: Node2D, ignore_occupanc
 			prints("successful plan", path, "attempts remaining", max_attempts, "queue len", len(queue))
 			for i in path:
 				used_tiles[i] = tile_owner
+			make_plan_cache[cache_key] = path
 			return path
 		#prints("neighbors", coords, map[coords].neighbors)
 		if capabilities:  
@@ -198,6 +204,7 @@ func make_plan(from: Vector2i, to: Vector2i, tile_owner: Node2D, ignore_occupanc
 					if neighbor in visited:
 						continue
 					queue.append([neighbor, path])
+	make_plan_cache[cache_key] = []
 	return []
 
 
