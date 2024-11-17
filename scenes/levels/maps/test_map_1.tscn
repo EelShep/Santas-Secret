@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://cblegvyts7kti"]
+[gd_scene load_steps=19 format=4 uid="uid://cblegvyts7kti"]
 
 [ext_resource type="PackedScene" uid="uid://ujuwg0fbq72c" path="res://scenes/levels/map_template.tscn" id="1_di08m"]
 [ext_resource type="PackedScene" uid="uid://ckank5xl1ccdj" path="res://scenes/interactables/checkpoint/checkpoint.tscn" id="2_elu1q"]
@@ -12,19 +12,19 @@
 blend_mode = 1
 light_mode = 1
 
-[sub_resource type="Curve" id="Curve_me7pd"]
+[sub_resource type="Curve" id="Curve_o3cgx"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.505435, 0.710053), 0.0530848, 0.0530848, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_m3dxd"]
-curve = SubResource("Curve_me7pd")
+curve = SubResource("Curve_o3cgx")
 
-[sub_resource type="Gradient" id="Gradient_u382e"]
+[sub_resource type="Gradient" id="Gradient_i4qto"]
 offsets = PackedFloat32Array(0.146947, 0.183206, 0.227099, 0.416031, 0.467557, 0.528626, 0.744275, 0.79771, 0.84542)
 colors = PackedColorArray(0.882353, 0.305882, 0.8, 1, 1, 1, 1, 1, 1, 0.885898, 0.191781, 1, 1, 0.858824, 0, 1, 1, 1, 1, 1, 0.266534, 0.407447, 0.696497, 1, 0.203922, 0.356863, 0.670588, 1, 1, 1, 1, 1, 0.611765, 0.0627451, 0.196078, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_vl1ey"]
-gradient = SubResource("Gradient_u382e")
+gradient = SubResource("Gradient_i4qto")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4yjty"]
 particle_flag_disable_z = true
@@ -37,6 +37,20 @@ color = Color(0.501407, 0.501406, 0.501406, 1)
 color_initial_ramp = SubResource("GradientTexture1D_vl1ey")
 alpha_curve = SubResource("CurveTexture_m3dxd")
 
+[sub_resource type="Curve" id="Curve_me7pd"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.505435, 0.710053), 0.0530848, 0.0530848, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vc6dd"]
+curve = SubResource("Curve_me7pd")
+
+[sub_resource type="Gradient" id="Gradient_u382e"]
+offsets = PackedFloat32Array(0.146947, 0.183206, 0.227099, 0.416031, 0.467557, 0.528626, 0.744275, 0.79771, 0.84542)
+colors = PackedColorArray(0.882353, 0.305882, 0.8, 1, 1, 1, 1, 1, 1, 0.885898, 0.191781, 1, 1, 0.858824, 0, 1, 1, 1, 1, 1, 0.266534, 0.407447, 0.696497, 1, 0.203922, 0.356863, 0.670588, 1, 1, 1, 1, 1, 0.611765, 0.0627451, 0.196078, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_agej7"]
+gradient = SubResource("Gradient_u382e")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fl7er"]
 particle_flag_disable_z = true
 emission_shape = 3
@@ -45,8 +59,8 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.01
 scale_max = 0.02
 color = Color(0.501407, 0.501406, 0.501406, 1)
-color_initial_ramp = SubResource("GradientTexture1D_vl1ey")
-alpha_curve = SubResource("CurveTexture_m3dxd")
+color_initial_ramp = SubResource("GradientTexture1D_agej7")
+alpha_curve = SubResource("CurveTexture_vc6dd")
 
 [node name="TestMap1" instance=ExtResource("1_di08m")]
 
