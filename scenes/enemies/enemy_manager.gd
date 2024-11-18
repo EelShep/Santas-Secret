@@ -223,6 +223,7 @@ func project_to_walkable(from: Vector2i) -> Vector2i:
 var show_map_items = {}
 #func show_map(tilemap: TileMap):
 func show_map(tilemap):
+	return
 	for i in map:
 		match map[i].kind:
 			MapTileDataKind.WALKABLE:
