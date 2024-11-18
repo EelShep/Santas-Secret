@@ -18,6 +18,7 @@ starting_map = "test_map.tscn"
 level_manager = NodePath("LevelManager")
 game_ui = NodePath("GameUI")
 day_night = NodePath("DayNight")
+INITIAL_HOUR = 18
 
 [node name="DayNight" type="CanvasModulate" parent="."]
 script = ExtResource("2_ldkdj")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://ctl63onj30x7c"]
 
 [ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_dtkli"]
-[ext_resource type="Texture2D" uid="uid://hre3d6c2wbwo" path="res://assets/visual/sprites/MC.png" id="2_w3615"]
+[ext_resource type="Texture2D" uid="uid://hre3d6c2wbwo" path="res://assets/visual/sprites/placeholder/MC.png" id="2_w3615"]
 [ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="3_ist6r"]
 [ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="5_s7v7g"]
 
