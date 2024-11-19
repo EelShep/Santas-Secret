@@ -1,12 +1,12 @@
 [gd_scene load_steps=13 format=3 uid="uid://ckank5xl1ccdj"]
 
 [ext_resource type="Script" path="res://scenes/interactables/checkpoint/checkpoint.gd" id="1_v44ii"]
-[ext_resource type="Texture2D" uid="uid://djpmjc8x8m42o" path="res://assets/visual/sprites/tileset_v2.png" id="2_soia6"]
+[ext_resource type="Texture2D" uid="uid://djpmjc8x8m42o" path="res://assets/visual/sprites/tileset_v2.png" id="2_8xysa"]
 [ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="3_31uac"]
 [ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="4_max5t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_72dhd"]
-atlas = ExtResource("2_soia6")
+atlas = ExtResource("2_8xysa")
 region = Rect2(0, 0, 64, 96)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u7vik"]
