@@ -81,7 +81,7 @@ func make_map(tilemap: TileMapLayer, enemies: Array):
 			visited.append(coords)
 			
 			# add drops
-			if map[coords].kind == MapTileDataKind.EMPTY:
+			if coords in map and map[coords].kind == MapTileDataKind.EMPTY:
 				for y in range(tilemap.get_used_rect().size.y):
 					if not coords + Vector2i(0, y) in map:
 						break
@@ -155,8 +155,9 @@ func manhattan_distance(a: Vector2i,b: Vector2i) -> int:
 var make_plan_cache = {}
 func make_plan(from: Vector2i, to: Vector2i, tile_owner: Node2D, ignore_occupancies=false, capabilities=[]):
 	var cache_key = Rect2i(from, to)
-	if cache_key in make_plan_cache:
-		return make_plan_cache[cache_key]
+	if not capabilities:
+		if cache_key in make_plan_cache:
+			return make_plan_cache[cache_key]
 	var queue = [[from, []]]
 	var visited = []
 	
@@ -173,7 +174,8 @@ func make_plan(from: Vector2i, to: Vector2i, tile_owner: Node2D, ignore_occupanc
 		max_attempts -= 1
 		if max_attempts <=0:
 			prints("make_plan failed with max attempts")
-			make_plan_cache[cache_key] = []
+			if not capabilities:
+				make_plan_cache[cache_key] = []
 			return []
 
 		
@@ -189,7 +191,9 @@ func make_plan(from: Vector2i, to: Vector2i, tile_owner: Node2D, ignore_occupanc
 			make_plan_cache[cache_key] = path
 			return path
 		#prints("neighbors", coords, map[coords].neighbors)
-		if capabilities:  
+		if capabilities:
+			if coords not in map:
+				continue
 			for i in len(map[coords].neighbors): 
 				if not map[coords].connections[i] in capabilities:
 					continue
@@ -204,7 +208,8 @@ func make_plan(from: Vector2i, to: Vector2i, tile_owner: Node2D, ignore_occupanc
 					if neighbor in visited:
 						continue
 					queue.append([neighbor, path])
-	make_plan_cache[cache_key] = []
+	if not capabilities:
+		make_plan_cache[cache_key] = []
 	return []
 
 
@@ -223,6 +228,7 @@ func project_to_walkable(from: Vector2i) -> Vector2i:
 var show_map_items = {}
 #func show_map(tilemap: TileMap):
 func show_map(tilemap):
+	return
 	for i in map:
 		match map[i].kind:
 			MapTileDataKind.WALKABLE:

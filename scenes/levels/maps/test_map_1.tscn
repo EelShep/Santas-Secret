@@ -1,10 +1,9 @@
-[gd_scene load_steps=19 format=4 uid="uid://cblegvyts7kti"]
+[gd_scene load_steps=18 format=4 uid="uid://cblegvyts7kti"]
 
 [ext_resource type="PackedScene" uid="uid://ujuwg0fbq72c" path="res://scenes/levels/map_template.tscn" id="1_di08m"]
 [ext_resource type="PackedScene" uid="uid://ckank5xl1ccdj" path="res://scenes/interactables/checkpoint/checkpoint.tscn" id="2_elu1q"]
 [ext_resource type="TileSet" uid="uid://i7mf02rj7f2i" path="res://src/resources/tilesets/tile_set.tres" id="2_rrroa"]
 [ext_resource type="PackedScene" uid="uid://dhg2k50sekyxu" path="res://scenes/entities/hazards/spikes.tscn" id="3_2txhi"]
-[ext_resource type="Script" path="res://scenes/enemies/enemy_manager.gd" id="5_rdyjd"]
 [ext_resource type="PackedScene" uid="uid://ctl63onj30x7c" path="res://scenes/enemies/enemy.tscn" id="5_xl7lx"]
 [ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="6_agxvu"]
 
@@ -89,8 +88,19 @@ position = Vector2(880, 336)
 [node name="Spikes3" parent="Hazards" index="2" instance=ExtResource("3_2txhi")]
 position = Vector2(848, 336)
 
-[node name="Enemies" type="Node" parent="." index="4"]
-script = ExtResource("5_rdyjd")
+[node name="GPUParticles2D" type="GPUParticles2D" parent="BackgroundProps" index="0"]
+material = SubResource("CanvasItemMaterial_l2i4h")
+position = Vector2(752, 317)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_4yjty")
+texture = ExtResource("6_agxvu")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="BackgroundProps" index="1"]
+material = SubResource("CanvasItemMaterial_l2i4h")
+position = Vector2(640, 309)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_fl7er")
+texture = ExtResource("6_agxvu")
 
 [node name="EnemyBase1" parent="Enemies" index="0" instance=ExtResource("5_xl7lx")]
 position = Vector2(706, 344)
@@ -117,18 +127,4 @@ visible = false
 modulate = Color(0.980392, 0.47451, 0, 0.458824)
 position = Vector2(460, 884)
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("6_agxvu")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="BackgroundProps" index="0"]
-material = SubResource("CanvasItemMaterial_l2i4h")
-position = Vector2(752, 317)
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_4yjty")
-texture = ExtResource("6_agxvu")
-
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="BackgroundProps" index="1"]
-material = SubResource("CanvasItemMaterial_l2i4h")
-position = Vector2(640, 309)
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_fl7er")
 texture = ExtResource("6_agxvu")

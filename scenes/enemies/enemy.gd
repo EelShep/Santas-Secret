@@ -253,6 +253,8 @@ func plan_movement(delta: float):
 		var capabilities = []
 		if !can_jump:
 			capabilities = [EnemyManager.MapTileDataConnection.WALK]
+		if !can_walk:
+			return
 		if active:
 			var player_tile = EnemyManager.instance.entity_position_to_coords(Player.instance.position)
 			player_tile = EnemyManager.instance.project_to_walkable(player_tile)
