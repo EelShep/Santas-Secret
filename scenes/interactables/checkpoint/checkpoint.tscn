@@ -1,29 +1,83 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckank5xl1ccdj"]
+[gd_scene load_steps=13 format=3 uid="uid://ckank5xl1ccdj"]
 
 [ext_resource type="Script" path="res://scenes/interactables/checkpoint/checkpoint.gd" id="1_v44ii"]
-[ext_resource type="Texture2D" uid="uid://cihtig8sq6fuj" path="res://assets/visual/sprites/placeholder/Tiles.png" id="2_706el"]
+[ext_resource type="Texture2D" uid="uid://dom1qfsexg41k" path="res://assets/visual/sprites/tileset_v1.png" id="2_8vgki"]
+[ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="3_31uac"]
+[ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="4_max5t"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ls8gg"]
-atlas = ExtResource("2_706el")
-region = Rect2(48, 128, 128, 224)
+[sub_resource type="AtlasTexture" id="AtlasTexture_72dhd"]
+atlas = ExtResource("2_8vgki")
+region = Rect2(0, 0, 64, 96)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u7vik"]
 radius = 42.0
 
-[node name="Checkpoint" type="Area2D" node_paths=PackedStringArray("canvas_layer", "prompt_control")]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f23jx"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Curve" id="Curve_o3cgx"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.505435, 0.710053), 0.0530848, 0.0530848, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_m3dxd"]
+curve = SubResource("Curve_o3cgx")
+
+[sub_resource type="Gradient" id="Gradient_i4qto"]
+offsets = PackedFloat32Array(0.146947, 0.183206, 0.227099, 0.416031, 0.467557, 0.528626, 0.744275, 0.79771, 0.84542)
+colors = PackedColorArray(0.882353, 0.305882, 0.8, 1, 1, 1, 1, 1, 1, 0.885898, 0.191781, 1, 1, 0.858824, 0, 1, 1, 1, 1, 1, 0.266534, 0.407447, 0.696497, 1, 0.203922, 0.356863, 0.670588, 1, 1, 1, 1, 1, 0.611765, 0.0627451, 0.196078, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vl1ey"]
+gradient = SubResource("Gradient_i4qto")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rij3m"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(16, 32, 1)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.01
+scale_max = 0.03
+color = Color(0.71213, 0.712129, 0.712129, 1)
+color_initial_ramp = SubResource("GradientTexture1D_vl1ey")
+alpha_curve = SubResource("CurveTexture_m3dxd")
+
+[node name="Checkpoint" type="Area2D" node_paths=PackedStringArray("canvas_layer", "prompt_control", "particles", "light")]
+z_index = 1
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_v44ii")
 canvas_layer = NodePath("CanvasLayer")
 prompt_control = NodePath("CanvasLayer/MarginContainer/PromptControl")
+particles = NodePath("LightParticles")
+light = NodePath("PointLight2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -111)
-texture = SubResource("AtlasTexture_ls8gg")
+light_mask = 32
+position = Vector2(0, -48)
+texture = SubResource("AtlasTexture_72dhd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -21)
 shape = SubResource("CircleShape2D_u7vik")
+
+[node name="LightParticles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_f23jx")
+position = Vector2(0, -56)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_rij3m")
+texture = ExtResource("3_31uac")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+light_mask = 8
+position = Vector2(0, -16)
+color = Color(0.988235, 1, 0.760784, 0.4)
+range_layer_min = -100
+range_layer_max = 512
+range_item_cull_mask = 106
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_item_cull_mask = 4
+texture = ExtResource("4_max5t")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 visible = false

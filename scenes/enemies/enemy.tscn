@@ -1,0 +1,162 @@
+[gd_scene load_steps=12 format=3 uid="uid://ctl63onj30x7c"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_dtkli"]
+[ext_resource type="Texture2D" uid="uid://hre3d6c2wbwo" path="res://assets/visual/sprites/placeholder/MC.png" id="2_w3615"]
+[ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="3_ist6r"]
+[ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="5_s7v7g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vb85q"]
+size = Vector2(16, 40)
+
+[sub_resource type="Animation" id="Animation_emxyy"]
+resource_name = "Fall"
+length = 0.3
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [10, 11, 12]
+}
+
+[sub_resource type="Animation" id="Animation_e76g1"]
+resource_name = "Idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_pje7w"]
+resource_name = "Jump"
+length = 0.3
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_yv3i2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_r5q3a"]
+resource_name = "Run"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sert5"]
+_data = {
+"Fall": SubResource("Animation_emxyy"),
+"Idle": SubResource("Animation_e76g1"),
+"Jump": SubResource("Animation_pje7w"),
+"RESET": SubResource("Animation_yv3i2"),
+"Run": SubResource("Animation_r5q3a")
+}
+
+[node name="EnemyBase" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 17
+script = ExtResource("1_dtkli")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -20)
+shape = SubResource("RectangleShape2D_vb85q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.9673, 0, 0.390281, 1)
+light_mask = 8
+position = Vector2(0, -30)
+texture = ExtResource("2_w3615")
+hframes = 7
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sert5")
+}
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+light_mask = 8
+position = Vector2(0, -16)
+color = Color(0.988235, 1, 0.760784, 0.4)
+range_layer_min = -100
+range_layer_max = 512
+range_item_cull_mask = 42
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_item_cull_mask = 4
+texture = ExtResource("3_ist6r")
+
+[node name="ProjectileLoad" type="Node2D" parent="."]
+position = Vector2(0, -20)
+
+[node name="ProjectileLoad" type="Sprite2D" parent="ProjectileLoad"]
+modulate = Color(0.913479, 0.717812, 0, 1)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("5_s7v7g")
+
+[node name="TargetMarker" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.364706, 0.364706, 0.364706, 0.643137)
+position = Vector2(0, -20)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("5_s7v7g")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, -10)
+target_position = Vector2(200, 0)
+collision_mask = 2
+
+[node name="RayCast2DFire" type="RayCast2D" parent="."]
+position = Vector2(0, -20)
+target_position = Vector2(150, 0)
+collision_mask = 2

@@ -14,10 +14,11 @@ gradient = ExtResource("3_5mp8n")
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("level_manager", "game_ui", "day_night")]
 script = ExtResource("1_tjrnh")
-starting_map = "test_map.tscn"
+starting_map = "level_1.tscn"
 level_manager = NodePath("LevelManager")
 game_ui = NodePath("GameUI")
 day_night = NodePath("DayNight")
+INITIAL_HOUR = 18
 
 [node name="DayNight" type="CanvasModulate" parent="."]
 script = ExtResource("2_ldkdj")
@@ -44,6 +45,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
@@ -51,6 +53,7 @@ theme_override_constants/margin_bottom = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GameUI/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="DayNightLabel" type="Label" parent="GameUI/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -78,6 +81,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.168627, 0.168627, 0.168627, 0.815686)
 
 [node name="PauseScreens" type="Control" parent="PauseScreenUI" node_paths=PackedStringArray("screens")]
@@ -87,6 +91,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("3_jmoiw")
 screens = [NodePath("PauseScreen")]
 button_groups = Array[String](["pause_buttons"])

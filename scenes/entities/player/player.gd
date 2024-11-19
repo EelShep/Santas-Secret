@@ -22,7 +22,7 @@ var airtime: float = 0
 var speed: float = SPEED_MIN
 var can_pick = false
 
-
+@export var hurt_area: HurtArea
 @export var interaction_finder: Area2D
 
 static var instance: Player
@@ -39,7 +39,10 @@ func _input(event: InputEvent) -> void:
 			if area is Interactable: (area as Interactable).handle_action()
 
 func _ready() -> void:
+	hurt_area.damaged.connect(_on_hurt_area_damaged)
 	on_enter()
+
+
 
 func _physics_process(delta: float) -> void:
 	if event:
@@ -99,9 +102,20 @@ func _physics_process(delta: float) -> void:
 	elif velocity.x < -1:
 		$Sprite2D.flip_h = true
 
-func kill():
+func stun() -> void:
+	print("stunned")
+
+func kill() -> void:
+	Events.player_died.emit()
 	# Player dies, reset the position to the entrance.
-	position = reset_position
+	#position = reset_position
+
+func _on_hurt_area_damaged(hit_area: HitArea) -> void:
+	match hit_area.type:
+		HitArea.Type.Stun:
+			stun()
+		HitArea.Type.Kill:
+			kill()
 
 func on_enter():
 	# Position for kill system. Assigned when entering new room (see Game.gd).
