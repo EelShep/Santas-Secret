@@ -1,8 +1,9 @@
 class_name PauseScreens extends ScreensManager
 
 const MAIN_MENU_SCENE_PATH: String = "res://scenes/main/main_menu.tscn"
-const PAUSE_SCREEN: int = 0
 
+const PAUSE_SCREEN: int = 0
+const OPTIONS_SCREENS: int = 0
 
 func _on_button_pressed(button: ScreenButton) -> void:
 	match button.name:
@@ -10,6 +11,9 @@ func _on_button_pressed(button: ScreenButton) -> void:
 		"PauseResume":
 			exit_screens.emit(self, true)
 			change_screen(null)
+		"PauseOptions":
+			change_screen(null)
+			screen_managers[OPTIONS_SCREENS].on_enter()
 		"PauseQuit":
 			SceneTransition.fade_out_in()
 			await SceneTransition.transition_ready

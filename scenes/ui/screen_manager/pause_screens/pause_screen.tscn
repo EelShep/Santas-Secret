@@ -75,6 +75,12 @@ text = "Resume"
 group = "pause_buttons"
 button_type = 1
 
+[node name="PauseOptions" parent="MarginContainer/VBoxContainer/Bottom/ButtonsContainer" instance=ExtResource("2_xcwrp")]
+layout_mode = 2
+text = "Options"
+group = "pause_buttons"
+button_type = 1
+
 [node name="PauseQuit" parent="MarginContainer/VBoxContainer/Bottom/ButtonsContainer" instance=ExtResource("2_xcwrp")]
 layout_mode = 2
 text = "Quit"

@@ -1,13 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://ducb6nwnf0e6j"]
+[gd_scene load_steps=8 format=3 uid="uid://ducb6nwnf0e6j"]
 
 [ext_resource type="Script" path="res://scenes/main/met_game.gd" id="1_tjrnh"]
 [ext_resource type="Script" path="res://scenes/levels/day_night.gd" id="2_ldkdj"]
-[ext_resource type="Script" path="res://scenes/ui/pause_screen_ui.gd" id="2_wt6m8"]
 [ext_resource type="Gradient" uid="uid://dv75y3trn3ns7" path="res://src/resources/daynight-gradient-texture.tres" id="3_5mp8n"]
-[ext_resource type="Script" path="res://scenes/ui/screen_manager/pause_screens/pause_screens.gd" id="3_jmoiw"]
-[ext_resource type="PackedScene" uid="uid://dt1s2x2oymdsv" path="res://scenes/ui/screen_manager/pause_screens/pause_screen.tscn" id="4_uvvqy"]
 [ext_resource type="PackedScene" uid="uid://cus86duxmepnn" path="res://scenes/entities/player/player.tscn" id="4_x01mj"]
 [ext_resource type="Script" path="res://scenes/ui/game_ui.gd" id="5_vgo4j"]
+[ext_resource type="PackedScene" uid="uid://cscdh3qxydpea" path="res://scenes/ui/pause_ui.tscn" id="6_3kgi4"]
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_pj03m"]
 gradient = ExtResource("3_5mp8n")
@@ -68,34 +66,4 @@ horizontal_alignment = 2
 
 [node name="Timer" type="Timer" parent="GameUI"]
 
-[node name="PauseScreenUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("background", "pause_screens")]
-process_mode = 3
-visible = false
-script = ExtResource("2_wt6m8")
-background = NodePath("BackgroundRect")
-pause_screens = NodePath("PauseScreens")
-
-[node name="BackgroundRect" type="ColorRect" parent="PauseScreenUI"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.168627, 0.168627, 0.168627, 0.815686)
-
-[node name="PauseScreens" type="Control" parent="PauseScreenUI" node_paths=PackedStringArray("screens")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("3_jmoiw")
-screens = [NodePath("PauseScreen")]
-button_groups = Array[String](["pause_buttons"])
-
-[node name="PauseScreen" parent="PauseScreenUI/PauseScreens" instance=ExtResource("4_uvvqy")]
-layout_mode = 1
-mouse_filter = 2
+[node name="PauseUI" parent="." instance=ExtResource("6_3kgi4")]
