@@ -3,10 +3,12 @@
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_x2t1b"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_17mij"]
 [ext_resource type="TileSet" uid="uid://i7mf02rj7f2i" path="res://src/resources/tilesets/tile_set.tres" id="4_0cqge"]
-[ext_resource type="Script" path="res://scenes/enemies/enemy_manager.gd" id="4_ooqp8"]
+[ext_resource type="Script" path="res://scenes/enemies/enemy_manager.gd" id="4_ie6de"]
 
 [node name="MapTemplate" type="Node2D"]
 script = ExtResource("1_x2t1b")
+
+[node name="PlayerSpawn" type="Node2D" parent="."]
 
 [node name="RoomInstance" parent="." instance=ExtResource("2_17mij")]
 
@@ -27,4 +29,4 @@ metadata/_edit_lock_ = true
 z_index = -1
 
 [node name="Enemies" type="Node" parent="."]
-script = ExtResource("4_ooqp8")
+script = ExtResource("4_ie6de")
