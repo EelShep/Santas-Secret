@@ -27,6 +27,7 @@ buses/default_bus_layout="res://src/resources/default_bus_layout.tres"
 
 Events="*res://src/globals/events.gd"
 AudioController="*res://src/globals/audio_controller/audio_controller.tscn"
+SaveData="*res://src/globals/save_data.gd"
 GameData="*res://src/globals/game_data.gd"
 SceneTransition="*res://src/globals/scene_transition/scene_transition.tscn"
 MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"

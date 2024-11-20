@@ -1,0 +1,195 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5yw2mafnywit"]
+
+[ext_resource type="Script" path="res://scenes/ui/screen_manager/options_screens/options_screens.gd" id="1_mdqvv"]
+[ext_resource type="Script" path="res://scenes/ui/screen_manager/options_screens/options_screen.gd" id="2_vwamt"]
+[ext_resource type="LabelSettings" uid="uid://dkvluoxtfvbi" path="res://src/resources/themes/labels/label_settings.tres" id="3_bgev1"]
+[ext_resource type="PackedScene" uid="uid://c8yuyke35wqn4" path="res://scenes/ui/screen_manager/screen_button_9_slice.tscn" id="3_sf41a"]
+
+[node name="OptionsScreens" type="Control" node_paths=PackedStringArray("screens")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mdqvv")
+screens = [NodePath("OptionsScreen")]
+button_groups = Array[String](["options_buttons"])
+
+[node name="OptionsScreen" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_vwamt")
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsScreen/MarginContainer"]
+layout_mode = 2
+
+[node name="Video" type="Control" parent="OptionsScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsScreen/MarginContainer/VBoxContainer/Video"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VideoLabel" type="RichTextLabel" parent="OptionsScreen/MarginContainer/VBoxContainer/Video/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center][shake rate=9.0 level=9 connected=1][color=orangered]Video[/color][/shake] "
+scroll_active = false
+
+[node name="ButtonsHBox" type="HBoxContainer" parent="OptionsScreen/MarginContainer/VBoxContainer/Video/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LabelsVBox" type="VBoxContainer" parent="OptionsScreen/MarginContainer/VBoxContainer/Video/VBoxContainer/ButtonsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="FullscreenLabel" type="Label" parent="OptionsScreen/MarginContainer/VBoxContainer/Video/VBoxContainer/ButtonsHBox/LabelsVBox"]
+layout_mode = 2
+text = "Fullscreen"
+label_settings = ExtResource("3_bgev1")
+horizontal_alignment = 2
+
+[node name="Spacer" type="Control" parent="OptionsScreen/MarginContainer/VBoxContainer/Video/VBoxContainer/ButtonsHBox"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="ButtonsVBox" type="VBoxContainer" parent="OptionsScreen/MarginContainer/VBoxContainer/Video/VBoxContainer/ButtonsHBox"]
+layout_mode = 2
+size_flags_horizontal = 2
+alignment = 1
+
+[node name="FullscreenCheckbox" type="CheckBox" parent="OptionsScreen/MarginContainer/VBoxContainer/Video/VBoxContainer/ButtonsHBox/ButtonsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Audio" type="Control" parent="OptionsScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsScreen/MarginContainer/VBoxContainer/Audio"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AudioLabel" type="RichTextLabel" parent="OptionsScreen/MarginContainer/VBoxContainer/Audio/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center][shake rate=9.0 level=9 connected=1][color=orangered]Audio[/color][/shake] "
+scroll_active = false
+
+[node name="ButtonsHBox" type="HBoxContainer" parent="OptionsScreen/MarginContainer/VBoxContainer/Audio/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LabelsVBox" type="VBoxContainer" parent="OptionsScreen/MarginContainer/VBoxContainer/Audio/VBoxContainer/ButtonsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="MasterLabel" type="Label" parent="OptionsScreen/MarginContainer/VBoxContainer/Audio/VBoxContainer/ButtonsHBox/LabelsVBox"]
+layout_mode = 2
+text = "Master"
+label_settings = ExtResource("3_bgev1")
+horizontal_alignment = 2
+
+[node name="MusicLabel" type="Label" parent="OptionsScreen/MarginContainer/VBoxContainer/Audio/VBoxContainer/ButtonsHBox/LabelsVBox"]
+layout_mode = 2
+text = "Music"
+label_settings = ExtResource("3_bgev1")
+horizontal_alignment = 2
+
+[node name="SFXLabel" type="Label" parent="OptionsScreen/MarginContainer/VBoxContainer/Audio/VBoxContainer/ButtonsHBox/LabelsVBox"]
+layout_mode = 2
+text = "SFX
+"
+label_settings = ExtResource("3_bgev1")
+horizontal_alignment = 2
+
+[node name="Spacer" type="Control" parent="OptionsScreen/MarginContainer/VBoxContainer/Audio/VBoxContainer/ButtonsHBox"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="ButtonsVBox" type="VBoxContainer" parent="OptionsScreen/MarginContainer/VBoxContainer/Audio/VBoxContainer/ButtonsHBox"]
+layout_mode = 2
+size_flags_horizontal = 2
+alignment = 1
+
+[node name="MasterHSlider" type="HSlider" parent="OptionsScreen/MarginContainer/VBoxContainer/Audio/VBoxContainer/ButtonsHBox/ButtonsVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(148, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+max_value = 1.0
+step = 0.05
+value = 0.5
+
+[node name="MusicHSlider" type="HSlider" parent="OptionsScreen/MarginContainer/VBoxContainer/Audio/VBoxContainer/ButtonsHBox/ButtonsVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(148, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+max_value = 1.0
+step = 0.05
+value = 0.5
+
+[node name="SFXHSlider" type="HSlider" parent="OptionsScreen/MarginContainer/VBoxContainer/Audio/VBoxContainer/ButtonsHBox/ButtonsVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(148, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+max_value = 1.0
+step = 0.05
+value = 0.5
+
+[node name="Bottom" type="Control" parent="OptionsScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="OptionsScreen/MarginContainer/VBoxContainer/Bottom"]
+custom_minimum_size = Vector2(148, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -59.0
+offset_right = 43.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="OptionsBack" parent="OptionsScreen/MarginContainer/VBoxContainer/Bottom/ButtonsContainer" instance=ExtResource("3_sf41a")]
+layout_mode = 2
+text = "Back"
+group = "options_buttons"
+button_type = 4
