@@ -50,7 +50,16 @@ func _on_events_player_died() -> void:
 	get_tree().paused = true
 	Events.can_pause.emit(false)
 	SceneTransition.transition_ready.connect(reload_scene, CONNECT_ONE_SHOT)
-	pause_ui.handle_player_died()
+	pause_ui.handle_game_over(PauseScreens.RELOAD_SCREEN)
+
+
+func handle_game_over() -> void:
+	print("Game Over Man")
+	get_tree().paused = true
+	Events.can_pause.emit(false)
+	Events.game_over.emit()
+	SceneTransition.transition_ready.connect(reload_scene, CONNECT_ONE_SHOT)
+	pause_ui.handle_game_over(PauseScreens.GAME_OVER_SCREEN)
 
 
 func reload_scene() -> void:
@@ -58,21 +67,26 @@ func reload_scene() -> void:
 	Events.can_pause.emit(true)
 	get_tree().reload_current_scene()
 
-
+const SUN_RISE_HOUR: int = 8
+const NIGHT_FALL_HOUR: int = 19
+const GAME_OVER_HOUR: int = 4
 func _on_day_night_time_tick(day:int, hour:int, minute:int) -> void:
 	if curr_hour == hour: return
 	curr_hour = hour
-	if curr_hour == 8 || curr_hour == 19:
+	if curr_hour == SUN_RISE_HOUR || curr_hour == NIGHT_FALL_HOUR:
 		var player: Player = Player.instance
 		player.on_day_night(hour)
 		game_ui.on_day_night(hour)
+	if curr_hour == GAME_OVER_HOUR:
+		#ALERT TESTING handle_game_over()
+		game_ui.on_day_night(hour)
+
 
 func _on_events_checkpoint_activated() -> void:
 	game_ui.display_message("Checkpoint Activated")
 	GameData.set_curr_room()
 
 #endregion
-
 func _ready() -> void:
 	#NOTE Connect signals
 	Events.game_ready.emit()

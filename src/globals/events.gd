@@ -13,5 +13,6 @@ signal map_ready(area: int)
 
 signal player_died() #NOTE Player Captured
 signal game_over() #NOTE Time Expired
+signal game_reset()
 
 signal checkpoint_activated()
