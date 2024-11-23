@@ -47,6 +47,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ButtonsContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Bottom"]
+custom_minimum_size = Vector2(172, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -64,6 +65,12 @@ theme_override_constants/separation = 32
 [node name="MainMenuStart" parent="MarginContainer/VBoxContainer/Bottom/ButtonsContainer" instance=ExtResource("2_2fiif")]
 layout_mode = 2
 text = "Start"
+group = "main_menu_buttons"
+button_type = 1
+
+[node name="MainMenuOptions" parent="MarginContainer/VBoxContainer/Bottom/ButtonsContainer" instance=ExtResource("2_2fiif")]
+layout_mode = 2
+text = "Options"
 group = "main_menu_buttons"
 button_type = 1
 
