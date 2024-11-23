@@ -2,13 +2,14 @@ extends "res://addons/MetroidvaniaSystem/Template/Scripts/MetSysGame.gd"
 class_name Game
 
 const SaveManager = preload("res://addons/MetroidvaniaSystem/Template/Scripts/SaveManager.gd")
-const SAVE_PATH = "user://example_save_data.sav"
+const SAVE_PATH = "user://save_data.sav"
 # The game starts in this map. Note that it's scene name only, just like MetSys refers to rooms.
 @export var starting_map: String
 @export var custom_run: bool # For Custom Runner integration.
 @export_category("Setup")
 @export var level_manager: Node2D
 @export var game_ui: GameUI
+@export var pause_ui: PauseScreenUI
 @export_category("Day Night Cycle")
 @export var day_night: DayNight
 @export var INITIAL_HOUR: int = 6
@@ -49,7 +50,7 @@ func _on_events_player_died() -> void:
 	get_tree().paused = true
 	Events.can_pause.emit(false)
 	SceneTransition.transition_ready.connect(reload_scene, CONNECT_ONE_SHOT)
-	SceneTransition.fade_out()
+	pause_ui.handle_player_died()
 
 
 func reload_scene() -> void:
