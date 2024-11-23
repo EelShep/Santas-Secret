@@ -10,11 +10,12 @@
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_pj03m"]
 gradient = ExtResource("3_5mp8n")
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("level_manager", "game_ui", "day_night")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("level_manager", "game_ui", "pause_ui", "day_night")]
 script = ExtResource("1_tjrnh")
 starting_map = "level_1.tscn"
 level_manager = NodePath("LevelManager")
 game_ui = NodePath("GameUI")
+pause_ui = NodePath("PauseUI")
 day_night = NodePath("DayNight")
 INITIAL_HOUR = 18
 

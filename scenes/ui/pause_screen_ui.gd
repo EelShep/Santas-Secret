@@ -11,12 +11,21 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _ready() -> void:
 	Events.can_pause.connect(func(value: bool) -> void: can_pause = value)
+
 	get_tree().paused = false
 	set_process_unhandled_input(true)
 	pause_screens.exit_screens.connect(_on_screens_exited.unbind(2))
 	background.modulate.a = 0.0
 	show()
 	background.hide()
+
+
+func handle_player_died() -> void:
+	Events.can_pause.emit(false)
+	on_enter_menu()
+	var tween: Tween = appear()
+	await tween.finished
+	pause_screens.on_enter(PauseScreens.RELOAD_SCREEN)
 
 
 func show_pause_screen() -> void:
