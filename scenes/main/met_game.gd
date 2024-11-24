@@ -2,7 +2,7 @@ extends "res://addons/MetroidvaniaSystem/Template/Scripts/MetSysGame.gd"
 class_name Game
 
 const SaveManager = preload("res://addons/MetroidvaniaSystem/Template/Scripts/SaveManager.gd")
-const SAVE_PATH = "user://save_data.sav"
+
 # The game starts in this map. Note that it's scene name only, just like MetSys refers to rooms.
 @export var starting_map: String
 @export var custom_run: bool # For Custom Runner integration.
@@ -67,7 +67,7 @@ func _ready() -> void:
 	set_player($Player) # Assign player for MetSysGame.
 	
 	MetSys.set_save_data()
-	if not FileAccess.file_exists(SAVE_PATH):
+	if not FileAccess.file_exists(SaveData.SAVE_PATH):
 		reset_save()
 	load_save()
 
@@ -126,12 +126,12 @@ func save_game():
 
 func load_save() -> void:
 	GameData.reset_data()
-	var file = FileAccess.open(SAVE_PATH, FileAccess.READ).get_as_text()
+	var file = FileAccess.open(SaveData.SAVE_PATH, FileAccess.READ).get_as_text()
 	if file == "": 
 		reset_save()
 	
 	var save_manager := SaveManager.new()
-	save_manager.load_from_text(SAVE_PATH)
+	save_manager.load_from_text(SaveData.SAVE_PATH)
 	
 	generated_rooms = save_manager.get_value(GENERATED_ROOMS)
 	day_time = save_manager.get_value(DAY_TIME)
@@ -143,7 +143,7 @@ func load_save() -> void:
 
 func reset_save() -> void:
 	GameData.reset_data()
-	FileAccess.open(SAVE_PATH, FileAccess.WRITE).store_string("")
+	
 	var save_manager := SaveManager.new()
 	
 	MetSys.reset_state()
@@ -155,7 +155,7 @@ func reset_save() -> void:
 	save_manager.set_value(PLAY_TIME, play_time)
 	save_manager.set_value(CURR_ROOM, STARTING_MAP)
 	
-	save_manager.save_as_text(SAVE_PATH)
+	save_manager.save_as_text(SaveData.SAVE_PATH)
 #endregion
 #region DAY NIGHT
 const SUN_RISE_HOUR: int = 8

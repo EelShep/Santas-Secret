@@ -24,9 +24,11 @@ func load_data() -> Dictionary:
 func save_data(_data: Dictionary) -> void:
 	data.merge(_data, true)
 '
+func _ready() -> void:
+	Events.main_menu_ready.connect(reset_data)
 
 func reset_data() -> void:
-	pass
+	FileAccess.open(SaveData.SAVE_PATH, FileAccess.WRITE).store_string("")
 
 func convert_time(_play_time : float) -> String:
 	var total_seconds: int = int(_play_time)
