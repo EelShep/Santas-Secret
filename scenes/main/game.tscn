@@ -17,7 +17,7 @@ level_manager = NodePath("LevelManager")
 game_ui = NodePath("GameUI")
 pause_ui = NodePath("PauseUI")
 day_night = NodePath("DayNight")
-INITIAL_HOUR = 18
+INITIAL_HOUR = 23
 
 [node name="DayNight" type="CanvasModulate" parent="."]
 script = ExtResource("2_ldkdj")

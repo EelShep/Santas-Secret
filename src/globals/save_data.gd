@@ -1,6 +1,7 @@
 extends Node
 
 const CONFIG_PATH: String = "user://settings.cfg"
+const SAVE_PATH = "user://save_data.sav"
 var config: ConfigFile = ConfigFile.new()
 
 var new_save: bool = true
