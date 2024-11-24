@@ -27,8 +27,9 @@ func on_day_night(hour: float) -> void:
 	displayed_label = day_night_label
 	displayed_label.show()
 	
-	var is_night = hour > 18
-	displayed_label.text = "The sun has fallen" if is_night else "The sun has risen"
+	if hour == Game.NIGHT_FALL_HOUR: displayed_label.text = "The sun has fallen" 
+	elif hour == Game.SUN_RISE_HOUR: displayed_label.text = "The sun has risen"
+	elif hour == Game.GAME_OVER_HOUR: displayed_label.text = "Game Over time reached"
 	
 	timer.start()
 

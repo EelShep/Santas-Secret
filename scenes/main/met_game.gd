@@ -2,7 +2,7 @@ extends "res://addons/MetroidvaniaSystem/Template/Scripts/MetSysGame.gd"
 class_name Game
 
 const SaveManager = preload("res://addons/MetroidvaniaSystem/Template/Scripts/SaveManager.gd")
-const SAVE_PATH = "user://save_data.sav"
+
 # The game starts in this map. Note that it's scene name only, just like MetSys refers to rooms.
 @export var starting_map: String
 @export var custom_run: bool # For Custom Runner integration.
@@ -16,9 +16,7 @@ const SAVE_PATH = "user://save_data.sav"
 var day_time: float = -1.0
 var curr_hour: int
 
-# The coordinates of generated rooms. MetSys does not keep this list, so it needs to be done manually.
-#TODO var generated_rooms: Array[Vector3i]
-
+var generated_rooms: Array[Vector3i]
 
 static var instance: Game
 func _init() -> void:
@@ -38,42 +36,22 @@ var play_time: float:
 func _process(delta: float) -> void:
 	total_play_time += delta
 	play_time += delta
-	
-#region Signal Functions
-func _on_events_dialogue_toggle(value: bool) -> void:
-	Events.can_pause.emit(!value)
-	get_tree().paused = value
 
 
-func _on_events_player_died() -> void:
-	save_game()
-	get_tree().paused = true
-	Events.can_pause.emit(false)
-	SceneTransition.transition_ready.connect(reload_scene, CONNECT_ONE_SHOT)
-	pause_ui.handle_player_died()
+func _unhandled_input(event: InputEvent) -> void:
+	if not OS.has_feature("editor"): return
+	if event.is_action_pressed(GameConst.INPUT_SELECT):
+		var music_bus: int = AudioConst.BUS_MUSIC_IDX
+		AudioServer.set_bus_mute(music_bus, !AudioServer.is_bus_mute(music_bus))
+	elif event is InputEventKey and event.pressed:
+		match event.keycode:
+			KEY_R:
+				get_tree().reload_current_scene()
 
-
-func reload_scene() -> void:
-	get_tree().paused = false
-	Events.can_pause.emit(true)
-	get_tree().reload_current_scene()
-
-
-func _on_day_night_time_tick(day:int, hour:int, minute:int) -> void:
-	if curr_hour == hour: return
-	curr_hour = hour
-	if curr_hour == 8 || curr_hour == 19:
-		var player: Player = Player.instance
-		player.on_day_night(hour)
-		game_ui.on_day_night(hour)
-
-func _on_events_checkpoint_activated() -> void:
-	game_ui.display_message("Checkpoint Activated")
-	GameData.set_curr_room()
-
-#endregion
 
 func _ready() -> void:
+	if !OS.has_feature("editor"):
+		custom_run = false
 	#NOTE Connect signals
 	Events.game_ready.emit()
 	Events.dialogue_toggle.connect(_on_events_dialogue_toggle)
@@ -89,8 +67,9 @@ func _ready() -> void:
 	set_player($Player) # Assign player for MetSysGame.
 	
 	MetSys.set_save_data()
-	if not GameData.load_data().is_empty():
-		load_game()
+	if not FileAccess.file_exists(SaveData.SAVE_PATH):
+		reset_save()
+	load_save()
 
 	day_night.setup(self)
 	
@@ -109,36 +88,6 @@ func _ready() -> void:
 	reset_map_starting_coords.call_deferred()
 	add_module("RoomTransitions.gd") # Add module for room transitions.
 
-# Save game using MetSys SaveManager.
-func save_game():
-	var data: Dictionary = {
-		#GameData.CURR_ROOM: MetSys.get_current_room_name(),
-		GameData.PLAY_TIME: play_time,
-		GameData.DAY_TIME: day_night.time
-	}
-	GameData.save_data(data)
-
-const STARTING_MAP: String = "test_map.tscn"
-func load_game() -> void:
-	if GameData.load_data().is_empty():
-		GameData.set_curr_room()
-		return
-	var data: Dictionary = GameData.load_data()
-	
-	var room_data = data.get(GameData.CURR_ROOM)
-	
-	if not custom_run:
-		starting_map = room_data if room_data != null else STARTING_MAP
-	play_time = data.get(GameData.PLAY_TIME)
-	day_time = data.get(GameData.DAY_TIME)
-	
-func reset_data() -> void:
-	GameData.reset_data()
-
-func reset_map_starting_coords():
-	pass
-	#$UI/MapWindow.reset_starting_coords()
-
 
 func init_room():
 	MetSys.get_current_room_instance().adjust_camera_limits(%Camera2D)
@@ -146,12 +95,102 @@ func init_room():
 	player.on_enter()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if not OS.has_feature("editor"): return
-	if event.is_action_pressed(GameConst.INPUT_SELECT):
-		var music_bus: int = AudioConst.BUS_MUSIC_IDX
-		AudioServer.set_bus_mute(music_bus, !AudioServer.is_bus_mute(music_bus))
-	elif event is InputEventKey and event.pressed:
-		match event.keycode:
-			KEY_R:
-				get_tree().reload_current_scene()
+func handle_game_over() -> void:
+	print("Game Over Man")
+	get_tree().paused = true
+	Events.can_pause.emit(false)
+	Events.game_over.emit()
+	SceneTransition.transition_ready.connect(reload_scene, CONNECT_ONE_SHOT)
+	pause_ui.handle_game_over(PauseScreens.GAME_OVER_SCREEN)
+
+
+func reload_scene() -> void:
+	get_tree().paused = false
+	Events.can_pause.emit(true)
+	get_tree().reload_current_scene()
+
+#region SAVE FUNCTIONS
+const CURR_ROOM: String = "current_room"
+const GENERATED_ROOMS: String = "generated_rooms"
+const PLAY_TIME: String = "play_time"
+const DAY_TIME: String = "day_time"
+const STARTING_MAP: String = "level_1.tscn"
+func save_game():
+	reset_map_starting_coords()
+	var save_manager := SaveManager.new()
+	save_manager.set_value(GENERATED_ROOMS, generated_rooms)
+	save_manager.set_value(DAY_TIME, day_time)
+	save_manager.set_value(PLAY_TIME, play_time)
+	save_manager.set_value(CURR_ROOM, starting_map)
+	
+
+func load_save() -> void:
+	GameData.reset_data()
+	var file = FileAccess.open(SaveData.SAVE_PATH, FileAccess.READ).get_as_text()
+	if file == "": 
+		reset_save()
+	
+	var save_manager := SaveManager.new()
+	save_manager.load_from_text(SaveData.SAVE_PATH)
+	
+	generated_rooms = save_manager.get_value(GENERATED_ROOMS)
+	day_time = save_manager.get_value(DAY_TIME)
+	play_time = save_manager.get_value(PLAY_TIME)
+	if not custom_run:
+		var current_room = save_manager.get_value(CURR_ROOM)
+		if current_room: starting_map = current_room
+
+
+func reset_save() -> void:
+	GameData.reset_data()
+	
+	var save_manager := SaveManager.new()
+	
+	MetSys.reset_state()
+	MetSys.set_save_data()
+	
+	generated_rooms.clear()
+	save_manager.set_value(GENERATED_ROOMS, generated_rooms)
+	save_manager.set_value(DAY_TIME, day_time)
+	save_manager.set_value(PLAY_TIME, play_time)
+	save_manager.set_value(CURR_ROOM, STARTING_MAP)
+	
+	save_manager.save_as_text(SaveData.SAVE_PATH)
+#endregion
+#region DAY NIGHT
+const SUN_RISE_HOUR: int = 8
+const NIGHT_FALL_HOUR: int = 19
+const GAME_OVER_HOUR: int = 4
+func _on_day_night_time_tick(day:int, hour:int, minute:int) -> void:
+	if curr_hour == hour: return
+	curr_hour = hour
+	if curr_hour == SUN_RISE_HOUR || curr_hour == NIGHT_FALL_HOUR:
+		var player: Player = Player.instance
+		player.on_day_night(hour)
+		game_ui.on_day_night(hour)
+	if curr_hour == GAME_OVER_HOUR:
+		#ALERT TESTING handle_game_over()
+		game_ui.on_day_night(hour)
+#endregion
+#region Signal Functions
+func _on_events_checkpoint_activated() -> void:
+	game_ui.display_message("Checkpoint Activated")
+	save_game()
+
+func _on_events_dialogue_toggle(value: bool) -> void:
+	Events.can_pause.emit(!value)
+	get_tree().paused = value
+
+
+func _on_events_player_died() -> void:
+	save_game()
+	get_tree().paused = true
+	Events.can_pause.emit(false)
+	SceneTransition.transition_ready.connect(reload_scene, CONNECT_ONE_SHOT)
+	pause_ui.handle_game_over(PauseScreens.RELOAD_SCREEN)
+#endregion
+#region DEPRECATED
+func reset_map_starting_coords():
+	pass
+	#$UI/MapWindow.reset_starting_coords()
+#endregion

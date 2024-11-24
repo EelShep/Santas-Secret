@@ -20,12 +20,11 @@ func _ready() -> void:
 	background.hide()
 
 
-func handle_player_died() -> void:
-	Events.can_pause.emit(false)
+func handle_game_over(screen_id: int) -> void:
 	on_enter_menu()
 	var tween: Tween = appear()
 	await tween.finished
-	pause_screens.on_enter(PauseScreens.RELOAD_SCREEN)
+	pause_screens.on_enter(screen_id)
 
 
 func show_pause_screen() -> void:

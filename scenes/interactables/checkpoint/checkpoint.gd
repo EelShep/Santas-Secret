@@ -14,19 +14,28 @@ func _ready() -> void:
 	super()
 	canvas_layer.hide()
 	prompt_control.hide()
+
+	particles.emitting = activated
+	light.enabled = activated
+	
+	MetSys.register_storable_object(self, activate)
+	
 	get_tree().create_timer(0.25).timeout.connect(func(): 
 		show_delay = false
 	)
+	
+
+func activate() -> void:
+	activated = true
 	particles.emitting = activated
 	light.enabled = activated
-
 
 
 func handle_action() -> void:
-	activated = true
 	Events.checkpoint_activated.emit()
-	particles.emitting = activated
-	light.enabled = activated
+	if not activated:
+		MetSys.store_object(self)
+	activate()
 
 
 func handle_enter(body: Node2D) -> void:
