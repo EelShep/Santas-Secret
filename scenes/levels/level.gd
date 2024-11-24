@@ -5,6 +5,8 @@ enum Area {
 	Area2 = 0
 }
 
+@export var tilemap_manager: TileMapManager
+
 @export var id: int
 @export var area: Area
 

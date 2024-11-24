@@ -22,6 +22,8 @@ var airtime: float = 0
 var speed: float = SPEED_MIN
 var can_pick = false
 
+@export var footstep_player: AudioStreamPlayer2D
+
 @export var hurt_area: HurtArea
 @export var interaction_finder: Area2D
 
@@ -55,6 +57,10 @@ func _physics_process(delta: float) -> void:
 		# Some simple double jump implementation.
 		double_jump = true
 		airtime = 0
+	
+	# NOTE Landing SFX
+	if is_on_floor() and not prev_on_floor:
+		footstep()
 	
 	var on_floor_ct: bool = is_on_floor() or airtime < COYOTE_TIME
 	if Input.is_action_just_pressed(GameConst.INPUT_JUMP) and (on_floor_ct or double_jump):
@@ -102,10 +108,25 @@ func _physics_process(delta: float) -> void:
 	elif velocity.x < -1:
 		$Sprite2D.flip_h = true
 
+
+func footstep() -> void:
+	var tilemap_manager: TileMapManager = Level.instance.tilemap_manager
+	var tilemap: TileMapLayer = tilemap_manager.ground_tiles
+	var vertical_offset: Vector2 = Vector2(0, 10)
+	var tile_pos: Vector2 = tilemap.local_to_map(position + vertical_offset)
+	var custom_data = tilemap_manager.get_tile_custom_data(tilemap, tile_pos, TileMapManager.GROUND_TYPE)
+	var footstep_sfx_stream: AudioStreamRandomizer = AudioConst.RES_INDOOR_FOOTSTEPS
+	if custom_data == TileMapManager.GROUND_SNOW:
+		footstep_sfx_stream = AudioConst.RES_SNOW_FOOTSTEPS
+	footstep_player.stream = footstep_sfx_stream
+	footstep_player.play()
+	
+
 func stun() -> void:
 	print("stunned")
 
 func kill() -> void:
+	AudioController.play_sfx(AudioConst.SFX_PLAYER_DEATH)
 	Events.player_died.emit()
 	# Player dies, reset the position to the entrance.
 	#position = reset_position
