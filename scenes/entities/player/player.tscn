@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://cus86duxmepnn"]
+[gd_scene load_steps=16 format=3 uid="uid://cus86duxmepnn"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_euw2l"]
 [ext_resource type="Texture2D" uid="uid://hre3d6c2wbwo" path="res://assets/visual/sprites/placeholder/MC.png" id="2_1jd5e"]
 [ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="3_axwlt"]
 [ext_resource type="Script" path="res://scenes/entities/player/direction.gd" id="4_ia72w"]
 [ext_resource type="Script" path="res://src/scripts/components/hurt_area.gd" id="5_takns"]
+[ext_resource type="AudioStream" uid="uid://cm3o6e878527i" path="res://src/resources/audio/sound_effects/entity/footsteps_snow.tres" id="6_rsh1v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vb85q"]
 size = Vector2(16, 40)
@@ -93,6 +94,23 @@ tracks/0/keys = {
 "update": 1,
 "values": [1, 2, 3, 4, 5, 6]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"footstep"
+}, {
+"args": [],
+"method": &"footstep"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sert5"]
 _data = {
@@ -109,11 +127,12 @@ size = Vector2(20, 40)
 [sub_resource type="CircleShape2D" id="CircleShape2D_nu3fp"]
 radius = 30.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hurt_area", "interaction_finder")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("footstep_player", "hurt_area", "interaction_finder")]
 z_index = 2
 collision_layer = 2
 collision_mask = 17
 script = ExtResource("1_euw2l")
+footstep_player = NodePath("FootstepSFX")
 hurt_area = NodePath("Components/HurtArea")
 interaction_finder = NodePath("Components/InteractionFinder")
 
@@ -168,3 +187,6 @@ collision_mask = 8
 position = Vector2(0, -30)
 shape = SubResource("CircleShape2D_nu3fp")
 debug_color = Color(0.588503, 0.377368, 1, 0.42)
+
+[node name="FootstepSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_rsh1v")
