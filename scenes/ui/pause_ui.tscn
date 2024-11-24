@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cscdh3qxydpea"]
+[gd_scene load_steps=6 format=3 uid="uid://cscdh3qxydpea"]
 
 [ext_resource type="Script" path="res://scenes/ui/pause_screen_ui.gd" id="1_bgyts"]
 [ext_resource type="Script" path="res://scenes/ui/screen_manager/pause_screens/pause_screens.gd" id="2_ffwsb"]
 [ext_resource type="PackedScene" uid="uid://dt1s2x2oymdsv" path="res://scenes/ui/screen_manager/pause_screens/pause_screen.tscn" id="3_uocmd"]
+[ext_resource type="PackedScene" uid="uid://tl16vd251rsh" path="res://scenes/ui/screen_manager/pause_screens/reload_screen.tscn" id="4_37rxt"]
 [ext_resource type="PackedScene" uid="uid://b5yw2mafnywit" path="res://scenes/ui/screen_manager/options_screens/options_screens.tscn" id="4_ar25i"]
 
 [node name="PauseUI" type="CanvasLayer" node_paths=PackedStringArray("background", "pause_screens")]
@@ -30,11 +31,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_ffwsb")
-screens = [NodePath("PauseScreen")]
+screens = [NodePath("PauseScreen"), NodePath("ReloadScreen")]
 screen_managers = [NodePath("OptionsScreens")]
-button_groups = Array[String](["pause_buttons"])
+button_groups = Array[String](["pause_buttons", "reload_buttons"])
 
 [node name="PauseScreen" parent="PauseScreens" instance=ExtResource("3_uocmd")]
+layout_mode = 1
+
+[node name="ReloadScreen" parent="PauseScreens" instance=ExtResource("4_37rxt")]
 layout_mode = 1
 
 [node name="OptionsScreens" parent="PauseScreens" instance=ExtResource("4_ar25i")]

@@ -11,6 +11,7 @@ func setup(game_ref: Game) -> void:
 	game_ref.new_second.connect(_on_game_new_second)
 	timer.timeout.connect(_on_timer_timeout)
 
+
 func display_message(message: String, time: float = 3.0) -> void:
 	displayed_label = day_night_label
 	displayed_label.show()
