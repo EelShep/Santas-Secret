@@ -1,12 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://dom4jt7ptglky"]
+[gd_scene load_steps=12 format=3 uid="uid://dom4jt7ptglky"]
 
 [ext_resource type="Script" path="res://src/globals/audio_controller/audio_controller.gd" id="1_a2i5f"]
 [ext_resource type="Script" path="res://src/scripts/audio/sfx_controller.gd" id="2_5xwsq"]
 [ext_resource type="Script" path="res://src/scripts/audio/music_controller.gd" id="3_fum7x"]
 [ext_resource type="AudioStream" uid="uid://c4wkqkdvvj7ok" path="res://assets/audio/music/placeholder/JDSherbert - Ambiences Music Pack - Cosmic Star.ogg" id="4_14rgq"]
 [ext_resource type="AudioStream" uid="uid://qp8knl04xpdv" path="res://assets/audio/music/placeholder/JDSherbert - Ambiences Music Pack - Bloodrat Sewers.ogg" id="5_bv782"]
+[ext_resource type="AudioStream" uid="uid://d3snylwuv3g3d" path="res://assets/audio/sound_effects/entity/player/player_death_01.wav" id="6_38lo0"]
 [ext_resource type="AudioStream" uid="uid://3kxxe3hnhn8v" path="res://assets/audio/sound_effects/placeholder_ui/UIAffirmative2.ogg" id="6_psvmj"]
 [ext_resource type="AudioStream" uid="uid://c46ufrduegfcn" path="res://assets/audio/sound_effects/placeholder_ui/UIAffirmative1.ogg" id="7_ahxc0"]
+[ext_resource type="AudioStream" uid="uid://ylo52xijifjq" path="res://assets/audio/sound_effects/world/save_game.wav" id="7_drd01"]
 [ext_resource type="AudioStream" uid="uid://c7tx65fqogv4u" path="res://assets/audio/sound_effects/placeholder_ui/UINegative1.ogg" id="8_ojrfn"]
 [ext_resource type="AudioStream" uid="uid://fftq2dc66y2r" path="res://assets/audio/sound_effects/placeholder_ui/UINegative2.ogg" id="9_tivn7"]
 
@@ -24,6 +26,10 @@ music = {
 [node name="SFXController" type="Node" parent="."]
 script = ExtResource("2_5xwsq")
 players = 3
+sfx = {
+0: ExtResource("6_38lo0"),
+1: ExtResource("7_drd01")
+}
 
 [node name="UISFXController" type="Node" parent="."]
 script = ExtResource("2_5xwsq")

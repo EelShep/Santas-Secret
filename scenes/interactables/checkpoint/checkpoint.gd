@@ -33,6 +33,7 @@ func activate() -> void:
 
 func handle_action() -> void:
 	Events.checkpoint_activated.emit()
+	AudioController.play_sfx(AudioConst.SFX_SAVE)
 	if not activated:
 		MetSys.store_object(self)
 	activate()

@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://b1dqu4bjqtv3l"]
+
+[ext_resource type="AudioStream" uid="uid://qieelauocem1" path="res://assets/audio/sound_effects/entity/footstep_indoors_01.wav" id="1_802w8"]
+[ext_resource type="AudioStream" uid="uid://chmylbwdfvogj" path="res://assets/audio/sound_effects/entity/footstep_indoors_02.wav" id="2_hh3a5"]
+[ext_resource type="AudioStream" uid="uid://dfhsw65oit7m5" path="res://assets/audio/sound_effects/entity/footstep_indoors_03.wav" id="3_ljes7"]
+
+[resource]
+streams_count = 3
+stream_0/stream = ExtResource("1_802w8")
+stream_1/stream = ExtResource("2_hh3a5")
+stream_2/stream = ExtResource("3_ljes7")
