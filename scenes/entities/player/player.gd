@@ -44,12 +44,33 @@ func _ready() -> void:
 	hurt_area.damaged.connect(_on_hurt_area_damaged)
 	on_enter()
 
-
-
+var stun_time: float = 0.0
 func _physics_process(delta: float) -> void:
 	if event:
 		return
+		
+	if stun_time >= 0.0:
+		handle_stun(delta)
+		return
 	
+	handle_gravity(delta)
+	handle_movement_input(delta)
+	handle_jump_input()
+	handle_short_hop()
+	# NOTE Landing SFX
+	if is_on_floor() and not prev_on_floor:
+		footstep()
+	#NOTE Wall Speed
+	if is_on_wall():
+		speed = SPEED_MIN
+	
+	update_animation()
+	
+	prev_on_floor = is_on_floor()
+	move_and_slide()
+
+#region Process Handlers
+func handle_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y = min(velocity.y + gravity * delta, MAX_FALL_SPEED)
 		airtime += delta
@@ -57,11 +78,19 @@ func _physics_process(delta: float) -> void:
 		# Some simple double jump implementation.
 		double_jump = true
 		airtime = 0
-	
-	# NOTE Landing SFX
-	if is_on_floor() and not prev_on_floor:
-		footstep()
-	
+
+
+func handle_movement_input(delta: float) -> void:
+	var direction := Input.get_axis(GameConst.INPUT_MOVE_LEFT, GameConst.INPUT_MOVE_RIGHT)
+	if direction:
+		speed = min(SPEED_MAX, speed + ACCEL * delta)
+		velocity.x = direction * speed
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED_MIN)
+		speed = SPEED_MIN
+
+
+func handle_jump_input() -> void:
 	var on_floor_ct: bool = is_on_floor() or airtime < COYOTE_TIME
 	if Input.is_action_just_pressed(GameConst.INPUT_JUMP) and (on_floor_ct or double_jump):
 		if not on_floor_ct:
@@ -71,26 +100,15 @@ func _physics_process(delta: float) -> void:
 			position.y += 8
 		else:
 			velocity.y = JUMP_VELOCITY
-	
+
+
+func handle_short_hop() -> void:
 	if Input.is_action_just_released(GameConst.INPUT_JUMP):
 		if not is_on_floor() and velocity.y < 0:
 			velocity.y = min(0, velocity.y - JUMP_VELOCITY * SHORT_HOP)
-			
-	
-	if is_on_wall():
-		speed = SPEED_MIN
-	
-	var direction := Input.get_axis(GameConst.INPUT_MOVE_LEFT, GameConst.INPUT_MOVE_RIGHT)
-	if direction:
-		speed = min(SPEED_MAX, speed + ACCEL * delta)
-		velocity.x = direction * speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED_MIN)
-		speed = SPEED_MIN
 
-	prev_on_floor = is_on_floor()
-	move_and_slide()
-	
+
+func update_animation() -> void:
 	var new_animation = &"Idle"
 	if velocity.y < 0:
 		new_animation = &"Jump"
@@ -109,6 +127,14 @@ func _physics_process(delta: float) -> void:
 		$Sprite2D.flip_h = true
 
 
+func handle_stun(delta: float) -> void:
+	stun_time -= delta
+	velocity.x = 0
+	velocity.y = min(velocity.y, 0)
+	animation = &"Stun"
+	$AnimationPlayer.play(animation)
+
+
 func footstep() -> void:
 	var tilemap_manager: TileMapManager = Level.instance.tilemap_manager
 	var tilemap: TileMapLayer = tilemap_manager.ground_tiles
@@ -120,16 +146,17 @@ func footstep() -> void:
 		footstep_sfx_stream = AudioConst.RES_SNOW_FOOTSTEPS
 	footstep_player.stream = footstep_sfx_stream
 	footstep_player.play()
-	
-
+#endregion
+#region Hurt Functions	
+@export var STUN_TIME: float = 0.6
 func stun() -> void:
-	print("stunned")
+	if stun_time >= 0.0: return
+	stun_time = STUN_TIME
 
 func kill() -> void:
 	AudioController.play_sfx(AudioConst.SFX_PLAYER_DEATH)
 	Events.player_died.emit()
-	# Player dies, reset the position to the entrance.
-	#position = reset_position
+
 
 func _on_hurt_area_damaged(hit_area: HitArea) -> void:
 	match hit_area.type:
@@ -137,11 +164,13 @@ func _on_hurt_area_damaged(hit_area: HitArea) -> void:
 			stun()
 		HitArea.Type.Kill:
 			kill()
+#endregion
 
 func on_enter():
 	# Position for kill system. Assigned when entering new room (see Game.gd).
 	reset_position = position
-	
+
+
 func on_day_night(hour: int) -> void:
 	var value: bool = hour > 18
 	$PointLight2D.enabled = value
