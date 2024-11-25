@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://cus86duxmepnn"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_euw2l"]
-[ext_resource type="Texture2D" uid="uid://hre3d6c2wbwo" path="res://assets/visual/sprites/placeholder/MC.png" id="2_1jd5e"]
+[ext_resource type="Texture2D" uid="uid://ckbe6wd0liblc" path="res://assets/visual/sprites/entity/player/Player_Spritesheet.png" id="2_m64kw"]
 [ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="3_axwlt"]
 [ext_resource type="Script" path="res://scenes/entities/player/direction.gd" id="4_ia72w"]
 [ext_resource type="Script" path="res://src/scripts/components/hurt_area.gd" id="5_takns"]
@@ -12,25 +12,9 @@ size = Vector2(16, 40)
 
 [sub_resource type="Animation" id="Animation_emxyy"]
 resource_name = "Fall"
-length = 0.3
+length = 0.1
 loop_mode = 1
 step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [10, 11, 12]
-}
-
-[sub_resource type="Animation" id="Animation_e76g1"]
-resource_name = "Idle"
-length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -41,12 +25,29 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [7]
+}
+
+[sub_resource type="Animation" id="Animation_e76g1"]
+resource_name = "Idle"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_pje7w"]
 resource_name = "Jump"
-length = 0.3
+length = 0.1
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -56,10 +57,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [7, 8, 9]
+"values": [10]
 }
 
 [sub_resource type="Animation" id="Animation_yv3i2"]
@@ -92,7 +93,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [1, 2, 3, 4, 5, 6]
+"values": [6, 7, 8, 9, 10, 11]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -122,7 +123,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_78y87"]
-size = Vector2(20, 40)
+size = Vector2(20, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nu3fp"]
 radius = 30.0
@@ -142,9 +143,10 @@ shape = SubResource("RectangleShape2D_vb85q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 8
-position = Vector2(0, -30)
-texture = ExtResource("2_1jd5e")
-hframes = 7
+position = Vector2(0, -32)
+scale = Vector2(2, 2)
+texture = ExtResource("2_m64kw")
+hframes = 6
 vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -176,7 +178,7 @@ collision_mask = 0
 script = ExtResource("5_takns")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Components/HurtArea"]
-position = Vector2(0, -20)
+position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_78y87")
 
 [node name="InteractionFinder" type="Area2D" parent="Components"]
@@ -184,9 +186,10 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Components/InteractionFinder"]
-position = Vector2(0, -30)
+position = Vector2(0, -16)
 shape = SubResource("CircleShape2D_nu3fp")
 debug_color = Color(0.588503, 0.377368, 1, 0.42)
 
 [node name="FootstepSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_rsh1v")
+bus = &"SFX"
