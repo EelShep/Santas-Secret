@@ -8,6 +8,9 @@ const MAX_FALL_SPEED = 900.0
 const COYOTE_TIME: float = .1
 const SHORT_HOP: float = .5
 
+var face_dir: int = 1
+@export var push_force: float = 10.0
+
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var animation: String
 
@@ -21,6 +24,7 @@ var prev_on_floor: bool
 var airtime: float = 0
 var speed: float = SPEED_MIN
 var can_pick = false
+
 
 @export var footstep_player: AudioStreamPlayer2D
 
@@ -68,6 +72,12 @@ func _physics_process(delta: float) -> void:
 	
 	prev_on_floor = is_on_floor()
 	move_and_slide()
+	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var pushable = collision.get_collider() as Pushable
+		if pushable == null: continue
+		pushable.push(face_dir * push_force ,position)
 
 #region Process Handlers
 func handle_gravity(delta: float) -> void:
@@ -122,8 +132,10 @@ func update_animation() -> void:
 		$AnimationPlayer.play(new_animation)
 	
 	if velocity.x > 1:
+		face_dir = 1
 		$Sprite2D.flip_h = false
 	elif velocity.x < -1:
+		face_dir = -1
 		$Sprite2D.flip_h = true
 
 

@@ -150,11 +150,13 @@ radius = 30.0
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("footstep_player", "hurt_area", "interaction_finder")]
 z_index = 2
 collision_layer = 2
-collision_mask = 17
+collision_mask = 49
 script = ExtResource("1_euw2l")
+push_force = 2.0
 footstep_player = NodePath("FootstepSFX")
 hurt_area = NodePath("Components/HurtArea")
 interaction_finder = NodePath("Components/InteractionFinder")
+STUN_TIME = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -20)
