@@ -47,7 +47,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ButtonsContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Bottom"]
-custom_minimum_size = Vector2(172, 0)
+custom_minimum_size = Vector2(184, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

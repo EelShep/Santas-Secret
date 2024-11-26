@@ -1,12 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://djqj3k4kogtki"]
+[gd_scene load_steps=6 format=3 uid="uid://djqj3k4kogtki"]
 
-[ext_resource type="Texture2D" uid="uid://cjr71vhddnrrj" path="res://scenes/enemies/Circle.png" id="1_6x4dy"]
+[ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="1_6x4dy"]
 [ext_resource type="Script" path="res://scenes/enemies/projectile.gd" id="1_eadfw"]
+[ext_resource type="Script" path="res://src/scripts/components/hit_area.gd" id="3_8bqdw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d3av6"]
 radius = 12.6491
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_p8pj0"]
+radius = 14.0
+
 [node name="Projectile" type="Area2D"]
+z_index = 2
 position = Vector2(343, 3)
 collision_layer = 16
 collision_mask = 3
@@ -18,3 +23,13 @@ texture = ExtResource("1_6x4dy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_d3av6")
+
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_8bqdw")
+type = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+shape = SubResource("CircleShape2D_p8pj0")
+debug_color = Color(0.997919, 0, 0.154892, 0.42)
