@@ -4,17 +4,17 @@
 [ext_resource type="Script" path="res://scenes/pushable/pushable_box.gd" id="1_isxfv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fx47j"]
-size = Vector2(42, 44)
+size = Vector2(62, 64)
 
 [node name="PushableBox" type="CharacterBody2D"]
 collision_layer = 32
-collision_mask = 17
+collision_mask = 49
 script = ExtResource("1_isxfv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 32
 position = Vector2(0, -1)
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_gw5gj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
