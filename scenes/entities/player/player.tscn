@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://cus86duxmepnn"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_euw2l"]
-[ext_resource type="Texture2D" uid="uid://ckbe6wd0liblc" path="res://assets/visual/sprites/entity/player/Player_Spritesheet_v2.png" id="2_m64kw"]
+[ext_resource type="Texture2D" uid="uid://ckbe6wd0liblc" path="res://assets/visual/sprites/entity/player/Player_Spritesheet_v2.png" id="2_v3ml3"]
 [ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="3_axwlt"]
 [ext_resource type="Script" path="res://scenes/entities/player/direction.gd" id="4_ia72w"]
 [ext_resource type="Script" path="res://src/scripts/components/hurt_area.gd" id="5_takns"]
@@ -166,7 +166,7 @@ shape = SubResource("RectangleShape2D_vb85q")
 light_mask = 8
 position = Vector2(0, -32)
 scale = Vector2(2, 2)
-texture = ExtResource("2_m64kw")
+texture = ExtResource("2_v3ml3")
 hframes = 6
 vframes = 5
 
