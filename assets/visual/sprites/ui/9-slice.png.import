@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmnlhi88emytw"
-path="res://.godot/imported/9-patch-small.png-d1d59bb9d395939707b7e37d7553e53d.ctex"
+uid="uid://dewwklnme5hrp"
+path="res://.godot/imported/9-slice.png-0ac9bdf73ad29eb1a77bd5ab9fbc9977.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/sprites/9-patch-small.png"
-dest_files=["res://.godot/imported/9-patch-small.png-d1d59bb9d395939707b7e37d7553e53d.ctex"]
+source_file="res://assets/visual/sprites/ui/9-slice.png"
+dest_files=["res://.godot/imported/9-slice.png-0ac9bdf73ad29eb1a77bd5ab9fbc9977.ctex"]
 
 [params]
 
