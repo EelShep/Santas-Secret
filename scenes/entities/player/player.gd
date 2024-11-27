@@ -40,9 +40,14 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed(GameConst.INPUT_INTERACT):
 		var areas = interaction_finder.get_overlapping_areas()
 		print(areas.size())
-		if areas.size() < 1: return
-		for area in areas:
-			if area is Interactable: (area as Interactable).handle_action()
+		if areas.size() > 0:
+			for area in areas:
+				if area is Interactable:
+					(area as Interactable).handle_action()
+		else:
+			var flash = preload("res://scenes/entities/player/flash.tscn").instantiate()
+			flash.position = position
+			get_parent().add_child(flash)
 
 func _ready() -> void:
 	hurt_area.damaged.connect(_on_hurt_area_damaged)
@@ -158,8 +163,7 @@ func footstep() -> void:
 		footstep_sfx_stream = AudioConst.RES_SNOW_FOOTSTEPS
 	footstep_player.stream = footstep_sfx_stream
 	footstep_player.play()
-#endregion
-#region Hurt Functions	
+
 @export var STUN_TIME: float = 0.6
 func stun() -> void:
 	if stun_time >= 0.0: return
