@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://cus86duxmepnn"]
+[gd_scene load_steps=17 format=3 uid="uid://cus86duxmepnn"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_euw2l"]
-[ext_resource type="Texture2D" uid="uid://ckbe6wd0liblc" path="res://assets/visual/sprites/entity/player/Player_Spritesheet.png" id="2_m64kw"]
+[ext_resource type="Texture2D" uid="uid://ckbe6wd0liblc" path="res://assets/visual/sprites/entity/player/Player_Spritesheet_v2.png" id="2_m64kw"]
 [ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="3_axwlt"]
 [ext_resource type="Script" path="res://scenes/entities/player/direction.gd" id="4_ia72w"]
 [ext_resource type="Script" path="res://src/scripts/components/hurt_area.gd" id="5_takns"]
@@ -12,7 +12,7 @@ size = Vector2(16, 40)
 
 [sub_resource type="Animation" id="Animation_emxyy"]
 resource_name = "Fall"
-length = 0.1
+length = 0.4
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -22,10 +22,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [7]
+"values": [18, 19, 20, 21]
 }
 
 [sub_resource type="Animation" id="Animation_e76g1"]
@@ -60,7 +60,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [10]
+"values": [13]
 }
 
 [sub_resource type="Animation" id="Animation_yv3i2"]
@@ -113,13 +113,32 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_nbi3l"]
+resource_name = "Stun"
+length = 0.3
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [24, 25, 26]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sert5"]
 _data = {
 "Fall": SubResource("Animation_emxyy"),
 "Idle": SubResource("Animation_e76g1"),
 "Jump": SubResource("Animation_pje7w"),
 "RESET": SubResource("Animation_yv3i2"),
-"Run": SubResource("Animation_r5q3a")
+"Run": SubResource("Animation_r5q3a"),
+"Stun": SubResource("Animation_nbi3l")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_78y87"]
@@ -131,11 +150,13 @@ radius = 30.0
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("footstep_player", "hurt_area", "interaction_finder")]
 z_index = 2
 collision_layer = 2
-collision_mask = 17
+collision_mask = 49
 script = ExtResource("1_euw2l")
+push_force = 2.0
 footstep_player = NodePath("FootstepSFX")
 hurt_area = NodePath("Components/HurtArea")
 interaction_finder = NodePath("Components/InteractionFinder")
+STUN_TIME = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -20)
@@ -147,7 +168,7 @@ position = Vector2(0, -32)
 scale = Vector2(2, 2)
 texture = ExtResource("2_m64kw")
 hframes = 6
-vframes = 2
+vframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

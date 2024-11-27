@@ -1,9 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://ctl63onj30x7c"]
+[gd_scene load_steps=14 format=3 uid="uid://ctl63onj30x7c"]
 
 [ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_dtkli"]
+[ext_resource type="Script" path="res://src/scripts/components/hit_area.gd" id="2_p504u"]
 [ext_resource type="Texture2D" uid="uid://hre3d6c2wbwo" path="res://assets/visual/sprites/placeholder/MC.png" id="2_w3615"]
 [ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="3_ist6r"]
 [ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="5_s7v7g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eeoc1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vb85q"]
 size = Vector2(16, 40)
@@ -106,6 +109,15 @@ _data = {
 collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_dtkli")
+
+[node name="HitArea" type="Area2D" parent="."]
+position = Vector2(0, -20)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("2_p504u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+shape = SubResource("CircleShape2D_eeoc1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -20)
