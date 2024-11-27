@@ -292,6 +292,7 @@ func check_plan():
 		prints("going left")
 #
 func color_player():
+	return
 	if active:
 		if caught:
 			$Sprite2D.modulate = Color.DARK_GREEN
