@@ -1,34 +1,18 @@
 extends Node
-'
-#region Data Keys
-const CURR_ROOM: String = "current_room"
-const PLAY_TIME: String = "play_time"
-const DAY_TIME: String = "day_time"
-#endregion 
-
-var data: Dictionary = {}
 
 
-func set_curr_room() -> void:
-	data[CURR_ROOM] = MetSys.get_current_room_name()
-
-
-func reset_data() -> void:
-	data = {}
-
-
-func load_data() -> Dictionary:
-	return data
-
-
-func save_data(_data: Dictionary) -> void:
-	data.merge(_data, true)
-'
 func _ready() -> void:
 	Events.main_menu_ready.connect(reset_data)
 
+
 func reset_data() -> void:
 	FileAccess.open(SaveData.SAVE_PATH, FileAccess.WRITE).store_string("")
+
+var credits_stats: bool = false
+func get_data():
+	var file = FileAccess.open(SaveData.SAVE_PATH, FileAccess.READ).get_as_text()
+	print(file)
+	
 
 func convert_time(_play_time : float) -> String:
 	var total_seconds: int = int(_play_time)
