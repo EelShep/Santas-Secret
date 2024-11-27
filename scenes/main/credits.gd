@@ -109,7 +109,7 @@ func _on_input_delay_timeout() -> void:
 #region Helper Functions
 func set_stats() -> void:
 	if not GameData.credits_stats: return
-	var game_data: Dictionary = GameData.get_data()
+	var game_data: Variant = GameData.get_data()
 
 	
 func set_all_children_visibility(node: Variant, value: bool) -> void:
