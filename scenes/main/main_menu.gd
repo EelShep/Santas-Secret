@@ -1,7 +1,5 @@
 extends CanvasLayer
 
-const GAME_SCENE_PATH: String = "res://scenes/main/game.tscn"
-const CREDITS_SCENE_PATH: String = "res://scenes/main/credits.tscn"
 
 @export var main_menu_screens: MainMenuScreens
 #TODO @export var quit_button: ScreenButton
@@ -18,13 +16,13 @@ func _ready() -> void:
 func _on_play_pressed() -> void:
 	SceneTransition.fade_out_in()
 	await SceneTransition.transition_ready
-	get_tree().change_scene_to_file(GAME_SCENE_PATH)
+	get_tree().change_scene_to_file(SceneTransition.GAME_SCENE_PATH)
 
 
 func _on_credits_pressed() -> void:
 	SceneTransition.fade_out_in()
 	await SceneTransition.transition_ready
-	get_tree().change_scene_to_file(CREDITS_SCENE_PATH)
+	get_tree().change_scene_to_file(SceneTransition.CREDITS_SCENE_PATH)
 
 
 func _on_quit_pressed() -> void:

@@ -1,7 +1,6 @@
 class_name CreditsScene extends CanvasLayer
 
 const INPUT_DELAY: float = 1.5
-const MENU_SCENE_PATH: String = "res://scenes/main/main_menu.tscn"
 
 @export var animation_player: AnimationPlayer
 @export var input_delay: Timer
@@ -99,7 +98,7 @@ func proceed_to_menu() -> void:
 	input_allowed = false
 	SceneTransition.fade_out_in()
 	await SceneTransition.transition_ready
-	get_tree().change_scene_to_file(MENU_SCENE_PATH)
+	get_tree().change_scene_to_file(SceneTransition.MAIN_MENU_SCENE_PATH)
 	
 	
 func _on_input_delay_timeout() -> void:

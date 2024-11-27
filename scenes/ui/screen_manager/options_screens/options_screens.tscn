@@ -35,12 +35,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/margin_bottom = 32
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OptionsScreen/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/separation = 64
 
 [node name="Video" type="Control" parent="OptionsScreen/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
@@ -55,12 +58,13 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="VideoLabel" type="RichTextLabel" parent="OptionsScreen/MarginContainer/VBoxContainer/Video/VBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(0, 84)
 layout_mode = 2
-mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0.0117647, 0.117647, 0.203922, 1)
+theme_override_constants/outline_size = 32
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
-text = "[center][shake rate=9.0 level=9 connected=1][color=orangered]Video[/color][/shake] "
+text = "[center][shake rate=9.0 level=9 connected=1][color=red]Video[/color][/shake] "
 scroll_active = false
 
 [node name="ButtonsHBox" type="HBoxContainer" parent="OptionsScreen/MarginContainer/VBoxContainer/Video/VBoxContainer"]
@@ -110,12 +114,13 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="AudioLabel" type="RichTextLabel" parent="OptionsScreen/MarginContainer/VBoxContainer/Audio/VBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(0, 84)
 layout_mode = 2
-mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0.0117647, 0.117647, 0.203922, 1)
+theme_override_constants/outline_size = 32
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
-text = "[center][shake rate=9.0 level=9 connected=1][color=orangered]Audio[/color][/shake] "
+text = "[center][shake rate=9.0 level=9 connected=1][color=red]Audio[/color][/shake] "
 scroll_active = false
 
 [node name="ButtonsHBox" type="HBoxContainer" parent="OptionsScreen/MarginContainer/VBoxContainer/Audio/VBoxContainer"]
@@ -194,22 +199,23 @@ mouse_filter = 2
 [node name="ButtonsContainer" type="VBoxContainer" parent="OptionsScreen/MarginContainer/VBoxContainer/Bottom"]
 custom_minimum_size = Vector2(148, 0)
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -43.0
-offset_top = -59.0
-offset_right = 43.0
-offset_bottom = 59.0
+anchor_bottom = 1.0
+offset_left = -74.0
+offset_top = -118.0
+offset_right = 74.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 mouse_filter = 2
 theme_override_constants/separation = 32
+alignment = 2
 
 [node name="OptionsBack" parent="OptionsScreen/MarginContainer/VBoxContainer/Bottom/ButtonsContainer" instance=ExtResource("3_sf41a")]
 layout_mode = 2
+size_flags_vertical = 8
 text = "Back"
 group = "options_buttons"
 button_type = 4
