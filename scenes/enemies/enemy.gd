@@ -62,6 +62,11 @@ func _physics_process(delta: float) -> void:
 	if Player.instance.event:
 		return
 		
+	if stun_time >= 0.0:
+		handle_stun(delta)
+		return
+	$StunVisual.hide()
+		
 	check_player(delta)
 	plan_movement(delta)
 	movement()
@@ -303,81 +308,30 @@ func color_player():
 
 func movement():
 	velocity.x = planned_direction * SPEED_MAX
-
-	
-	## Gravity
-	#if !is_on_floor():
-		#velocity.y += gravity
-	#elif is_on_floor():
-		#jump_count = max_jump_count
-	#
-	#handle_jumping()
-	#
-	## Move Player
-	#var inputAxis = 0.0
-	#if movement_enabled:
-		#inputAxis = Input.get_axis("Left", "Right")
-		#velocity = Vector2(inputAxis * move_speed, velocity.y)
-	#else:
-		#velocity = Vector2(planned_direction * move_speed, velocity.y)
-	#
-	#move_and_slide()
 #
 func jump():
-	
 	planned_jump = false
-	#velocity.y = -jump_force
 	velocity.y  = JUMP_VELOCITY
 	
-	
-	
-	
-#
-## Handle Player Animations
-#func player_animations():
-	#particle_trails.emitting = false
-	#
-	#if is_on_floor():
-		#if abs(velocity.x) > 0:
-			#particle_trails.emitting = true
-			#player_sprite.play("Walk", 1.5)
-		#else:
-			#player_sprite.play("Idle")
-	#else:
-		#player_sprite.play("Jump")
-#
-## Flip player sprite based on X velocity
-#func flip_player():
-	#if velocity.x < 0: 
-		#player_sprite.flip_h = true
-	#elif velocity.x > 0:
-		#player_sprite.flip_h = false
-#
-## Tween Animations
-#func death_tween():
-	#position = spawn_point
-#
-#func respawn_tween():
-	#var tween = create_tween()
-	#tween.stop(); tween.play()
-	#tween.tween_property(player_sprite, "scale", Vector2.ONE, 0.15) 
-	#tween.parallel().tween_property(player_sprite, "position", Vector2(0,-48), 0.15)
-#
-#func jump_tween():
-	#var tween = create_tween()
-	#tween.tween_property(self, "scale", Vector2(0.7, 1.4), 0.1)
-	#tween.tween_property(self, "scale", Vector2.ONE, 0.1)
-#
-## --------- SIGNALS ---------- #
-#
-## Reset the player's position to the current level spawn point if collided with any trap
-#func _on_collision_body_entered(_body):
-	#if _body.is_in_group("Traps"):
-		#death_particles.emitting = true
-		#death_tween()
-	#elif _body is Player:
-		#caught = true
-	#
-#func _on_collision_body_exited(_body):
-	#if _body is Player:
-		#caught = false
+var stun_time := 0.0
+func handle_stun(delta: float) -> void:
+	stun_time -= delta
+	$StunVisual.show()
+
+@export var footstep_player: AudioStreamPlayer2D
+func footstep() -> void:
+	var tilemap_manager: TileMapManager = Level.instance.tilemap_manager
+	var tilemap: TileMapLayer = tilemap_manager.ground_tiles
+	var vertical_offset: Vector2 = Vector2(0, 10)
+	var tile_pos: Vector2 = tilemap.local_to_map(position + vertical_offset)
+	var custom_data = tilemap_manager.get_tile_custom_data(tilemap, tile_pos, TileMapManager.GROUND_TYPE)
+	var footstep_sfx_stream: AudioStreamRandomizer = AudioConst.RES_INDOOR_FOOTSTEPS
+	if custom_data == TileMapManager.GROUND_SNOW:
+		footstep_sfx_stream = AudioConst.RES_SNOW_FOOTSTEPS
+	footstep_player.stream = footstep_sfx_stream
+	footstep_player.play()
+
+@export var STUN_TIME: float = 1.2
+func stun() -> void:
+	if stun_time >= 0.0: return
+	stun_time = STUN_TIME

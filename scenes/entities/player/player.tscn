@@ -156,7 +156,6 @@ push_force = 2.0
 footstep_player = NodePath("FootstepSFX")
 hurt_area = NodePath("Components/HurtArea")
 interaction_finder = NodePath("Components/InteractionFinder")
-STUN_TIME = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -20)
