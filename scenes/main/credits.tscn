@@ -204,6 +204,7 @@ _data = {
 }
 
 [node name="Credits" type="CanvasLayer" node_paths=PackedStringArray("animation_player", "input_delay")]
+process_mode = 3
 script = ExtResource("1_mnjmq")
 animation_player = NodePath("AnimationPlayer")
 input_delay = NodePath("InputDelay")
@@ -511,7 +512,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="NameLabel" type="RichTextLabel" parent="CreditsUI/Stats/MarginContainer/StatsVBox/StatsHBox/LabelsVBox"]
+[node name="PlayTimeLabel" type="RichTextLabel" parent="CreditsUI/Stats/MarginContainer/StatsVBox/StatsHBox/LabelsVBox"]
 custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0.0117647, 0.117647, 0.203922, 1)
@@ -526,7 +527,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="NameLabel" type="RichTextLabel" parent="CreditsUI/Stats/MarginContainer/StatsVBox/StatsHBox/ValuesVBox"]
+[node name="PlayTimeValue" type="RichTextLabel" parent="CreditsUI/Stats/MarginContainer/StatsVBox/StatsHBox/ValuesVBox"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0.0117647, 0.117647, 0.203922, 1)
