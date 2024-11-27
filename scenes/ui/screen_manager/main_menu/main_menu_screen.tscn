@@ -20,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_bottom = 50
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -29,7 +30,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="TitleLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Top"]
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(0, 172)
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -37,9 +38,11 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 64
+theme_override_colors/font_outline_color = Color(0.0117647, 0.117647, 0.203922, 1)
+theme_override_constants/outline_size = 32
+theme_override_font_sizes/normal_font_size = 128
 bbcode_enabled = true
-text = "[center][shake rate=9.0 level=9 connected=1][color=orangered]Github GameOff[/color][/shake] "
+text = "[center][shake rate=9.0 level=9 connected=1][color=red]Santa's Secret[/color][/shake] "
 scroll_active = false
 
 [node name="Bottom" type="Control" parent="MarginContainer/VBoxContainer"]
@@ -71,6 +74,12 @@ button_type = 1
 [node name="MainMenuOptions" parent="MarginContainer/VBoxContainer/Bottom/ButtonsContainer" instance=ExtResource("2_2fiif")]
 layout_mode = 2
 text = "Options"
+group = "main_menu_buttons"
+button_type = 1
+
+[node name="MainMenuCredits" parent="MarginContainer/VBoxContainer/Bottom/ButtonsContainer" instance=ExtResource("2_2fiif")]
+layout_mode = 2
+text = "Credits"
 group = "main_menu_buttons"
 button_type = 1
 

@@ -47,6 +47,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		match event.keycode:
 			KEY_R:
 				get_tree().reload_current_scene()
+			KEY_0:
+				Events.game_complete.emit()
 
 
 func _ready() -> void:
@@ -57,12 +59,11 @@ func _ready() -> void:
 	Events.dialogue_toggle.connect(_on_events_dialogue_toggle)
 	Events.player_died.connect(_on_events_player_died)
 	Events.checkpoint_activated.connect(_on_events_checkpoint_activated)
-	
+	Events.game_complete.connect(_on_events_game_complete)
 	day_night.time_tick.connect(_on_day_night_time_tick)
-	#NOTE Setup Dependancies
-	
+	#NOTE Setup MetSys & Other Dependancies
 	game_ui.setup(self)
-	
+
 	MetSys.reset_state() # Make sure MetSys is in initial state.
 	set_player($Player) # Assign player for MetSysGame.
 	
@@ -78,7 +79,7 @@ func _ready() -> void:
 	# Load the starting room.
 	load_room(starting_map)
 	
-	# Find the save point and teleport the player to it, to start at the save point.
+	# Find the save point and teleport the player to it, to start at the Checkpoint or PlayerSpawn.
 	var start := map.get_node_or_null(^"Checkpoint")
 	if custom_run or !start: start = map.get_node_or_null(^"PlayerSpawn")
 	if start:
@@ -188,6 +189,15 @@ func _on_events_player_died() -> void:
 	Events.can_pause.emit(false)
 	SceneTransition.transition_ready.connect(reload_scene, CONNECT_ONE_SHOT)
 	pause_ui.handle_game_over(PauseScreens.RELOAD_SCREEN)
+
+
+func _on_events_game_complete() -> void:
+	save_game()
+	get_tree().paused = true
+	Events.can_pause.emit(false)
+	GameData.handle_game_complete()
+	
+	
 #endregion
 #region DEPRECATED
 func reset_map_starting_coords():
