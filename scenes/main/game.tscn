@@ -12,7 +12,7 @@ gradient = ExtResource("3_5mp8n")
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("level_manager", "game_ui", "pause_ui", "day_night")]
 script = ExtResource("1_tjrnh")
-starting_map = "Level_1.tscn"
+starting_map = "level_1.tscn"
 level_manager = NodePath("LevelManager")
 game_ui = NodePath("GameUI")
 pause_ui = NodePath("PauseUI")

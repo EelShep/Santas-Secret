@@ -114,7 +114,7 @@ const CURR_ROOM: String = "current_room"
 const GENERATED_ROOMS: String = "generated_rooms"
 const PLAY_TIME: String = "play_time"
 const DAY_TIME: String = "day_time"
-const STARTING_MAP: String = "Level_1.tscn"
+const STARTING_MAP: String = "level_1.tscn"
 func save_game():
 	reset_map_starting_coords()
 	var save_manager := SaveManager.new()
