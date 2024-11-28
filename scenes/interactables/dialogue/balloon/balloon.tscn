@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/interactables/dialogue/balloon/balloon.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
-[ext_resource type="Texture2D" uid="uid://b4uo0r461qb04" path="res://assets/visual/sprites/9-patch.png" id="2_d5825"]
+[ext_resource type="Texture2D" uid="uid://b4uo0r461qb04" path="res://assets/visual/sprites/ui/9-patch.png" id="2_d5825"]
 [ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="3_72ixx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]

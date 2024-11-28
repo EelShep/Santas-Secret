@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://cus86duxmepnn"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_euw2l"]
-[ext_resource type="Texture2D" uid="uid://ckbe6wd0liblc" path="res://assets/visual/sprites/entity/player/Player_Spritesheet_v2.png" id="2_algno"]
+[ext_resource type="Texture2D" uid="uid://ckbe6wd0liblc" path="res://assets/visual/sprites/entity/player/Player_Spritesheet_v2.png" id="2_v3ml3"]
 [ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="3_axwlt"]
 [ext_resource type="Script" path="res://scenes/entities/player/direction.gd" id="4_ia72w"]
 [ext_resource type="Script" path="res://src/scripts/components/hurt_area.gd" id="5_takns"]
@@ -10,9 +10,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vb85q"]
 size = Vector2(16, 40)
 
-[sub_resource type="Animation" id="Animation_emxyy"]
+[sub_resource type="Animation" id="Animation_02vlq"]
 resource_name = "Fall"
-length = 0.4
+length = 0.2
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -22,13 +22,13 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [18, 19, 20, 21]
+"values": [19, 18]
 }
 
-[sub_resource type="Animation" id="Animation_e76g1"]
+[sub_resource type="Animation" id="Animation_yqbek"]
 resource_name = "Idle"
 length = 0.6
 step = 0.1
@@ -45,9 +45,9 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
-[sub_resource type="Animation" id="Animation_pje7w"]
+[sub_resource type="Animation" id="Animation_u1fgu"]
 resource_name = "Jump"
-length = 0.1
+length = 0.2
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -57,13 +57,13 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [13]
+"values": [16, 15]
 }
 
-[sub_resource type="Animation" id="Animation_yv3i2"]
+[sub_resource type="Animation" id="Animation_dbgex"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -78,7 +78,7 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_r5q3a"]
+[sub_resource type="Animation" id="Animation_4efey"]
 resource_name = "Run"
 length = 0.6
 loop_mode = 1
@@ -113,7 +113,7 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_nbi3l"]
+[sub_resource type="Animation" id="Animation_2fify"]
 resource_name = "Stun"
 length = 0.3
 loop_mode = 1
@@ -131,14 +131,14 @@ tracks/0/keys = {
 "values": [24, 25, 26]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sert5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jshqi"]
 _data = {
-"Fall": SubResource("Animation_emxyy"),
-"Idle": SubResource("Animation_e76g1"),
-"Jump": SubResource("Animation_pje7w"),
-"RESET": SubResource("Animation_yv3i2"),
-"Run": SubResource("Animation_r5q3a"),
-"Stun": SubResource("Animation_nbi3l")
+"Fall": SubResource("Animation_02vlq"),
+"Idle": SubResource("Animation_yqbek"),
+"Jump": SubResource("Animation_u1fgu"),
+"RESET": SubResource("Animation_dbgex"),
+"Run": SubResource("Animation_4efey"),
+"Stun": SubResource("Animation_2fify")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_78y87"]
@@ -156,7 +156,6 @@ push_force = 2.0
 footstep_player = NodePath("FootstepSFX")
 hurt_area = NodePath("Components/HurtArea")
 interaction_finder = NodePath("Components/InteractionFinder")
-STUN_TIME = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -20)
@@ -166,13 +165,13 @@ shape = SubResource("RectangleShape2D_vb85q")
 light_mask = 8
 position = Vector2(0, -32)
 scale = Vector2(2, 2)
-texture = ExtResource("2_algno")
+texture = ExtResource("2_v3ml3")
 hframes = 6
 vframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_sert5")
+"": SubResource("AnimationLibrary_jshqi")
 }
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
@@ -214,3 +213,6 @@ debug_color = Color(0.588503, 0.377368, 1, 0.42)
 [node name="FootstepSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_rsh1v")
 bus = &"SFX"
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true

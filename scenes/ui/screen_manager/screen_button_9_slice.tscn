@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://c8yuyke35wqn4"]
 
-[ext_resource type="Texture2D" uid="uid://dmnlhi88emytw" path="res://assets/visual/sprites/9-patch-small.png" id="1_luwff"]
+[ext_resource type="Texture2D" uid="uid://dmnlhi88emytw" path="res://assets/visual/sprites/ui/9-patch-small.png" id="1_luwff"]
 [ext_resource type="Script" path="res://src/scripts/screen_manager/screen_button.gd" id="1_xbvyk"]
-[ext_resource type="Texture2D" uid="uid://cn65xgigjl64m" path="res://assets/visual/sprites/9-patch-small_unfocused.png" id="2_72rua"]
+[ext_resource type="Texture2D" uid="uid://cn65xgigjl64m" path="res://assets/visual/sprites/ui/9-patch-small_unfocused.png" id="2_72rua"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0d00i"]
 content_margin_left = 32.0

@@ -24,7 +24,7 @@ func _init() -> void:
 	instance = self
 
 signal new_second(play_time: float)
-var total_play_time: float
+#var total_play_time: float
 var last_second: int = -1
 var play_time: float:
 	set(value):
@@ -34,7 +34,7 @@ var play_time: float:
 		last_second = current_second
 		new_second.emit(play_time)
 func _process(delta: float) -> void:
-	total_play_time += delta
+	#total_play_time += delta
 	play_time += delta
 
 
@@ -69,6 +69,9 @@ func _ready() -> void:
 	
 	MetSys.set_save_data()
 	if not FileAccess.file_exists(SaveData.SAVE_PATH):
+		reset_save()
+	var file = FileAccess.open(SaveData.SAVE_PATH, FileAccess.READ).get_as_text()
+	if file == "": 
 		reset_save()
 	load_save()
 
@@ -111,18 +114,16 @@ func reload_scene() -> void:
 	get_tree().reload_current_scene()
 
 #region SAVE FUNCTIONS
-const CURR_ROOM: String = "current_room"
-const GENERATED_ROOMS: String = "generated_rooms"
-const PLAY_TIME: String = "play_time"
-const DAY_TIME: String = "day_time"
-const STARTING_MAP: String = "Level_1.tscn"
+
 func save_game():
 	reset_map_starting_coords()
 	var save_manager := SaveManager.new()
-	save_manager.set_value(GENERATED_ROOMS, generated_rooms)
-	save_manager.set_value(DAY_TIME, day_time)
-	save_manager.set_value(PLAY_TIME, play_time)
-	save_manager.set_value(CURR_ROOM, starting_map)
+	save_manager.set_value(GameData.GENERATED_ROOMS, generated_rooms)
+	save_manager.set_value(GameData.DAY_TIME, day_time)
+	save_manager.set_value(GameData.PLAY_TIME, play_time)
+	save_manager.set_value(GameData.CURR_ROOM, starting_map)
+	
+	save_manager.save_as_text(SaveData.SAVE_PATH)
 	
 
 func load_save() -> void:
@@ -134,16 +135,17 @@ func load_save() -> void:
 	var save_manager := SaveManager.new()
 	save_manager.load_from_text(SaveData.SAVE_PATH)
 	
-	generated_rooms = save_manager.get_value(GENERATED_ROOMS)
-	day_time = save_manager.get_value(DAY_TIME)
-	play_time = save_manager.get_value(PLAY_TIME)
+	generated_rooms = save_manager.get_value(GameData.GENERATED_ROOMS)
+	day_time = save_manager.get_value(GameData.DAY_TIME)
+	play_time = save_manager.get_value(GameData.PLAY_TIME)
 	if not custom_run:
-		var current_room = save_manager.get_value(CURR_ROOM)
+		var current_room = save_manager.get_value(GameData.CURR_ROOM)
 		if current_room: starting_map = current_room
 
 
 func reset_save() -> void:
 	GameData.reset_data()
+	GameData.reset_save()
 	
 	var save_manager := SaveManager.new()
 	
@@ -151,10 +153,10 @@ func reset_save() -> void:
 	MetSys.set_save_data()
 	
 	generated_rooms.clear()
-	save_manager.set_value(GENERATED_ROOMS, generated_rooms)
-	save_manager.set_value(DAY_TIME, day_time)
-	save_manager.set_value(PLAY_TIME, play_time)
-	save_manager.set_value(CURR_ROOM, STARTING_MAP)
+	save_manager.set_value(GameData.GENERATED_ROOMS, generated_rooms)
+	save_manager.set_value(GameData.DAY_TIME, 0.0)
+	save_manager.set_value(GameData.PLAY_TIME, 0.0)
+	save_manager.set_value(GameData.CURR_ROOM, GameData.STARTING_MAP)
 	
 	save_manager.save_as_text(SaveData.SAVE_PATH)
 #endregion
