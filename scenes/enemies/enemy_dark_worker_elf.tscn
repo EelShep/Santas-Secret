@@ -1,10 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://bekyigy3vc8qp"]
+[gd_scene load_steps=18 format=3 uid="uid://bekyigy3vc8qp"]
 
 [ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_osdn3"]
+[ext_resource type="Script" path="res://src/scripts/components/hurt_area.gd" id="2_jdrho"]
 [ext_resource type="Script" path="res://src/scripts/components/hit_area.gd" id="2_wccu7"]
 [ext_resource type="Texture2D" uid="uid://2r2eucpsuwnd" path="res://assets/visual/sprites/entity/enemy/Dark_Worker_Elf_Spritesheet.png" id="3_mhmvv"]
 [ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="4_6cv8b"]
 [ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="5_7mc5e"]
+[ext_resource type="AudioStream" uid="uid://cm3o6e878527i" path="res://src/resources/audio/sound_effects/entity/footsteps_snow.tres" id="6_koopx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txiud"]
+size = Vector2(20, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eeoc1"]
 
@@ -116,7 +121,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_ilkxr"]
 resource_name = "Stun"
-length = 0.3
+length = 0.6
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -126,7 +131,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
+"times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [24, 25, 26]
@@ -142,20 +147,34 @@ _data = {
 "Stun": SubResource("Animation_ilkxr")
 }
 
-[node name="DarkWorkerElf" type="CharacterBody2D"]
+[node name="DarkWorkerElf" type="CharacterBody2D" node_paths=PackedStringArray("hit_area", "hurt_area", "footstep_player")]
 collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_osdn3")
+hit_area = NodePath("Components/HitArea")
+hurt_area = NodePath("Components/HurtArea")
 can_fire = true
 annotation_color = Color(1, 1, 1, 1)
+footstep_player = NodePath("FootstepSFX")
 
-[node name="HitArea" type="Area2D" parent="."]
+[node name="Components" type="Node2D" parent="."]
+
+[node name="HurtArea" type="Area2D" parent="Components"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("2_jdrho")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/HurtArea"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_txiud")
+
+[node name="HitArea" type="Area2D" parent="Components"]
 position = Vector2(0, -20)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("2_wccu7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/HitArea"]
 shape = SubResource("CircleShape2D_eeoc1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -211,3 +230,13 @@ collision_mask = 2
 position = Vector2(0, -20)
 target_position = Vector2(150, 0)
 collision_mask = 2
+
+[node name="StunVisual" type="Sprite2D" parent="."]
+modulate = Color(0.913479, 0.717812, 0, 1)
+position = Vector2(0, -52)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("5_7mc5e")
+
+[node name="FootstepSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_koopx")
+bus = &"SFX"

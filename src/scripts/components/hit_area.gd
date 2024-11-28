@@ -24,7 +24,7 @@ func _ready() -> void:
 
 func toggle_shape(value):
 	if collision_shape:
-		collision_shape.set_deferred("disabled", value)
+		collision_shape.set_deferred("disabled", !value)
 
 
 func _on_hurt_area_entered(hurt_area : HurtArea):
