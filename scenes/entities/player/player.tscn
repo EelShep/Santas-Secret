@@ -156,7 +156,6 @@ push_force = 2.0
 footstep_player = NodePath("FootstepSFX")
 hurt_area = NodePath("Components/HurtArea")
 interaction_finder = NodePath("Components/InteractionFinder")
-STUN_TIME = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -20)
@@ -214,3 +213,6 @@ debug_color = Color(0.588503, 0.377368, 1, 0.42)
 [node name="FootstepSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_rsh1v")
 bus = &"SFX"
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true

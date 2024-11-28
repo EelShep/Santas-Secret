@@ -1,10 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://ctl63onj30x7c"]
+[gd_scene load_steps=17 format=3 uid="uid://ctl63onj30x7c"]
 
 [ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_dtkli"]
+[ext_resource type="Script" path="res://src/scripts/components/hurt_area.gd" id="2_h5itg"]
 [ext_resource type="Script" path="res://src/scripts/components/hit_area.gd" id="2_p504u"]
 [ext_resource type="Texture2D" uid="uid://hre3d6c2wbwo" path="res://assets/visual/sprites/placeholder/MC.png" id="2_w3615"]
 [ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="3_ist6r"]
 [ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="5_s7v7g"]
+[ext_resource type="AudioStream" uid="uid://cm3o6e878527i" path="res://src/resources/audio/sound_effects/entity/footsteps_snow.tres" id="6_phjaa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yrrlt"]
+size = Vector2(20, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eeoc1"]
 
@@ -105,18 +110,33 @@ _data = {
 "Run": SubResource("Animation_r5q3a")
 }
 
-[node name="EnemyBase" type="CharacterBody2D"]
+[node name="EnemyBase" type="CharacterBody2D" node_paths=PackedStringArray("hit_area", "hurt_area", "footstep_player")]
 collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_dtkli")
+SPEED_MAX = 200.0
+hit_area = NodePath("Components/HitArea")
+hurt_area = NodePath("Components/HurtArea")
+footstep_player = NodePath("FootstepSFX")
 
-[node name="HitArea" type="Area2D" parent="."]
+[node name="Components" type="Node2D" parent="."]
+
+[node name="HurtArea" type="Area2D" parent="Components"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("2_h5itg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/HurtArea"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_yrrlt")
+
+[node name="HitArea" type="Area2D" parent="Components"]
 position = Vector2(0, -20)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("2_p504u")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/HitArea"]
 shape = SubResource("CircleShape2D_eeoc1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -166,9 +186,19 @@ texture = ExtResource("5_s7v7g")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(0, -10)
 target_position = Vector2(200, 0)
-collision_mask = 2
+collision_mask = 3
 
 [node name="RayCast2DFire" type="RayCast2D" parent="."]
 position = Vector2(0, -20)
 target_position = Vector2(150, 0)
-collision_mask = 2
+collision_mask = 3
+
+[node name="FootstepSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_phjaa")
+bus = &"SFX"
+
+[node name="StunVisual" type="Sprite2D" parent="."]
+modulate = Color(0.913479, 0.717812, 0, 1)
+position = Vector2(0, -52)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("5_s7v7g")

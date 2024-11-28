@@ -4,7 +4,7 @@ const CURR_ROOM: String = "current_room"
 const GENERATED_ROOMS: String = "generated_rooms"
 const PLAY_TIME: String = "play_time"
 const DAY_TIME: String = "day_time"
-const STARTING_MAP: String = "level_1.tscn"
+const STARTING_MAP: String = "start.tscn"
 
 func _ready() -> void:
 	Events.main_menu_ready.connect(_on_events_main_menu_ready)
