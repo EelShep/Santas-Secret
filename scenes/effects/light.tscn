@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://drbd61gd5hgi5"]
+
+[ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="1_nl5wn"]
+
+[node name="Light" type="PointLight2D"]
+light_mask = 8
+color = Color(0.988235, 1, 0.760784, 0.4)
+range_layer_min = -100
+range_layer_max = 512
+range_item_cull_mask = 42
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_item_cull_mask = 4
+texture = ExtResource("1_nl5wn")

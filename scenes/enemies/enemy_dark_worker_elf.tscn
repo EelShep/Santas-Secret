@@ -1,16 +1,17 @@
-[gd_scene load_steps=17 format=3 uid="uid://cus86duxmepnn"]
+[gd_scene load_steps=15 format=3 uid="uid://bekyigy3vc8qp"]
 
-[ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_euw2l"]
-[ext_resource type="Texture2D" uid="uid://ckbe6wd0liblc" path="res://assets/visual/sprites/entity/player/Player_Spritesheet_v2.png" id="2_v3ml3"]
-[ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="3_axwlt"]
-[ext_resource type="Script" path="res://scenes/entities/player/direction.gd" id="4_ia72w"]
-[ext_resource type="Script" path="res://src/scripts/components/hurt_area.gd" id="5_takns"]
-[ext_resource type="AudioStream" uid="uid://cm3o6e878527i" path="res://src/resources/audio/sound_effects/entity/footsteps_snow.tres" id="6_rsh1v"]
+[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_osdn3"]
+[ext_resource type="Script" path="res://src/scripts/components/hit_area.gd" id="2_wccu7"]
+[ext_resource type="Texture2D" uid="uid://2r2eucpsuwnd" path="res://assets/visual/sprites/entity/enemy/Dark_Worker_Elf_Spritesheet.png" id="3_mhmvv"]
+[ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="4_6cv8b"]
+[ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="5_7mc5e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eeoc1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vb85q"]
 size = Vector2(16, 40)
 
-[sub_resource type="Animation" id="Animation_02vlq"]
+[sub_resource type="Animation" id="Animation_dgkoa"]
 resource_name = "Fall"
 length = 0.2
 loop_mode = 1
@@ -25,10 +26,10 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [19, 18]
+"values": [0, 1]
 }
 
-[sub_resource type="Animation" id="Animation_yqbek"]
+[sub_resource type="Animation" id="Animation_r4ues"]
 resource_name = "Idle"
 length = 0.6
 step = 0.1
@@ -42,10 +43,10 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5]
+"values": [12, 13, 14, 15, 16, 17]
 }
 
-[sub_resource type="Animation" id="Animation_u1fgu"]
+[sub_resource type="Animation" id="Animation_h53lx"]
 resource_name = "Jump"
 length = 0.2
 loop_mode = 1
@@ -60,10 +61,10 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [16, 15]
+"values": [19, 22]
 }
 
-[sub_resource type="Animation" id="Animation_dbgex"]
+[sub_resource type="Animation" id="Animation_6s12w"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -78,7 +79,7 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_4efey"]
+[sub_resource type="Animation" id="Animation_ku0dj"]
 resource_name = "Run"
 length = 0.6
 loop_mode = 1
@@ -113,7 +114,7 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_2fify"]
+[sub_resource type="Animation" id="Animation_ilkxr"]
 resource_name = "Stun"
 length = 0.3
 loop_mode = 1
@@ -131,52 +132,51 @@ tracks/0/keys = {
 "values": [24, 25, 26]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jshqi"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_17olj"]
 _data = {
-"Fall": SubResource("Animation_02vlq"),
-"Idle": SubResource("Animation_yqbek"),
-"Jump": SubResource("Animation_u1fgu"),
-"RESET": SubResource("Animation_dbgex"),
-"Run": SubResource("Animation_4efey"),
-"Stun": SubResource("Animation_2fify")
+"Fall": SubResource("Animation_dgkoa"),
+"Idle": SubResource("Animation_r4ues"),
+"Jump": SubResource("Animation_h53lx"),
+"RESET": SubResource("Animation_6s12w"),
+"Run": SubResource("Animation_ku0dj"),
+"Stun": SubResource("Animation_ilkxr")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_78y87"]
-size = Vector2(20, 32)
+[node name="DarkWorkerElf" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 17
+script = ExtResource("1_osdn3")
+can_fire = true
+annotation_color = Color(1, 1, 1, 1)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_nu3fp"]
-radius = 30.0
+[node name="HitArea" type="Area2D" parent="."]
+position = Vector2(0, -20)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("2_wccu7")
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("footstep_player", "hurt_area", "interaction_finder")]
-z_index = 2
-collision_layer = 2
-collision_mask = 49
-script = ExtResource("1_euw2l")
-push_force = 2.0
-footstep_player = NodePath("FootstepSFX")
-hurt_area = NodePath("Components/HurtArea")
-interaction_finder = NodePath("Components/InteractionFinder")
-STUN_TIME = null
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+shape = SubResource("CircleShape2D_eeoc1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -20)
 shape = SubResource("RectangleShape2D_vb85q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-light_mask = 8
-position = Vector2(0, -32)
+light_mask = 32
+position = Vector2(0, -30)
 scale = Vector2(2, 2)
-texture = ExtResource("2_v3ml3")
+texture = ExtResource("3_mhmvv")
 hframes = 6
 vframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_jshqi")
+"": SubResource("AnimationLibrary_17olj")
 }
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-light_mask = 8
+light_mask = 32
 position = Vector2(0, -16)
 color = Color(0.988235, 1, 0.760784, 0.4)
 range_layer_min = -100
@@ -185,32 +185,29 @@ range_item_cull_mask = 42
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 shadow_item_cull_mask = 4
-texture = ExtResource("3_axwlt")
+texture = ExtResource("4_6cv8b")
 
-[node name="direction" type="Marker2D" parent="." groups=["direction"]]
-position = Vector2(-21, -53)
-script = ExtResource("4_ia72w")
+[node name="ProjectileLoad" type="Node2D" parent="."]
+position = Vector2(0, -20)
 
-[node name="Components" type="Node2D" parent="."]
+[node name="ProjectileLoad" type="Sprite2D" parent="ProjectileLoad"]
+modulate = Color(0.913479, 0.717812, 0, 1)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("5_7mc5e")
 
-[node name="HurtArea" type="Area2D" parent="Components"]
-collision_layer = 2
-collision_mask = 0
-script = ExtResource("5_takns")
+[node name="TargetMarker" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.364706, 0.364706, 0.364706, 0.643137)
+position = Vector2(0, -20)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("5_7mc5e")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/HurtArea"]
-position = Vector2(0, -16)
-shape = SubResource("RectangleShape2D_78y87")
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, -10)
+target_position = Vector2(200, 0)
+collision_mask = 2
 
-[node name="InteractionFinder" type="Area2D" parent="Components"]
-collision_layer = 0
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/InteractionFinder"]
-position = Vector2(0, -16)
-shape = SubResource("CircleShape2D_nu3fp")
-debug_color = Color(0.588503, 0.377368, 1, 0.42)
-
-[node name="FootstepSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_rsh1v")
-bus = &"SFX"
+[node name="RayCast2DFire" type="RayCast2D" parent="."]
+position = Vector2(0, -20)
+target_position = Vector2(150, 0)
+collision_mask = 2

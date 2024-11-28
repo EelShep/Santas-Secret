@@ -34,12 +34,12 @@ func _input(event: InputEvent) -> void:
 func _ready() -> void:
 	AudioController.play_music(AudioConst.MUSIC_TITLE)
 	input_delay.timeout.connect(_on_input_delay_timeout)
+	animation_player.animation_finished.connect(_on_animation_finished)
+	
 	%Credits.hide()
 	%Stats.hide()
 	%MenuPrompt.hide()
-	animation_player.animation_finished.connect(_on_animation_finished)
-	
-	
+
 	show_credits()
 	set_stats()
 
@@ -48,10 +48,12 @@ func _on_animation_finished(anim_name: String) -> void:
 		ANIM_CREDITS:
 			show_thanks()
 		ANIM_THANKS:
-			if GameData.credits_stats: show_stats()
-			elif input_allowed: proceed_to_menu()
+			if GameData.credits_stats: 
+				show_stats()
+			elif input_allowed: 
+				proceed_to_menu()
 		ANIM_STATS:
-			proceed_to_menu()
+			pass
 		
 	
 func show_credits() -> void:
@@ -79,12 +81,14 @@ func show_stats() -> void:
 	if not GameData.credits_stats:
 		show_menu_prompt()
 		return
+	input_allowed = false
 	curr_state = States.Stats
+	
 	hide_all()
 	%Stats.show()
 	%MenuPrompt.hide()
-	input_allowed = false
 	set_all_children_visibility(%Stats, true)
+	
 	animation_player.play(ANIM_STATS)
 	input_delay.start(INPUT_DELAY)
 
@@ -110,6 +114,10 @@ func _on_input_delay_timeout() -> void:
 func set_stats() -> void:
 	if not GameData.credits_stats: return
 	var game_data: Variant = GameData.get_data()
+	if not game_data or not game_data is Dictionary: return
+	var play_time = (game_data as Dictionary).get(GameData.PLAY_TIME)
+	if play_time:
+		%PlayTimeValue.text = GameData.convert_time(play_time)
 
 	
 func set_all_children_visibility(node: Variant, value: bool) -> void:

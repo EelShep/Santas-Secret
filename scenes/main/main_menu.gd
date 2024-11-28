@@ -14,7 +14,7 @@ func _ready() -> void:
 
 
 func _on_play_pressed() -> void:
-	SceneTransition.fade_out_in()
+	SceneTransition.fade_out()
 	await SceneTransition.transition_ready
 	get_tree().change_scene_to_file(SceneTransition.GAME_SCENE_PATH)
 
