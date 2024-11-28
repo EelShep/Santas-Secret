@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=4 uid="uid://blr5xdhbk85ea"]
+[gd_scene load_steps=4 format=4 uid="uid://blr5xdhbk85ea"]
 
 [ext_resource type="PackedScene" uid="uid://ujuwg0fbq72c" path="res://scenes/levels/map_template.tscn" id="1_40too"]
 [ext_resource type="PackedScene" uid="uid://bekyigy3vc8qp" path="res://scenes/enemies/enemy_dark_worker_elf.tscn" id="2_pkuol"]
+[ext_resource type="PackedScene" uid="uid://c1cmjfr0y5tal" path="res://scenes/throwable/gold_ornament.tscn" id="3_jgtle"]
 
 [node name="Level1" instance=ExtResource("1_40too")]
 
@@ -16,3 +17,6 @@ tile_map_data = PackedByteArray("AAAAABEAAAACAAMAAAABABEAAAADAAMAAAAGABEAAAAEAAM
 
 [node name="DarkWorkerElf" parent="Enemies" index="0" instance=ExtResource("2_pkuol")]
 position = Vector2(767, 478)
+
+[node name="GoldOrnament" parent="." index="5" instance=ExtResource("3_jgtle")]
+position = Vector2(226, 525)
