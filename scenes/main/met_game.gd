@@ -92,11 +92,14 @@ func _ready() -> void:
 	reset_map_starting_coords.call_deferred()
 	add_module("RoomTransitions.gd") # Add module for room transitions.
 
-
+var initial_load: bool = true
 func init_room():
 	MetSys.get_current_room_instance().adjust_camera_limits(%Camera2D)
-	SceneTransition.fade_in()
 	player.on_enter()
+	if initial_load:
+		initial_load = false
+		return
+	SceneTransition.fade_in()
 
 
 func handle_game_over() -> void:
@@ -122,6 +125,7 @@ func save_game():
 	save_manager.set_value(GameData.DAY_TIME, day_night.time)
 	save_manager.set_value(GameData.PLAY_TIME, play_time)
 	save_manager.set_value(GameData.CURR_ROOM, starting_map)
+	save_manager.set_value(GameData.INITIAL_LOAD, initial_load)
 	
 	save_manager.save_as_text(SaveData.SAVE_PATH)
 	
@@ -138,6 +142,7 @@ func load_save() -> void:
 	generated_rooms = save_manager.get_value(GameData.GENERATED_ROOMS)
 	day_time = save_manager.get_value(GameData.DAY_TIME)
 	play_time = save_manager.get_value(GameData.PLAY_TIME)
+	initial_load = save_manager.get_value(GameData.INITIAL_LOAD)
 	if not custom_run:
 		var current_room = save_manager.get_value(GameData.CURR_ROOM)
 		if current_room: starting_map = current_room
@@ -157,6 +162,7 @@ func reset_save() -> void:
 	save_manager.set_value(GameData.DAY_TIME, 0.0)
 	save_manager.set_value(GameData.PLAY_TIME, 0.0)
 	save_manager.set_value(GameData.CURR_ROOM, GameData.STARTING_MAP)
+	save_manager.set_value(GameData.INITIAL_LOAD, true)
 	
 	save_manager.save_as_text(SaveData.SAVE_PATH)
 #endregion

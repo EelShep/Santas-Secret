@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bl5pgq7obl5"]
+[gd_scene load_steps=9 format=3 uid="uid://bl5pgq7obl5"]
 
 [ext_resource type="Script" path="res://scenes/main/credits.gd" id="1_mnjmq"]
+[ext_resource type="Texture2D" uid="uid://cswgqwtr8hvbo" path="res://assets/visual/sprites/ui/BG.png" id="2_11liv"]
 
 [sub_resource type="Animation" id="Animation_3vg0a"]
 length = 0.001
@@ -209,13 +210,13 @@ script = ExtResource("1_mnjmq")
 animation_player = NodePath("AnimationPlayer")
 input_delay = NodePath("InputDelay")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.230315, 0.230315, 0.230315, 1)
+texture = ExtResource("2_11liv")
 
 [node name="CreditsUI" type="Control" parent="."]
 layout_mode = 3
