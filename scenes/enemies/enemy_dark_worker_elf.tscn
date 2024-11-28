@@ -155,7 +155,9 @@ hit_area = NodePath("Components/HitArea")
 hurt_area = NodePath("Components/HurtArea")
 can_fire = true
 annotation_color = Color(1, 1, 1, 1)
+fire_cooldown_time = 2.0
 footstep_player = NodePath("FootstepSFX")
+STUN_TIME = 2.6
 
 [node name="Components" type="Node2D" parent="."]
 
@@ -193,6 +195,7 @@ vframes = 5
 libraries = {
 "": SubResource("AnimationLibrary_17olj")
 }
+autoplay = "Idle"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 light_mask = 32

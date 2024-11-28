@@ -12,7 +12,7 @@ const SaveManager = preload("res://addons/MetroidvaniaSystem/Template/Scripts/Sa
 @export var pause_ui: PauseScreenUI
 @export_category("Day Night Cycle")
 @export var day_night: DayNight
-@export var INITIAL_HOUR: int = 6
+@export var INITIAL_HOUR: int = 7
 var day_time: float = -1.0
 var curr_hour: int
 
@@ -119,7 +119,7 @@ func save_game():
 	reset_map_starting_coords()
 	var save_manager := SaveManager.new()
 	save_manager.set_value(GameData.GENERATED_ROOMS, generated_rooms)
-	save_manager.set_value(GameData.DAY_TIME, day_time)
+	save_manager.set_value(GameData.DAY_TIME, day_night.time)
 	save_manager.set_value(GameData.PLAY_TIME, play_time)
 	save_manager.set_value(GameData.CURR_ROOM, starting_map)
 	

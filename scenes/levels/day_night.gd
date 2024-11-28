@@ -20,7 +20,7 @@ var past_minute:float = -1.0
 
 
 func setup(game: Game) -> void:
-	if game.day_time < 0.0:
+	if game.day_time <= 0.0:
 		hour = game.INITIAL_HOUR
 	else: time = game.day_time
 

@@ -181,7 +181,7 @@ func start_firing():
 	var tween = create_tween()
 	tween.tween_property($ProjectileLoad, "scale", Vector2.ONE*1.0, fire_load_time)
 	tween.tween_callback(do_fire)
-	firing = true	
+	firing = true
 		
 var projectile_template = preload("res://scenes/enemies/projectile.tscn")
 func do_fire():
