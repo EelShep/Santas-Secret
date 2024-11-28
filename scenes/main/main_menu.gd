@@ -14,9 +14,9 @@ func _ready() -> void:
 
 
 func _on_play_pressed() -> void:
-	SceneTransition.fade_out()
+	SceneTransition.fade_out_in()
 	await SceneTransition.transition_ready
-	get_tree().change_scene_to_file(SceneTransition.GAME_SCENE_PATH)
+	get_tree().change_scene_to_file(SceneTransition.INTRO_CUTSCENE_PATH)
 
 
 func _on_credits_pressed() -> void:

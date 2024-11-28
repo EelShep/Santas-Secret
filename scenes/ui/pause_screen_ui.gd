@@ -1,6 +1,6 @@
 class_name PauseScreenUI extends CanvasLayer
 
-@export var background: ColorRect
+@export var background: TextureRect
 @export var pause_screens: ScreensManager
 
 var can_pause: bool = true
