@@ -23,15 +23,17 @@ func handle_action() -> void:
 	if not dialog_balloon or not dialogue_resource: return
 	if get_tree().paused == true: return
 	
+	Events.trigger_dialogue.emit(dialog_balloon, dialogue_resource, dialogue_title)
+
 	canvas_layer.hide()
 	prompt_control.hide()
-	Events.trigger_dialogue.emit(dialog_balloon, dialogue_resource, dialogue_title)
 
 
 func handle_enter(body: Node2D) -> void:
 	if show_delay: return
-	canvas_layer.show()
-	prompt_control.show()
+	if not is_triggered:
+		canvas_layer.show()
+		prompt_control.show()
 
 
 func handle_exit(body: Node2D) -> void:

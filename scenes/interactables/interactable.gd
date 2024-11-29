@@ -1,7 +1,10 @@
 class_name Interactable extends Area2D
 
+var is_triggered: bool = false
 
 func _ready() -> void:
+	if get_parent() is Trigger:
+		is_triggered = true
 	body_entered.connect(handle_enter)
 	body_exited.connect(handle_exit)
 	#collision_layer = GameConst.COLLISION_INTERACTABLE

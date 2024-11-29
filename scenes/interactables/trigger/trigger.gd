@@ -1,4 +1,4 @@
-extends Area2D
+class_name Trigger extends Area2D
 
 @export var one_time: bool = true
 @export var event: Event = Event.NONE
