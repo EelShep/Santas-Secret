@@ -1,7 +1,57 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmagxypqs3wo1"]
+[gd_scene load_steps=11 format=3 uid="uid://cmagxypqs3wo1"]
 
 [ext_resource type="Script" path="res://scenes/entities/npc/npc.gd" id="1_sgwom"]
-[ext_resource type="Texture2D" uid="uid://cn2ylxar5ov15" path="res://assets/visual/sprites/entity/npc/WiseElfSprite.png" id="2_ahcjg"]
+[ext_resource type="Texture2D" uid="uid://n7mvdcj6tbj6" path="res://assets/visual/sprites/entity/npc/Mentor elf idle.png" id="2_ser75"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0oqg"]
+atlas = ExtResource("2_ser75")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkjp1"]
+atlas = ExtResource("2_ser75")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfjar"]
+atlas = ExtResource("2_ser75")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phroq"]
+atlas = ExtResource("2_ser75")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iodrg"]
+atlas = ExtResource("2_ser75")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_568qk"]
+atlas = ExtResource("2_ser75")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uajqd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0oqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkjp1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xfjar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phroq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iodrg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_568qk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q75f"]
 radius = 140.0
@@ -14,11 +64,13 @@ script = ExtResource("1_sgwom")
 sprite = NodePath("Sprite2D")
 action_timer = NodePath("ActionTimer")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 light_mask = 32
 position = Vector2(0, -30)
 scale = Vector2(2, 2)
-texture = ExtResource("2_ahcjg")
+sprite_frames = SubResource("SpriteFrames_uajqd")
+autoplay = "default"
+frame_progress = 0.536817
 
 [node name="ActionTimer" type="Timer" parent="."]
 wait_time = 5.0

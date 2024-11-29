@@ -13,9 +13,12 @@ size = Vector2(32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6fgu8"]
 size = Vector2(32, 32)
 
-[node name="GoldOrnament" type="RigidBody2D"]
+[node name="GoldOrnament" type="RigidBody2D" node_paths=PackedStringArray("hit_area")]
 collision_layer = 0
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_227oq")
+hit_area = NodePath("HitArea")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 32
@@ -45,4 +48,8 @@ shape = SubResource("RectangleShape2D_6fgu8")
 energy = 0.8
 texture_scale = 0.8
 
+[node name="StunTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

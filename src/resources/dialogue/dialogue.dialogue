@@ -7,9 +7,24 @@ Wise Old Elf: Santa’s planning something you must stop him.
 Player: Helloo I just got here okay...
 Wise Old Elf: Quick pick up that toy on the floor
 Wise Old Elf: Throw it at the Evil Elves to stun them
-Wise Old Elf: Would you like to hear that again?
-- Sure =>< start
-- No => END
+% Wise Old Elf: Do you understand?
+% Wise Old Elf: Did you get that?
+% Wise Old Elf: Did you hear me?
+- Yes => END
+- No =>< start_repeat
+
+=> END
+
+~ start_repeat
+
+Wise Old Elf: Santa’s planning something you must stop him.
+Wise Old Elf: Pick up that toy on the floor
+Wise Old Elf: Throw it at the Evil Elves to stun them
+% Wise Old Elf: Do you understand?
+% Wise Old Elf: Did you get that?
+% Wise Old Elf: Did you hear me?
+- Yes => END
+- No =>< start_repeat
 
 => END
 
