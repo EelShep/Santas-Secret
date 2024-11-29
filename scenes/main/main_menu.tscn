@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdmq1tyc8vtwp"]
+[gd_scene load_steps=6 format=3 uid="uid://bdmq1tyc8vtwp"]
 
 [ext_resource type="Script" path="res://scenes/main/main_menu.gd" id="1_lpwlv"]
+[ext_resource type="Texture2D" uid="uid://cswgqwtr8hvbo" path="res://assets/visual/sprites/ui/BG.png" id="2_df20w"]
 [ext_resource type="Script" path="res://scenes/ui/screen_manager/main_menu/main_menu_screens.gd" id="2_hnpdn"]
 [ext_resource type="PackedScene" uid="uid://dk4slfuxcswtw" path="res://scenes/ui/screen_manager/main_menu/main_menu_screen.tscn" id="3_lafw8"]
 [ext_resource type="PackedScene" uid="uid://b5yw2mafnywit" path="res://scenes/ui/screen_manager/options_screens/options_screens.tscn" id="4_pc0fc"]
@@ -17,14 +18,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="Control"]
+[node name="TextureRect" type="TextureRect" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.169245, 0.169245, 0.169245, 1)
+texture = ExtResource("2_df20w")
 
 [node name="MainMenuScreens" type="Control" parent="Control" node_paths=PackedStringArray("screens", "screen_managers")]
 layout_mode = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://cblegvyts7kti"]
+[gd_scene load_steps=18 format=4 uid="uid://0e1yl15ow105"]
 
 [ext_resource type="PackedScene" uid="uid://ujuwg0fbq72c" path="res://scenes/levels/map_template.tscn" id="1_di08m"]
 [ext_resource type="PackedScene" uid="uid://ckank5xl1ccdj" path="res://scenes/interactables/checkpoint/checkpoint.tscn" id="2_elu1q"]
