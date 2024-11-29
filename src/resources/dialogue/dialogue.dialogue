@@ -1,20 +1,27 @@
-~ wise_elf
-Wise Old Elf: Hello there. 
-Player: Hi, I am so excited to work for Santa finally!
-Wise Old Elf: You shouldn’t be
-Player: What?
-Wise Old Elf: Take this pill it’ll make it easier
-// thunder effect .....!!!!!1
+~ start
+
 Wise Old Elf: I can’t believe it It is you, the chosen one
-Player: I don’t…
+Player: What?
 Wise Old Elf: Quick there’s no time
 Wise Old Elf: Santa’s planning something you must stop him.
-Player: Helloo I just got here okay WAIT WHAT’s THAT
-A dark worker elve approaches you slow walking.
+Player: Helloo I just got here okay...
 Wise Old Elf: Quick pick up that toy on the floor
-#Player is prompted to pick the toy. 
-Wise Old Elf: Fire using [Left Click]
+Wise Old Elf: Throw it at the Evil Elves to stun them
+Wise Old Elf: Would you like to hear that again?
+- Sure =>< start
+- No => END
+
+=> END
+
+~ throw_tutorial
+#Player is prompted to pick the toy.
+Wise Old Elf: Pick up the Toy with [Q]
+Wise Old Elf: Throw it using [Left Click]
 #Player fires and the elf becomes stun. 
+=> END!
+
+~ start_complete
+
 Wise Old Elf: You must protect us brave elf by going deep into Santa’s base before the morning rises and he erases the evidence of such evil that lies…
 Player: Hey I came here looking for a job okay. Not this shit
 Wise Old Elf: I’ll give a billion Christmas cookies-

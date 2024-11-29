@@ -1,8 +1,20 @@
-[gd_scene load_steps=4 format=4 uid="uid://blr5xdhbk85ea"]
+[gd_scene load_steps=10 format=4 uid="uid://blr5xdhbk85ea"]
 
 [ext_resource type="PackedScene" uid="uid://ujuwg0fbq72c" path="res://scenes/levels/map_template.tscn" id="1_40too"]
 [ext_resource type="PackedScene" uid="uid://bekyigy3vc8qp" path="res://scenes/enemies/enemy_dark_worker_elf.tscn" id="2_pkuol"]
 [ext_resource type="PackedScene" uid="uid://c1cmjfr0y5tal" path="res://scenes/throwable/gold_ornament.tscn" id="3_jgtle"]
+[ext_resource type="PackedScene" uid="uid://cmagxypqs3wo1" path="res://scenes/entities/npc/wise_elf.tscn" id="4_td1mb"]
+[ext_resource type="PackedScene" uid="uid://di2o4l0a4uhrv" path="res://scenes/interactables/trigger/trigger.tscn" id="5_kn5ml"]
+[ext_resource type="PackedScene" uid="uid://cdkfvx081psyy" path="res://scenes/interactables/dialogue/dialogue.tscn" id="5_lermk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vw3rs"]
+radius = 48.0104
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ahrtf"]
+radius = 58.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cbmr"]
+size = Vector2(46, 280)
 
 [node name="Level1" instance=ExtResource("1_40too")]
 
@@ -19,4 +31,37 @@ tile_map_data = PackedByteArray("AAAAABEAAAACAAMAAAABABEAAAADAAMAAAAGABEAAAAEAAM
 position = Vector2(767, 478)
 
 [node name="GoldOrnament" parent="." index="5" instance=ExtResource("3_jgtle")]
-position = Vector2(226, 525)
+position = Vector2(472, 534)
+
+[node name="WiseElf" parent="." index="6" instance=ExtResource("4_td1mb")]
+position = Vector2(275, 542)
+
+[node name="Trigger" parent="WiseElf" index="3" instance=ExtResource("5_kn5ml")]
+
+[node name="Dialogue" parent="WiseElf/Trigger" index="0" instance=ExtResource("5_lermk")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WiseElf/Trigger" index="1"]
+position = Vector2(1, -39)
+shape = SubResource("CircleShape2D_vw3rs")
+
+[node name="Trigger2" parent="WiseElf" index="4" instance=ExtResource("5_kn5ml")]
+position = Vector2(196, 0)
+event = 1
+
+[node name="Dialogue" parent="WiseElf/Trigger2" index="0" instance=ExtResource("5_lermk")]
+dialogue_title = "throw_tutorial"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WiseElf/Trigger2" index="1"]
+position = Vector2(1, -30)
+shape = SubResource("CircleShape2D_ahrtf")
+
+[node name="Trigger3" parent="WiseElf" index="5" instance=ExtResource("5_kn5ml")]
+position = Vector2(713, -2)
+event = 1
+
+[node name="Dialogue" parent="WiseElf/Trigger3" index="0" instance=ExtResource("5_lermk")]
+dialogue_title = "start_complete"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WiseElf/Trigger3" index="1"]
+position = Vector2(14, -120)
+shape = SubResource("RectangleShape2D_2cbmr")

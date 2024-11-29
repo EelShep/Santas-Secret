@@ -19,10 +19,12 @@ var prev_on_floor: bool
 var airtime: float = 0
 var speed: float = SPEED_MIN
 var can_pick = false
-
+@export_category("Components")
 @export var hit_area: HitArea
 @export var hurt_area: HurtArea
 @export var interaction_finder: Area2D
+@export var emote_sprite: AnimatedSprite2D
+@export_category("Settings")
 
 #
 	#if Input.is_action_just_pressed(GameConst.INPUT_JUMP) and (on_floor_ct or double_jump):
@@ -212,6 +214,7 @@ func check_player(delta):
 				if not active or patrolling:
 					prints("activating", self)
 					reset_planning()
+					if emote_sprite: emote_sprite.play("Alert")
 					patrolling = false
 					active = true
 		if can_fire:

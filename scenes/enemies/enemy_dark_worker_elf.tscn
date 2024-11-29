@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://bekyigy3vc8qp"]
+[gd_scene load_steps=28 format=3 uid="uid://bekyigy3vc8qp"]
 
 [ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_osdn3"]
 [ext_resource type="Script" path="res://src/scripts/components/hurt_area.gd" id="2_jdrho"]
 [ext_resource type="Script" path="res://src/scripts/components/hit_area.gd" id="2_wccu7"]
 [ext_resource type="Texture2D" uid="uid://2r2eucpsuwnd" path="res://assets/visual/sprites/entity/enemy/Dark_Worker_Elf_Spritesheet.png" id="3_mhmvv"]
 [ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="4_6cv8b"]
+[ext_resource type="Texture2D" uid="uid://b0oiq6wot8wkh" path="res://assets/visual/sprites/entity/EmoteSpritesheet.png" id="4_tiphw"]
 [ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="5_7mc5e"]
 [ext_resource type="AudioStream" uid="uid://cm3o6e878527i" path="res://src/resources/audio/sound_effects/entity/footsteps_snow.tres" id="6_koopx"]
 
@@ -15,6 +16,78 @@ size = Vector2(20, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vb85q"]
 size = Vector2(16, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyd8s"]
+atlas = ExtResource("4_tiphw")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8y6pt"]
+atlas = ExtResource("4_tiphw")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vi2la"]
+atlas = ExtResource("4_tiphw")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bhjr"]
+atlas = ExtResource("4_tiphw")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x64qu"]
+atlas = ExtResource("4_tiphw")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23tcq"]
+atlas = ExtResource("4_tiphw")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otmlv"]
+atlas = ExtResource("4_tiphw")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0edh"]
+atlas = ExtResource("4_tiphw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c241t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyd8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8y6pt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vi2la")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7bhjr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x64qu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23tcq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otmlv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyd8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0edh")
+}],
+"loop": false,
+"name": &"Alert",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="Animation" id="Animation_dgkoa"]
 resource_name = "Fall"
@@ -147,12 +220,13 @@ _data = {
 "Stun": SubResource("Animation_ilkxr")
 }
 
-[node name="DarkWorkerElf" type="CharacterBody2D" node_paths=PackedStringArray("hit_area", "hurt_area", "footstep_player")]
+[node name="DarkWorkerElf" type="CharacterBody2D" node_paths=PackedStringArray("hit_area", "hurt_area", "emote_sprite", "footstep_player")]
 collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_osdn3")
 hit_area = NodePath("Components/HitArea")
 hurt_area = NodePath("Components/HurtArea")
+emote_sprite = NodePath("EmoteSprite")
 can_fire = true
 annotation_color = Color(1, 1, 1, 1)
 fire_cooldown_time = 2.0
@@ -182,6 +256,12 @@ shape = SubResource("CircleShape2D_eeoc1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -20)
 shape = SubResource("RectangleShape2D_vb85q")
+
+[node name="EmoteSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -90)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_c241t")
+autoplay = "default"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 32
