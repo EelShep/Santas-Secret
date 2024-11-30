@@ -6,10 +6,12 @@ var elapsed := 0.0
 var speed := 600
 var direction: Vector2
 
+@export var throw_player: AudioStreamPlayer2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	connect("body_entered", projectile_impact)
+	throw_player.play()
 
 
 func projectile_impact(body):

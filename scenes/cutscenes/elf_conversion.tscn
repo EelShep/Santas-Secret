@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfhmpvhih8rks"]
+[gd_scene load_steps=12 format=3 uid="uid://dfhmpvhih8rks"]
 
 [ext_resource type="Script" path="res://scenes/cutscenes/elf_conversion.gd" id="1_2nnan"]
 [ext_resource type="Shader" path="res://scenes/cutscenes/recolor-elf.gdshader" id="1_7bvjx"]
-[ext_resource type="Texture2D" uid="uid://dsg7cs2yaobcs" path="res://assets/visual/elves/palette.png" id="2_nd2i3"]
-[ext_resource type="Texture2D" uid="uid://c0svicl7kd76i" path="res://assets/visual/elves/elf.png" id="3_mcltu"]
-[ext_resource type="Texture2D" uid="uid://ccxilq76y65bj" path="res://assets/visual/elves/elf-skin.png" id="4_igi07"]
-[ext_resource type="Texture2D" uid="uid://c5s78le60ts8t" path="res://assets/visual/elves/elf-eyes.png" id="5_0v2oo"]
-[ext_resource type="Texture2D" uid="uid://dv63xgmvxtv0i" path="res://assets/visual/elves/elf-eyes-bad.png" id="6_vgadc"]
+[ext_resource type="Texture2D" uid="uid://cqinqyt5to62a" path="res://assets/visual/elves/palette.png" id="2_nd2i3"]
+[ext_resource type="Texture2D" uid="uid://t1fjwojxck3x" path="res://assets/visual/elves/elf.png" id="3_mcltu"]
+[ext_resource type="Texture2D" uid="uid://knc1i1yut52l" path="res://assets/visual/elves/elf-skin.png" id="4_igi07"]
+[ext_resource type="Texture2D" uid="uid://26muscpplcw6" path="res://assets/visual/elves/elf-eyes.png" id="5_0v2oo"]
+[ext_resource type="Texture2D" uid="uid://c18hbrc2feaxn" path="res://assets/visual/elves/elf-eyes-bad.png" id="6_vgadc"]
 [ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="8_qbo5s"]
+[ext_resource type="AudioStream" uid="uid://ndyn0kv2ackv" path="res://assets/audio/sound_effects/placeholder/404792__owlstorm__retro-video-game-sfx-hit-2.wav" id="9_l8nlm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6dd8o"]
 shader = ExtResource("1_7bvjx")
@@ -21,8 +22,9 @@ shader_parameter/palette = ExtResource("2_nd2i3")
 offsets = PackedFloat32Array(0, 0.0525362, 0.463768, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
 
-[node name="ElfConversion" type="Node2D"]
+[node name="ElfConversion" type="Node2D" node_paths=PackedStringArray("audio_player")]
 script = ExtResource("1_2nnan")
+audio_player = NodePath("AudioPlayer")
 
 [node name="base" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_6dd8o")
@@ -63,3 +65,7 @@ damping_max = 20.0
 scale_amount_min = 0.01
 scale_amount_max = 0.03
 color_ramp = SubResource("Gradient_ncbut")
+
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_l8nlm")
+volume_db = 5.0

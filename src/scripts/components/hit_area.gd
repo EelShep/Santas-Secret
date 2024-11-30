@@ -10,7 +10,7 @@ enum Type {
 
 var collision_shape
 
-signal damage_hurt_area(hurt_area)
+signal damage_hurt_area(hurt_area: HurtArea)
 
 
 func _ready() -> void:

@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=4 uid="uid://ca50g1dvucdlv"]
 
 [ext_resource type="PackedScene" uid="uid://ujuwg0fbq72c" path="res://scenes/levels/map_template.tscn" id="1_8tbgg"]
-[ext_resource type="TileSet" uid="uid://i7mf02rj7f2i" path="res://src/resources/tilesets/tile_set.tres" id="2_18ywg"]
+[ext_resource type="TileSet" uid="uid://i7mf02rj7f2i" path="res://src/resources/tilesets/tileset_v2.tres" id="2_18ywg"]
 [ext_resource type="PackedScene" uid="uid://dhg2k50sekyxu" path="res://scenes/entities/hazards/spikes.tscn" id="2_fj3fs"]
-[ext_resource type="PackedScene" uid="uid://cqchpn4x44pav" path="res://scenes/entities/npc/npc.tscn" id="3_dkt4l"]
+[ext_resource type="PackedScene" uid="uid://cqchpn4x44pav" path="res://scenes/entities/npc/test_npc.tscn" id="3_dkt4l"]
 [ext_resource type="Script" path="res://scenes/levels/maps/secret_area_2d.gd" id="3_my6ea"]
 [ext_resource type="PackedScene" uid="uid://cdkfvx081psyy" path="res://scenes/interactables/dialogue/dialogue.tscn" id="4_bmnwb"]
 [ext_resource type="PackedScene" uid="uid://ckank5xl1ccdj" path="res://scenes/interactables/checkpoint/checkpoint.tscn" id="5_te38c"]
@@ -70,7 +70,6 @@ position = Vector2(424, 928)
 position = Vector2(1664, 928)
 
 [node name="Dialogue" parent="NPC2" index="3" instance=ExtResource("4_bmnwb")]
-dialogue_start = "test1"
 
 [node name="Checkpoint" parent="." index="6" instance=ExtResource("5_te38c")]
 position = Vector2(1320, 928)

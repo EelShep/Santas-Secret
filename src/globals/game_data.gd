@@ -13,6 +13,7 @@ func _ready() -> void:
 #region DATA FUNCTIONS
 func reset_data() -> void:
 	credits_stats = false
+	EventsData.reset_data()
 
 
 func reset_save() -> void:

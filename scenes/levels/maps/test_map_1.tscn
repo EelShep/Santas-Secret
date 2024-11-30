@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ujuwg0fbq72c" path="res://scenes/levels/map_template.tscn" id="1_di08m"]
 [ext_resource type="PackedScene" uid="uid://ckank5xl1ccdj" path="res://scenes/interactables/checkpoint/checkpoint.tscn" id="2_elu1q"]
-[ext_resource type="TileSet" uid="uid://i7mf02rj7f2i" path="res://src/resources/tilesets/tile_set.tres" id="2_rrroa"]
+[ext_resource type="TileSet" uid="uid://i7mf02rj7f2i" path="res://src/resources/tilesets/tileset_v2.tres" id="2_rrroa"]
 [ext_resource type="PackedScene" uid="uid://dhg2k50sekyxu" path="res://scenes/entities/hazards/spikes.tscn" id="3_2txhi"]
 [ext_resource type="PackedScene" uid="uid://ctl63onj30x7c" path="res://scenes/enemies/enemy.tscn" id="5_xl7lx"]
 [ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="6_agxvu"]
@@ -104,7 +104,6 @@ texture = ExtResource("6_agxvu")
 
 [node name="EnemyBase1" parent="Enemies" index="0" instance=ExtResource("5_xl7lx")]
 position = Vector2(706, 344)
-SPEED_MAX = 200.0
 can_fire = true
 
 [node name="EnemyBase3" parent="Enemies" index="1" instance=ExtResource("5_xl7lx")]

@@ -1,19 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://b5jitev2ftuj7"]
 
-[ext_resource type="Texture2D" uid="uid://h6wvee6hs4ci" path="res://scenes/props/gift/gift1.png" id="1_1y7h0"]
+[ext_resource type="Texture2D" uid="uid://cks1nlerlgp4s" path="res://scenes/props/gift/gift1.png" id="1_1y7h0"]
 [ext_resource type="Script" path="res://scenes/props/gift/gift_prop.gd" id="1_28c8w"]
-[ext_resource type="Texture2D" uid="uid://tnc4qrtlwwqe" path="res://scenes/props/gift/bows.png" id="2_7n0xc"]
+[ext_resource type="Texture2D" uid="uid://b27nhmgf8r07s" path="res://scenes/props/gift/bows.png" id="2_7n0xc"]
 
 [node name="GiftProp" type="Node2D"]
 script = ExtResource("1_28c8w")
 
 [node name="base" type="Sprite2D" parent="."]
+light_mask = 32
 position = Vector2(0, -7)
 texture = ExtResource("1_1y7h0")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 14)
 
 [node name="wrap" type="Sprite2D" parent="."]
+light_mask = 32
 position = Vector2(0, -7)
 texture = ExtResource("1_1y7h0")
 region_enabled = true
@@ -21,12 +23,14 @@ region_rect = Rect2(0, 0, 16, 14)
 
 [node name="bow1" type="Sprite2D" parent="."]
 modulate = Color(0.325441, 0.325441, 0.325441, 1)
+light_mask = 32
 position = Vector2(0, -7)
 texture = ExtResource("1_1y7h0")
 region_enabled = true
 region_rect = Rect2(80, 0, 16, 14)
 
 [node name="bow2" type="Sprite2D" parent="."]
+light_mask = 32
 position = Vector2(0, -18)
 texture = ExtResource("2_7n0xc")
 region_enabled = true

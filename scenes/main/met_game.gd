@@ -41,14 +41,13 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not OS.has_feature("editor"): return
 	if event.is_action_pressed(GameConst.INPUT_SELECT):
-		var music_bus: int = AudioConst.BUS_MUSIC_IDX
-		AudioServer.set_bus_mute(music_bus, !AudioServer.is_bus_mute(music_bus))
+		AudioServer.set_bus_mute(AudioConst.BUS_MUSIC_IDX, \
+			!AudioServer.is_bus_mute(AudioConst.BUS_MUSIC_IDX))
 	elif event is InputEventKey and event.pressed:
 		match event.keycode:
-			KEY_R:
-				get_tree().reload_current_scene()
-			KEY_0:
-				Events.game_complete.emit()
+			KEY_R: get_tree().reload_current_scene()
+			KEY_0: Events.game_complete.emit()
+			KEY_1: Events.boss_activated.emit()
 
 
 func _ready() -> void:
@@ -61,6 +60,7 @@ func _ready() -> void:
 	Events.checkpoint_activated.connect(_on_events_checkpoint_activated)
 	Events.game_complete.connect(_on_events_game_complete)
 	day_night.time_tick.connect(_on_day_night_time_tick)
+	boss_timer.timeout.connect(spawn_boss)
 	#NOTE Setup MetSys & Other Dependancies
 	game_ui.setup(self)
 
@@ -96,11 +96,25 @@ var initial_load: bool = true
 func init_room():
 	MetSys.get_current_room_instance().adjust_camera_limits(%Camera2D)
 	player.on_enter()
+	
+	if EventsData.boss_active:
+		boss_timer.wait_time = randf_range(1.0, 1.5)
+		boss_timer.start()
+	
 	if initial_load:
 		initial_load = false
 		return
 	SceneTransition.fade_in()
-
+@export_category("Boss")
+@export var boss_prefab: PackedScene
+@export var boss_timer: Timer
+func spawn_boss() -> void:
+	var spawn_pos: Vector2 = (player as Player).reset_position
+	var boss_inst: Enemy = boss_prefab.instantiate()
+	boss_inst.position = spawn_pos
+	
+	var level: Level = Level.instance
+	level.enemy_manager.add_child(boss_inst)
 
 func handle_game_over() -> void:
 	print("Game Over Man")
@@ -117,7 +131,6 @@ func reload_scene() -> void:
 	get_tree().reload_current_scene()
 
 #region SAVE FUNCTIONS
-
 func save_game():
 	reset_map_starting_coords()
 	var save_manager := SaveManager.new()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cus86duxmepnn"]
+[gd_scene load_steps=18 format=3 uid="uid://cus86duxmepnn"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_euw2l"]
 [ext_resource type="Texture2D" uid="uid://ckbe6wd0liblc" path="res://assets/visual/sprites/entity/player/Player_Spritesheet_v2.png" id="2_v3ml3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scenes/entities/player/direction.gd" id="4_ia72w"]
 [ext_resource type="Script" path="res://src/scripts/components/hurt_area.gd" id="5_takns"]
 [ext_resource type="AudioStream" uid="uid://cm3o6e878527i" path="res://src/resources/audio/sound_effects/entity/footsteps_snow.tres" id="6_rsh1v"]
+[ext_resource type="AudioStream" uid="uid://d2k4vayhadn2v" path="res://assets/audio/sound_effects/placeholder/369010__flying_deer_fx__getting-hit-eeeh-02-mouth-fx-man-voice.wav" id="7_0lqkm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vb85q"]
 size = Vector2(16, 40)
@@ -147,15 +148,16 @@ size = Vector2(20, 32)
 [sub_resource type="CircleShape2D" id="CircleShape2D_nu3fp"]
 radius = 30.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("footstep_player", "hurt_area", "interaction_finder")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hurt_area", "interaction_finder", "footstep_player", "stun_player")]
 z_index = 2
 collision_layer = 2
 collision_mask = 49
 script = ExtResource("1_euw2l")
-push_force = 2.0
-footstep_player = NodePath("FootstepSFX")
 hurt_area = NodePath("Components/HurtArea")
 interaction_finder = NodePath("Components/InteractionFinder")
+footstep_player = NodePath("AudioComponents/FootstepSFX")
+stun_player = NodePath("AudioComponents/StunPlayer")
+push_force = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -20)
@@ -210,9 +212,17 @@ position = Vector2(0, -16)
 shape = SubResource("CircleShape2D_nu3fp")
 debug_color = Color(0.588503, 0.377368, 1, 0.42)
 
-[node name="FootstepSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioComponents" type="Node2D" parent="."]
+
+[node name="AudioListener2D" type="AudioListener2D" parent="AudioComponents"]
+current = true
+
+[node name="FootstepSFX" type="AudioStreamPlayer2D" parent="AudioComponents"]
 stream = ExtResource("6_rsh1v")
 bus = &"SFX"
 
-[node name="AudioListener2D" type="AudioListener2D" parent="."]
-current = true
+[node name="StunPlayer" type="AudioStreamPlayer2D" parent="AudioComponents"]
+stream = ExtResource("7_0lqkm")
+volume_db = -12.0
+pitch_scale = 1.05
+bus = &"SFX"

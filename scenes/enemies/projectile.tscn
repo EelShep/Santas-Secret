@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://djqj3k4kogtki"]
+[gd_scene load_steps=7 format=3 uid="uid://djqj3k4kogtki"]
 
 [ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="1_6x4dy"]
 [ext_resource type="Script" path="res://scenes/enemies/projectile.gd" id="1_eadfw"]
 [ext_resource type="Script" path="res://src/scripts/components/hit_area.gd" id="3_8bqdw"]
+[ext_resource type="AudioStream" uid="uid://ndyn0kv2ackv" path="res://assets/audio/sound_effects/placeholder/404792__owlstorm__retro-video-game-sfx-hit-2.wav" id="4_myfrd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d3av6"]
 radius = 12.6491
@@ -10,12 +11,13 @@ radius = 12.6491
 [sub_resource type="CircleShape2D" id="CircleShape2D_p8pj0"]
 radius = 14.0
 
-[node name="Projectile" type="Area2D"]
+[node name="Projectile" type="Area2D" node_paths=PackedStringArray("throw_player")]
 z_index = 2
 position = Vector2(343, 3)
 collision_layer = 16
 collision_mask = 3
 script = ExtResource("1_eadfw")
+throw_player = NodePath("ThrowPlayer")
 
 [node name="Projectile" type="Sprite2D" parent="."]
 scale = Vector2(0.03, 0.03)
@@ -33,3 +35,8 @@ type = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
 shape = SubResource("CircleShape2D_p8pj0")
 debug_color = Color(0.997919, 0, 0.154892, 0.42)
+
+[node name="ThrowPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_myfrd")
+volume_db = 5.0
+bus = &"SFX"

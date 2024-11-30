@@ -29,6 +29,7 @@ Events="*res://src/globals/events.gd"
 AudioController="*res://src/globals/audio_controller/audio_controller.tscn"
 SaveData="*res://src/globals/save_data.gd"
 GameData="*res://src/globals/game_data.gd"
+EventsData="*res://src/globals/events_data.gd"
 SceneTransition="*res://src/globals/scene_transition/scene_transition.tscn"
 MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
@@ -148,7 +149,7 @@ throw={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://src/resources/dialogue/dialogue_test.dialogue", "res://scenes/interactables/old elf/dialogue.dialogue")
+locale/translations_pot_files=PackedStringArray("res://src/resources/dialogue/dialogue_test.dialogue", "res://src/resources/dialogue/dialogue.dialogue")
 
 [layer_names]
 
