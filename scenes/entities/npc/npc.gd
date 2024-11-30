@@ -1,12 +1,12 @@
 extends Area2D
 
-@export var sprite: Sprite2D
+@export var sprite: AnimatedSprite2D
 @export var action_timer: Timer
 
 enum NPC{Castor, Lyle, Hermes}
 enum NPCState{Idle, PlayerNear}
 var current_state : NPCState
-var player: TestPlayer
+var player: Player
 
 
 func _ready() -> void:
@@ -33,13 +33,13 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is TestPlayer:
+	if body is Player:
 		player = body
 		current_state = NPCState.PlayerNear
 
 	
 func _on_body_exited(body: Node2D) -> void:
-	if body is TestPlayer:
+	if body is Player:
 		current_state = NPCState.Idle
 		player = null
 

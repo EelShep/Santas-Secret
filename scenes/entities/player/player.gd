@@ -8,8 +8,17 @@ const MAX_FALL_SPEED = 900.0
 const COYOTE_TIME: float = .1
 const SHORT_HOP: float = .5
 
-var face_dir: int = 1
+@export_category("Components")
+@export var hurt_area: HurtArea
+@export var interaction_finder: Area2D
+@export_category("Audio Players")
+@export var footstep_player: AudioStreamPlayer2D
+@export var stun_player: AudioStreamPlayer2D
+@export_category("Settings")
 @export var push_force: float = 10.0
+@export var STUN_TIME: float = 0.6
+
+var face_dir: int = 1
 
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var animation: String
@@ -24,12 +33,6 @@ var prev_on_floor: bool
 var airtime: float = 0
 var speed: float = SPEED_MIN
 var can_pick = false
-
-
-@export var footstep_player: AudioStreamPlayer2D
-
-@export var hurt_area: HurtArea
-@export var interaction_finder: Area2D
 
 static var instance: Player
 func _init() -> void:
@@ -164,10 +167,13 @@ func footstep() -> void:
 	footstep_player.stream = footstep_sfx_stream
 	footstep_player.play()
 
-@export var STUN_TIME: float = 0.6
+
 func stun() -> void:
 	if stun_time >= 0.0: return
 	stun_time = STUN_TIME
+	
+	stun_player.pitch_scale = randf_range(1.0, 1.1)
+	stun_player.play()
 
 func kill() -> void:
 	AudioController.play_sfx(AudioConst.SFX_PLAYER_DEATH)

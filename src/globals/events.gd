@@ -7,6 +7,9 @@ signal game_quit
 signal can_pause(value: bool)
 signal pause_toggled(value: bool)
 
+signal trigger_event(event_id: int)
+signal trigger_dialogue(dialog_balloon: PackedScene, dialogue_resource: DialogueResource,\
+	dialogue_title: String)
 signal dialogue_toggle(value: bool)
 
 signal map_ready(area: int)

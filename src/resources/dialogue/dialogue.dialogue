@@ -1,0 +1,45 @@
+~ start
+
+Wise Old Elf: I can’t believe it It is you, the chosen one
+Player: What?
+Wise Old Elf: Quick there’s no time
+Wise Old Elf: Santa’s planning something you must stop him.
+Player: Helloo I just got here okay...
+Wise Old Elf: Quick pick up that toy on the floor
+Wise Old Elf: Throw it at the Evil Elves to stun them
+% Wise Old Elf: Do you understand?
+% Wise Old Elf: Did you get that?
+% Wise Old Elf: Did you hear me?
+- Yes => END
+- No =>< start_repeat
+
+=> END
+
+~ start_repeat
+
+Wise Old Elf: Santa’s planning something you must stop him.
+Wise Old Elf: Pick up that toy on the floor
+Wise Old Elf: Throw it at the Evil Elves to stun them
+% Wise Old Elf: Do you understand?
+% Wise Old Elf: Did you get that?
+% Wise Old Elf: Did you hear me?
+- Yes => END
+- No =>< start_repeat
+
+=> END
+
+~ throw_tutorial
+#Player is prompted to pick the toy.
+Wise Old Elf: Pick up the Toy with [Q]
+Wise Old Elf: Throw it using [Left Click]
+#Player fires and the elf becomes stun. 
+=> END!
+
+~ start_complete
+
+Wise Old Elf: You must protect us brave elf by going deep into Santa’s base before the morning rises and he erases the evidence of such evil that lies…
+Player: Hey I came here looking for a job okay. Not this shit
+Wise Old Elf: I’ll give a billion Christmas cookies-
+Player: Deal 
+
+=> END

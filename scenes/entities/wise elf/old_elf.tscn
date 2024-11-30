@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b2dfatdkt85li"]
 
 [ext_resource type="PackedScene" uid="uid://cdkfvx081psyy" path="res://scenes/interactables/dialogue/dialogue.tscn" id="1_dm4ck"]
-[ext_resource type="Resource" uid="uid://6uoi1lk4u0ck" path="res://scenes/interactables/old elf/dialogue.dialogue" id="2_s2eed"]
+[ext_resource type="Resource" uid="uid://6uoi1lk4u0ck" path="res://src/resources/dialogue/dialogue.dialogue" id="2_s2eed"]
 
 [node name="old elf" type="Node2D"]
 
