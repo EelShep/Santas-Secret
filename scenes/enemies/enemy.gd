@@ -24,8 +24,11 @@ var can_pick = false
 @export var hurt_area: HurtArea
 @export var interaction_finder: Area2D
 @export var emote_sprite: AnimatedSprite2D
+@export_category("Audio Players")
+@export var footstep_player: AudioStreamPlayer2D
+@export var throw_player: AudioStreamPlayer2D
+@export var stun_player: AudioStreamPlayer2D
 @export_category("Settings")
-
 #
 	#if Input.is_action_just_pressed(GameConst.INPUT_JUMP) and (on_floor_ct or double_jump):
 		#if not on_floor_ct:
@@ -193,6 +196,8 @@ func do_fire():
 	projectile.position = position + $RayCast2DFire.position
 	projectile.direction = (Player.instance.position - position).normalized()
 	get_parent().add_child(projectile)
+	if throw_player: throw_player.play()
+	
 	await get_tree().create_timer(fire_cooldown_time).timeout
 	fired = false
 	firing = false
@@ -321,6 +326,7 @@ func jump():
 	
 var stun_time := 0.0
 func handle_stun(delta: float) -> void:
+	
 	stun_time -= delta
 	$StunVisual.show()
 	animation = &"Stun"
@@ -328,7 +334,7 @@ func handle_stun(delta: float) -> void:
 	if stun_time <= 0.0:
 		hit_area.toggle_shape(true)
 
-@export var footstep_player: AudioStreamPlayer2D
+
 func footstep() -> void:
 	var tilemap_manager: TileMapManager = Level.instance.tilemap_manager
 	var tilemap: TileMapLayer = tilemap_manager.ground_tiles
@@ -346,6 +352,8 @@ func stun() -> void:
 	if stun_time >= 0.0: return
 	hit_area.toggle_shape(false)
 	stun_time = STUN_TIME
+	
+	if stun_player: stun_player.play()
 
 
 func _on_hurt_area_damaged(hit_area: HitArea) -> void:

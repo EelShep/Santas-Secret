@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bekyigy3vc8qp"]
+[gd_scene load_steps=30 format=3 uid="uid://bekyigy3vc8qp"]
 
 [ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_osdn3"]
 [ext_resource type="Script" path="res://src/scripts/components/hurt_area.gd" id="2_jdrho"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://b0oiq6wot8wkh" path="res://assets/visual/sprites/entity/EmoteSpritesheet.png" id="4_tiphw"]
 [ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="5_7mc5e"]
 [ext_resource type="AudioStream" uid="uid://cm3o6e878527i" path="res://src/resources/audio/sound_effects/entity/footsteps_snow.tres" id="6_koopx"]
+[ext_resource type="AudioStream" uid="uid://ndyn0kv2ackv" path="res://assets/audio/sound_effects/placeholder/404792__owlstorm__retro-video-game-sfx-hit-2.wav" id="9_apmi2"]
+[ext_resource type="AudioStream" uid="uid://0e4thg6lcgha" path="res://assets/audio/sound_effects/placeholder/455216__matrixxx__cartoon-stunned-01.wav" id="10_fqll3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_txiud"]
 size = Vector2(20, 32)
@@ -220,17 +222,19 @@ _data = {
 "Stun": SubResource("Animation_ilkxr")
 }
 
-[node name="DarkWorkerElf" type="CharacterBody2D" node_paths=PackedStringArray("hit_area", "hurt_area", "emote_sprite", "footstep_player")]
+[node name="DarkWorkerElf" type="CharacterBody2D" node_paths=PackedStringArray("hit_area", "hurt_area", "emote_sprite", "footstep_player", "throw_player", "stun_player")]
 collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_osdn3")
 hit_area = NodePath("Components/HitArea")
 hurt_area = NodePath("Components/HurtArea")
 emote_sprite = NodePath("EmoteSprite")
+footstep_player = NodePath("AudioPlayers/FootstepSFX")
+throw_player = NodePath("AudioPlayers/ThrowPlayer")
+stun_player = NodePath("AudioPlayers/StunPlayer")
 can_fire = true
 annotation_color = Color(1, 1, 1, 1)
 fire_cooldown_time = 2.0
-footstep_player = NodePath("FootstepSFX")
 STUN_TIME = 2.6
 
 [node name="Components" type="Node2D" parent="."]
@@ -320,6 +324,18 @@ position = Vector2(0, -52)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("5_7mc5e")
 
-[node name="FootstepSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioPlayers" type="Node2D" parent="."]
+
+[node name="FootstepSFX" type="AudioStreamPlayer2D" parent="AudioPlayers"]
 stream = ExtResource("6_koopx")
+bus = &"SFX"
+
+[node name="ThrowPlayer" type="AudioStreamPlayer2D" parent="AudioPlayers"]
+stream = ExtResource("9_apmi2")
+bus = &"SFX"
+
+[node name="StunPlayer" type="AudioStreamPlayer2D" parent="AudioPlayers"]
+stream = ExtResource("10_fqll3")
+volume_db = -12.0
+pitch_scale = 0.9
 bus = &"SFX"

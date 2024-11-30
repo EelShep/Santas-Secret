@@ -2,6 +2,8 @@ extends Node2D
 class_name ElfConversion
 
 
+@export var audio_player: AudioStreamPlayer2D
+
 @export var converted = false
 
 
@@ -21,4 +23,7 @@ func dark_conversion():
 	$skin.material.set_shader_parameter("palette", preload("res://assets/visual/elves/skin-dark-palette.png"))
 	$skin.material.set_shader_parameter("skip_first_row", true)
 	$skin.material.set_shader_parameter("row", 1.0)
+	
+	audio_player.pitch_scale = randf_range(0.9, 1.1)
+	audio_player.play()
 	

@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c1cmjfr0y5tal"]
+[gd_scene load_steps=10 format=3 uid="uid://c1cmjfr0y5tal"]
 
 [ext_resource type="Script" path="res://scenes/entities/objects/object_1.gd" id="1_227oq"]
 [ext_resource type="Script" path="res://src/scripts/components/hit_area.gd" id="2_4bbi1"]
 [ext_resource type="Texture2D" uid="uid://dkvkaufjlmeqr" path="res://assets/visual/sprites/projectile/gold_ornament.png" id="3_ly03g"]
 [ext_resource type="PackedScene" uid="uid://drbd61gd5hgi5" path="res://scenes/effects/light.tscn" id="4_tncbj"]
+[ext_resource type="AudioStream" uid="uid://ndyn0kv2ackv" path="res://assets/audio/sound_effects/placeholder/404792__owlstorm__retro-video-game-sfx-hit-2.wav" id="5_mcilx"]
+[ext_resource type="AudioStream" uid="uid://b0fpga8ardhj8" path="res://assets/audio/sound_effects/placeholder/529942__grizzlymittz__fighting-game-hit-sound.mp3" id="6_84hvg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ass1t"]
 
@@ -13,12 +15,14 @@ size = Vector2(32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6fgu8"]
 size = Vector2(32, 32)
 
-[node name="GoldOrnament" type="RigidBody2D" node_paths=PackedStringArray("hit_area")]
+[node name="GoldOrnament" type="RigidBody2D" node_paths=PackedStringArray("hit_area", "throw_player", "break_player")]
 collision_layer = 0
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_227oq")
 hit_area = NodePath("HitArea")
+throw_player = NodePath("ThrowPlayer")
+break_player = NodePath("BreakPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 32
@@ -48,8 +52,13 @@ shape = SubResource("RectangleShape2D_6fgu8")
 energy = 0.8
 texture_scale = 0.8
 
-[node name="StunTimer" type="Timer" parent="."]
-one_shot = true
+[node name="ThrowPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_mcilx")
+bus = &"SFX"
+
+[node name="BreakPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_84hvg")
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

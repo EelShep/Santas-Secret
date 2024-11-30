@@ -1,7 +1,8 @@
 extends RigidBody2D 
 
 @export var hit_area: HitArea
-@export var stun_timer: Timer
+@export var throw_player: AudioStreamPlayer2D
+@export var break_player: AudioStreamPlayer2D
 @export_category("Settings")
 @export var throw_vel = 1000
 
@@ -42,6 +43,8 @@ func _input(event: InputEvent) -> void:
 		object.linear_velocity= object.transform.x * throw_vel
 		object.gravity = gravity
 		player.speed = 400
+		
+		if throw_player: throw_player.play()
 
 func toggle_throw(value: bool) -> void:
 	thrown = value
@@ -54,7 +57,12 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	if thrown: toggle_throw(false)
+	if thrown:
+		toggle_throw(false)
+		if break_player: break_player.play()
+	
 
 func _on_damage_hurt_area(body: HurtArea) -> void:
-	if thrown: toggle_throw(false)
+	if thrown: 
+		toggle_throw(false)
+		if break_player: break_player.play()
