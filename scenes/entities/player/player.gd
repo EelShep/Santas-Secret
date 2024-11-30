@@ -47,10 +47,10 @@ func _input(event: InputEvent) -> void:
 			for area in areas:
 				if area is Interactable:
 					(area as Interactable).handle_action()
-		'else:
+		else:
 			var flash = preload("res://scenes/entities/player/flash.tscn").instantiate()
 			flash.position = position
-			get_parent().add_child(flash)'
+			get_parent().add_child(flash)
 
 func _ready() -> void:
 	hurt_area.damaged.connect(_on_hurt_area_damaged)
