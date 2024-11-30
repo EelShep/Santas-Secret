@@ -3,9 +3,14 @@ extends Node
 var dialogues: Array = []
 var events: Array = []
 
+var boss_active: bool = false
+
 func _ready() -> void:
 	Events.trigger_event.connect(_on_events_trigger_event)
 	Events.trigger_dialogue.connect(_on_events_trigger_dialogue)
+	
+	Events.game_ready.connect(func() -> void: boss_active = false)
+	Events.boss_activated.connect(func() -> void: boss_active = true)
 
 
 func reset_data() -> void:

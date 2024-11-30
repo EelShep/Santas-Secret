@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ducb6nwnf0e6j"]
+[gd_scene load_steps=9 format=3 uid="uid://ducb6nwnf0e6j"]
 
 [ext_resource type="Script" path="res://scenes/main/met_game.gd" id="1_tjrnh"]
 [ext_resource type="Script" path="res://scenes/levels/day_night.gd" id="2_ldkdj"]
+[ext_resource type="PackedScene" uid="uid://cdnnrc4h5o3jj" path="res://scenes/enemies/enemy_santa.tscn" id="2_mfnrp"]
 [ext_resource type="Gradient" uid="uid://dv75y3trn3ns7" path="res://src/resources/daynight-gradient-texture.tres" id="3_5mp8n"]
 [ext_resource type="Script" path="res://scenes/ui/game_ui.gd" id="5_vgo4j"]
 [ext_resource type="PackedScene" uid="uid://cscdh3qxydpea" path="res://scenes/ui/pause_ui.tscn" id="6_3kgi4"]
@@ -10,13 +11,15 @@
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_pj03m"]
 gradient = ExtResource("3_5mp8n")
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("level_manager", "game_ui", "pause_ui", "day_night")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("level_manager", "game_ui", "pause_ui", "day_night", "boss_timer")]
 script = ExtResource("1_tjrnh")
 starting_map = "Level_1.tscn"
 level_manager = NodePath("LevelManager")
 game_ui = NodePath("GameUI")
 pause_ui = NodePath("PauseUI")
 day_night = NodePath("DayNight")
+boss_prefab = ExtResource("2_mfnrp")
+boss_timer = NodePath("BossTimer")
 
 [node name="DayNight" type="CanvasModulate" parent="."]
 script = ExtResource("2_ldkdj")
@@ -65,5 +68,8 @@ size_flags_vertical = 0
 horizontal_alignment = 2
 
 [node name="Timer" type="Timer" parent="GameUI"]
+
+[node name="BossTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="PauseUI" parent="." instance=ExtResource("6_3kgi4")]

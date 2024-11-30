@@ -1,0 +1,342 @@
+[gd_scene load_steps=30 format=3 uid="uid://cdnnrc4h5o3jj"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_pdiin"]
+[ext_resource type="Script" path="res://src/scripts/components/hurt_area.gd" id="2_dbj8c"]
+[ext_resource type="Script" path="res://src/scripts/components/hit_area.gd" id="3_siw0p"]
+[ext_resource type="Texture2D" uid="uid://b0oiq6wot8wkh" path="res://assets/visual/sprites/entity/EmoteSpritesheet.png" id="4_rxjkg"]
+[ext_resource type="Texture2D" uid="uid://c0vd0piurk4aq" path="res://assets/visual/sprites/entity/enemy/Santa sprite.png" id="5_5hgeb"]
+[ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="6_gyrn8"]
+[ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="7_0sgmq"]
+[ext_resource type="AudioStream" uid="uid://cm3o6e878527i" path="res://src/resources/audio/sound_effects/entity/footsteps_snow.tres" id="8_iw57g"]
+[ext_resource type="AudioStream" uid="uid://ndyn0kv2ackv" path="res://assets/audio/sound_effects/placeholder/404792__owlstorm__retro-video-game-sfx-hit-2.wav" id="9_i1ayt"]
+[ext_resource type="AudioStream" uid="uid://0e4thg6lcgha" path="res://assets/audio/sound_effects/placeholder/455216__matrixxx__cartoon-stunned-01.wav" id="10_8uhpo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txiud"]
+size = Vector2(42, 49)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eeoc1"]
+radius = 32.0156
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8rjkw"]
+size = Vector2(24, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyd8s"]
+atlas = ExtResource("4_rxjkg")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8y6pt"]
+atlas = ExtResource("4_rxjkg")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vi2la"]
+atlas = ExtResource("4_rxjkg")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bhjr"]
+atlas = ExtResource("4_rxjkg")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x64qu"]
+atlas = ExtResource("4_rxjkg")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23tcq"]
+atlas = ExtResource("4_rxjkg")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otmlv"]
+atlas = ExtResource("4_rxjkg")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0edh"]
+atlas = ExtResource("4_rxjkg")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c241t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyd8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8y6pt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vi2la")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7bhjr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x64qu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23tcq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otmlv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyd8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0edh")
+}],
+"loop": false,
+"name": &"Alert",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_c4cm7"]
+resource_name = "Fall"
+length = 0.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_xtw38"]
+resource_name = "Idle"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_x4njb"]
+resource_name = "Jump"
+length = 0.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_7ho02"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_wmsy5"]
+resource_name = "Run"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"footstep"
+}, {
+"args": [],
+"method": &"footstep"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_gsaho"]
+resource_name = "Stun"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_imkt6"]
+_data = {
+"Fall": SubResource("Animation_c4cm7"),
+"Idle": SubResource("Animation_xtw38"),
+"Jump": SubResource("Animation_x4njb"),
+"RESET": SubResource("Animation_7ho02"),
+"Run": SubResource("Animation_wmsy5"),
+"Stun": SubResource("Animation_gsaho")
+}
+
+[node name="Santa" type="CharacterBody2D" node_paths=PackedStringArray("hit_area", "hurt_area", "emote_sprite", "footstep_player", "throw_player", "stun_player")]
+collision_layer = 4
+collision_mask = 17
+script = ExtResource("1_pdiin")
+hit_area = NodePath("Components/HitArea")
+hurt_area = NodePath("Components/HurtArea")
+emote_sprite = NodePath("EmoteSprite")
+footstep_player = NodePath("AudioPlayers/FootstepSFX")
+throw_player = NodePath("AudioPlayers/ThrowPlayer")
+stun_player = NodePath("AudioPlayers/StunPlayer")
+can_fire = true
+annotation_color = Color(1, 1, 1, 1)
+fire_cooldown_time = 2.0
+STUN_TIME = 2.6
+
+[node name="Components" type="Node2D" parent="."]
+
+[node name="HurtArea" type="Area2D" parent="Components"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("2_dbj8c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/HurtArea"]
+position = Vector2(0, -24.5)
+shape = SubResource("RectangleShape2D_txiud")
+
+[node name="HitArea" type="Area2D" parent="Components"]
+position = Vector2(0, -20)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_siw0p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/HitArea"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_eeoc1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -20)
+shape = SubResource("RectangleShape2D_8rjkw")
+
+[node name="EmoteSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -119)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_c241t")
+animation = &"Alert"
+autoplay = "default"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 32
+position = Vector2(0, -48)
+texture = ExtResource("5_5hgeb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_imkt6")
+}
+autoplay = "Idle"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+light_mask = 32
+position = Vector2(0, -16)
+color = Color(0.988235, 1, 0.760784, 0.4)
+range_layer_min = -100
+range_layer_max = 512
+range_item_cull_mask = 42
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_item_cull_mask = 4
+texture = ExtResource("6_gyrn8")
+
+[node name="ProjectileLoad" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, -20)
+
+[node name="ProjectileLoad" type="Sprite2D" parent="ProjectileLoad"]
+modulate = Color(0.913479, 0.717812, 0, 1)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("7_0sgmq")
+
+[node name="TargetMarker" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.364706, 0.364706, 0.364706, 0.643137)
+position = Vector2(0, -20)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("7_0sgmq")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, -10)
+target_position = Vector2(200, 0)
+collision_mask = 3
+
+[node name="RayCast2DFire" type="RayCast2D" parent="."]
+position = Vector2(0, -20)
+target_position = Vector2(150, 0)
+collision_mask = 3
+
+[node name="StunVisual" type="Sprite2D" parent="."]
+modulate = Color(0.913479, 0.717812, 0, 1)
+position = Vector2(0, -52)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("7_0sgmq")
+
+[node name="AudioPlayers" type="Node2D" parent="."]
+
+[node name="FootstepSFX" type="AudioStreamPlayer2D" parent="AudioPlayers"]
+stream = ExtResource("8_iw57g")
+bus = &"SFX"
+
+[node name="ThrowPlayer" type="AudioStreamPlayer2D" parent="AudioPlayers"]
+stream = ExtResource("9_i1ayt")
+bus = &"SFX"
+
+[node name="StunPlayer" type="AudioStreamPlayer2D" parent="AudioPlayers"]
+stream = ExtResource("10_8uhpo")
+volume_db = -12.0
+pitch_scale = 0.9
+bus = &"SFX"
