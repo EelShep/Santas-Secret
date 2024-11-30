@@ -18,6 +18,7 @@ signal player_died() #NOTE Player Captured
 signal game_over() #NOTE Time Expired
 signal game_reset()
 
+signal boss_activated()
 signal game_complete()
 
 signal checkpoint_activated()

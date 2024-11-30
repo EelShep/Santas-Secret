@@ -6,9 +6,10 @@
 [ext_resource type="Script" path="res://scenes/enemies/enemy_manager.gd" id="4_ie6de"]
 [ext_resource type="TileSet" uid="uid://i7mf02rj7f2i" path="res://src/resources/tilesets/tileset_v2.tres" id="4_vk0nn"]
 
-[node name="MapTemplate" type="Node2D" node_paths=PackedStringArray("tilemap_manager")]
+[node name="MapTemplate" type="Node2D" node_paths=PackedStringArray("tilemap_manager", "enemy_manager")]
 script = ExtResource("1_x2t1b")
 tilemap_manager = NodePath("TileMaps")
+enemy_manager = NodePath("Enemies")
 
 [node name="PlayerSpawn" type="Node2D" parent="."]
 

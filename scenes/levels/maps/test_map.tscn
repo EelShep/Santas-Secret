@@ -70,7 +70,6 @@ position = Vector2(424, 928)
 position = Vector2(1664, 928)
 
 [node name="Dialogue" parent="NPC2" index="3" instance=ExtResource("4_bmnwb")]
-dialogue_start = "test1"
 
 [node name="Checkpoint" parent="." index="6" instance=ExtResource("5_te38c")]
 position = Vector2(1320, 928)

@@ -5,10 +5,13 @@ enum Area {
 	Area2 = 0
 }
 
-@export var tilemap_manager: TileMapManager
-
+@export_category("Settings")
 @export var id: int
 @export var area: Area
+@export_category("Components")
+@export var tilemap_manager: TileMapManager
+@export var enemy_manager: EnemyManager
+
 
 static var instance: Level
 func _init() -> void:
