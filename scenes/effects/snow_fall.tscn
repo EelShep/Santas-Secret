@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://ovdnxm75ikx8"]
+
+[sub_resource type="Curve" id="Curve_g50aw"]
+_data = [Vector2(0, 0.991108), 0.0, 0.0, 0, 0, Vector2(0.976271, 0.00410402), -2.71056, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wr58w"]
+curve = SubResource("Curve_g50aw")
+
+[sub_resource type="Gradient" id="Gradient_riaiq"]
+offsets = PackedFloat32Array(0.445693, 0.550562, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.940075, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bxy37"]
+gradient = SubResource("Gradient_riaiq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jtfei"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(384, 0, 0)
+emission_shape = 3
+emission_box_extents = Vector3(768, 1, 1)
+gravity = Vector3(45, 98, 0)
+scale_min = 3.0
+scale_max = 7.0
+color_initial_ramp = SubResource("GradientTexture1D_bxy37")
+alpha_curve = SubResource("CurveTexture_wr58w")
+turbulence_enabled = true
+turbulence_noise_speed_random = 0.0
+turbulence_influence_min = 0.02
+turbulence_influence_max = 0.08
+
+[node name="SnowFall" type="GPUParticles2D"]
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_jtfei")
+lifetime = 10.0
+preprocess = 30.0
+visibility_rect = Rect2(0, 0, 1024, 576)

@@ -22,7 +22,11 @@ metadata/_edit_lock_ = true
 
 [node name="Background" type="TileMapLayer" parent="TileMaps"]
 light_mask = 2
-z_index = -2
+z_index = -10
+tile_set = ExtResource("4_vk0nn")
+
+[node name="Objects" type="TileMapLayer" parent="TileMaps"]
+z_index = -5
 tile_set = ExtResource("4_vk0nn")
 
 [node name="Ground" type="TileMapLayer" parent="TileMaps"]

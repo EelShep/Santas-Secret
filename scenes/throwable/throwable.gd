@@ -1,10 +1,15 @@
-extends RigidBody2D 
+class_name Throwable extends RigidBody2D 
 
-@export var hit_area: HitArea
-@export var throw_player: AudioStreamPlayer2D
-@export var break_player: AudioStreamPlayer2D
+signal destroyed
+
 @export_category("Settings")
 @export var throw_vel = 1000
+@export_category("Components")
+@export var hit_area: HitArea
+@export var pick_area: Area2D
+@export_category("Audio")
+@export var throw_player: AudioStreamPlayer2D
+@export var break_player: AudioStreamPlayer2D
 
 var player: Player = Player.instance
 @onready var object: RigidBody2D =$"."
@@ -28,7 +33,7 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pick"):
-		var bodies = $Area2D.get_overlapping_bodies()
+		var bodies = pick_area.get_overlapping_bodies()
 		for body in bodies:
 			if player and player.can_pick == true:
 				picked = true
@@ -56,13 +61,22 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	player.can_pick = true
 
 
+func on_collided() -> void:
+	toggle_throw(false)
+	pick_area.set_deferred("monitoring", false)
+	hide()
+	
+	break_player.play()
+	await break_player.finished
+	
+	destroyed.emit()
+	queue_free()
+
 func _on_body_entered(body: Node) -> void:
 	if thrown:
-		toggle_throw(false)
-		if break_player: break_player.play()
+		on_collided()
 	
 
 func _on_damage_hurt_area(body: HurtArea) -> void:
 	if thrown: 
-		toggle_throw(false)
-		if break_player: break_player.play()
+		on_collided()

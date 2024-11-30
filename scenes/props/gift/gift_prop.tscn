@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b27nhmgf8r07s" path="res://scenes/props/gift/bows.png" id="2_7n0xc"]
 
 [node name="GiftProp" type="Node2D"]
+z_index = -6
 script = ExtResource("1_28c8w")
 
 [node name="base" type="Sprite2D" parent="."]

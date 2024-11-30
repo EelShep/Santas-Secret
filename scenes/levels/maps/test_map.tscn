@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scenes/levels/maps/secret_area_2d.gd" id="3_my6ea"]
 [ext_resource type="PackedScene" uid="uid://cdkfvx081psyy" path="res://scenes/interactables/dialogue/dialogue.tscn" id="4_bmnwb"]
 [ext_resource type="PackedScene" uid="uid://ckank5xl1ccdj" path="res://scenes/interactables/checkpoint/checkpoint.tscn" id="5_te38c"]
-[ext_resource type="PackedScene" uid="uid://cpto4d4anmhf3" path="res://scenes/entities/objects/object_1.tscn" id="7_q3x3i"]
+[ext_resource type="PackedScene" uid="uid://cpto4d4anmhf3" path="res://scenes/throwable/object_1.tscn" id="7_q3x3i"]
 [ext_resource type="PackedScene" uid="uid://b2dfatdkt85li" path="res://scenes/entities/wise elf/old_elf.tscn" id="8_hyd1w"]
 [ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="9_0olfc"]
 
