@@ -25,4 +25,4 @@ position = Vector2(919, 350)
 position = Vector2(555, 509)
 
 [node name="Spawner" parent="." index="5" instance=ExtResource("3_aljgf")]
-position = Vector2(726, 475)
+position = Vector2(736, 475)
