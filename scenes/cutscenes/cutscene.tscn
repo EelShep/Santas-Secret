@@ -289,3 +289,34 @@ theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
 text = "[center][shake rate=9.0 level=9 connected=1][color=white]Press any button...[/color][/shake] "
 scroll_active = false
+
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="Light" parent="Lights" instance=ExtResource("5_up1v6")]
+position = Vector2(333, 781)
+
+[node name="Light2" parent="Lights" instance=ExtResource("5_up1v6")]
+position = Vector2(798, 787)
+texture_scale = 1.2
+
+[node name="Light3" parent="Lights" instance=ExtResource("5_up1v6")]
+position = Vector2(795, 848)
+
+[node name="Light4" parent="Lights" instance=ExtResource("5_up1v6")]
+position = Vector2(732, 912)
+
+[node name="Light5" parent="Lights" instance=ExtResource("5_up1v6")]
+position = Vector2(344, 924)
+texture_scale = 1.5
+
+[node name="Light6" parent="Lights" instance=ExtResource("5_up1v6")]
+position = Vector2(343, 850)
+texture_scale = 1.5
+
+[node name="Light7" parent="Lights" instance=ExtResource("5_up1v6")]
+position = Vector2(381, 723)
+texture_scale = 0.8
+
+[node name="Light8" parent="Lights" instance=ExtResource("5_up1v6")]
+position = Vector2(813, 729)
+texture_scale = 0.8
