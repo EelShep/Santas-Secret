@@ -2,7 +2,9 @@ extends CanvasLayer
 
 signal line_ended(line: DialogueLine)
 signal dialogue_ended()
-
+@export_category("Audio")
+@export var talk_sfx: AudioStreamPlayer
+@export_category("Settings")
 ## The action to use for advancing the dialogue
 @export var next_action: StringName = &"ui_accept"
 
@@ -122,11 +124,13 @@ func start(dialogue_resource: DialogueResource, title: String, extra_game_states
 	is_waiting_for_input = false
 	resource = dialogue_resource
 	self.dialogue_line = await resource.get_next_dialogue_line(title, temporary_game_states)
+	talk_sfx.play()
 
 
 ## Go to the next line
 func next(next_id: String) -> void:
 	self.dialogue_line = await resource.get_next_dialogue_line(next_id, temporary_game_states)
+	talk_sfx.play()
 
 
 #region Signals
@@ -168,6 +172,7 @@ func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
 
 func end_dialogue() -> void:
+	talk_sfx.stop()
 	Events.dialogue_toggle.emit(false)
 	dialogue_ended.emit()
 	queue_free()

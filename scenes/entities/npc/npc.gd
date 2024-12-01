@@ -2,10 +2,19 @@ extends Area2D
 
 @export var sprite: AnimatedSprite2D
 @export var action_timer: Timer
+@export var dialogue_sprite: Sprite2D
+
 
 enum NPC{Castor, Lyle, Hermes}
 enum NPCState{Idle, PlayerNear}
-var current_state : NPCState
+var current_state : NPCState:
+	set(value):
+		current_state = value
+		if value == NPCState.PlayerNear:
+			dialogue_sprite.show()
+		else: dialogue_sprite.hide()
+		
+		
 var player: Player
 
 

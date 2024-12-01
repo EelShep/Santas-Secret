@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dfhmpvhih8rks"]
+[gd_scene load_steps=16 format=3 uid="uid://dfhmpvhih8rks"]
 
 [ext_resource type="Script" path="res://scenes/cutscenes/elf_conversion.gd" id="1_2nnan"]
 [ext_resource type="Shader" path="res://scenes/cutscenes/recolor-elf.gdshader" id="1_7bvjx"]
@@ -8,7 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://26muscpplcw6" path="res://assets/visual/elves/elf-eyes.png" id="5_0v2oo"]
 [ext_resource type="Texture2D" uid="uid://c18hbrc2feaxn" path="res://assets/visual/elves/elf-eyes-bad.png" id="6_vgadc"]
 [ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="8_qbo5s"]
-[ext_resource type="AudioStream" uid="uid://ndyn0kv2ackv" path="res://assets/audio/sound_effects/placeholder/404792__owlstorm__retro-video-game-sfx-hit-2.wav" id="9_l8nlm"]
+[ext_resource type="AudioStream" uid="uid://bkwk7upy01lf3" path="res://assets/audio/sound_effects/cutscene&dialogue/elf_transform_01.wav" id="9_si2dl"]
+[ext_resource type="AudioStream" uid="uid://p8ktmrafncuh" path="res://assets/audio/sound_effects/cutscene&dialogue/elf_transform_02.wav" id="10_syc2q"]
+[ext_resource type="AudioStream" uid="uid://uue3bgi1i2ud" path="res://assets/audio/sound_effects/cutscene&dialogue/elf_transform_03.wav" id="11_fgxbq"]
+[ext_resource type="AudioStream" uid="uid://dgq8mgn17pq16" path="res://assets/audio/sound_effects/cutscene&dialogue/elf_transform_04.wav" id="12_xjoyl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6dd8o"]
 shader = ExtResource("1_7bvjx")
@@ -21,6 +24,14 @@ shader_parameter/palette = ExtResource("2_nd2i3")
 [sub_resource type="Gradient" id="Gradient_ncbut"]
 offsets = PackedFloat32Array(0, 0.0525362, 0.463768, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_axlbh"]
+random_pitch = 1.05
+streams_count = 4
+stream_0/stream = ExtResource("9_si2dl")
+stream_1/stream = ExtResource("10_syc2q")
+stream_2/stream = ExtResource("11_fgxbq")
+stream_3/stream = ExtResource("12_xjoyl")
 
 [node name="ElfConversion" type="Node2D" node_paths=PackedStringArray("audio_player")]
 script = ExtResource("1_2nnan")
@@ -71,4 +82,4 @@ scale_amount_max = 0.03
 color_ramp = SubResource("Gradient_ncbut")
 
 [node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("9_l8nlm")
+stream = SubResource("AudioStreamRandomizer_axlbh")

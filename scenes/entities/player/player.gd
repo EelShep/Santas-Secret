@@ -14,6 +14,7 @@ const SHORT_HOP: float = .5
 @export_category("Audio Players")
 @export var footstep_player: AudioStreamPlayer2D
 @export var stun_player: AudioStreamPlayer2D
+@export var jump_player: AudioStreamPlayer2D
 @export_category("Settings")
 @export var push_force: float = 10.0
 @export var STUN_TIME: float = 0.6
@@ -118,6 +119,7 @@ func handle_jump_input() -> void:
 			position.y += 8
 		else:
 			velocity.y = JUMP_VELOCITY
+			jump_player.play()
 
 
 func handle_short_hop() -> void:
