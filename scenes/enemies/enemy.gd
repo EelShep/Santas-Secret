@@ -28,6 +28,7 @@ var can_pick = false
 @export var footstep_player: AudioStreamPlayer2D
 @export var throw_player: AudioStreamPlayer2D
 @export var stun_player: AudioStreamPlayer2D
+@export var alert_sfx: AudioStreamPlayer2D
 @export_category("Settings")
 #
 	#if Input.is_action_just_pressed(GameConst.INPUT_JUMP) and (on_floor_ct or double_jump):
@@ -52,10 +53,18 @@ var can_pick = false
 		#velocity.x = move_toward(velocity.x, 0, SPEED_MIN)
 		#speed = SPEED_MIN
 
+func toggle_always_active() -> void:
+	always_active = true
+	active = true
 
-
+@export var is_santa: bool = false
 func _ready() -> void:
-	hurt_area.damaged.connect(_on_hurt_area_damaged)
+	if is_santa && EventsData.boss_active:
+		toggle_always_active()
+	elif is_santa:
+		Events.boss_activated.connect(toggle_always_active)
+	else: hurt_area.damaged.connect(_on_hurt_area_damaged)
+	
 	on_enter()
 	marker = $TargetMarker.duplicate()
 	#marker.show()
@@ -160,7 +169,16 @@ var planned_jump = false
 var planned_timeout = 0.0
 @export var always_active = false
 @export var vigilant = true
-@export var active = false
+@export var active = false:
+	set(value):
+		active = value
+		if active:
+			if emote_sprite: 
+				emote_sprite.show()
+				emote_sprite.play("Alert")
+			if alert_sfx: alert_sfx.play()
+		else: emote_sprite.hide()
+
 var inactive_timeout = 0.0
 var patrolling = true
 var caught = false
@@ -219,7 +237,7 @@ func check_player(delta):
 				if not active or patrolling:
 					prints("activating", self)
 					reset_planning()
-					if emote_sprite: emote_sprite.play("Alert")
+					
 					patrolling = false
 					active = true
 		if can_fire:

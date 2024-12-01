@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bka4g4p4ntr66"]
 
-[ext_resource type="Texture2D" uid="uid://2bycbiqhcsq0" path="res://assets/visual/sprites/placeholder/Wooden_Crate.png" id="1_gw5gj"]
 [ext_resource type="Script" path="res://scenes/pushable/pushable_box.gd" id="1_isxfv"]
+[ext_resource type="Texture2D" uid="uid://d2nn4fct15tp0" path="res://assets/visual/sprites/pushable/Small box.png" id="2_nehbj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fx47j"]
 size = Vector2(26, 32)
@@ -15,9 +15,7 @@ MAX_PUSH_SPEED = 250.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 32
-position = Vector2(0, -1)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("1_gw5gj")
+texture = ExtResource("2_nehbj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_fx47j")

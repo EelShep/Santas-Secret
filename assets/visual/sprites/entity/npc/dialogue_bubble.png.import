@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2bycbiqhcsq0"
-path="res://.godot/imported/Wooden_Crate.png-4874a54d384604add76099bc367104ca.ctex"
+uid="uid://bumaphwc1qrit"
+path="res://.godot/imported/dialogue_bubble.png-cbb39f2be4a6d4b59b3b1ae17643fd54.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/sprites/placeholder/Wooden_Crate.png"
-dest_files=["res://.godot/imported/Wooden_Crate.png-4874a54d384604add76099bc367104ca.ctex"]
+source_file="res://assets/visual/sprites/entity/npc/dialogue_bubble.png"
+dest_files=["res://.godot/imported/dialogue_bubble.png-cbb39f2be4a6d4b59b3b1ae17643fd54.ctex"]
 
 [params]
 
