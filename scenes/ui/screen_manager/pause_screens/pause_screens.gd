@@ -31,7 +31,9 @@ func _on_button_pressed(button: ScreenButton) -> void:
 
 
 func _on_screen_exit(screen: Screen, exit_all: bool = false) -> void:
-	if screen == screens[PAUSE_SCREEN] or exit_all or screen.always_exit:
+	if screen == screens[RELOAD_SCREEN] || screen == screens[GAME_OVER_SCREEN]:
+		return
+	elif screen == screens[PAUSE_SCREEN] or exit_all or screen.always_exit:
 		change_screen(null)
 		exit_screens.emit(self, exit_all)
 	else: change_screen(screens[PAUSE_SCREEN])
