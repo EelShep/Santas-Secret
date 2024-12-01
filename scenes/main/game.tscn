@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://ducb6nwnf0e6j"]
+[gd_scene load_steps=10 format=3 uid="uid://ducb6nwnf0e6j"]
 
 [ext_resource type="Script" path="res://scenes/main/met_game.gd" id="1_tjrnh"]
 [ext_resource type="Script" path="res://scenes/levels/day_night.gd" id="2_ldkdj"]
-[ext_resource type="PackedScene" uid="uid://cdnnrc4h5o3jj" path="res://scenes/enemies/enemy_santa.tscn" id="2_mfnrp"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy_santa.tscn" id="2_mfnrp"]
 [ext_resource type="Gradient" uid="uid://dv75y3trn3ns7" path="res://src/resources/daynight-gradient-texture.tres" id="3_5mp8n"]
 [ext_resource type="Script" path="res://scenes/ui/game_ui.gd" id="5_vgo4j"]
 [ext_resource type="PackedScene" uid="uid://cscdh3qxydpea" path="res://scenes/ui/pause_ui.tscn" id="6_3kgi4"]
 [ext_resource type="PackedScene" uid="uid://cus86duxmepnn" path="res://scenes/entities/player/player.tscn" id="6_5vquv"]
+[ext_resource type="LabelSettings" uid="uid://dkvluoxtfvbi" path="res://src/resources/themes/labels/label_settings.tres" id="7_cqb3r"]
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_pj03m"]
 gradient = ExtResource("3_5mp8n")
@@ -18,13 +19,13 @@ level_manager = NodePath("LevelManager")
 game_ui = NodePath("GameUI")
 pause_ui = NodePath("PauseUI")
 day_night = NodePath("DayNight")
+INITIAL_HOUR = 18
 boss_prefab = ExtResource("2_mfnrp")
 boss_timer = NodePath("BossTimer")
 
 [node name="DayNight" type="CanvasModulate" parent="."]
 script = ExtResource("2_ldkdj")
 gradient_texture = SubResource("GradientTexture1D_pj03m")
-game_speed = 25.0
 
 [node name="LevelManager" type="Node2D" parent="."]
 
@@ -60,11 +61,14 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+label_settings = ExtResource("7_cqb3r")
+horizontal_alignment = 2
 
 [node name="PlayTimeLabel" type="Label" parent="GameUI/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+label_settings = ExtResource("7_cqb3r")
 horizontal_alignment = 2
 
 [node name="Timer" type="Timer" parent="GameUI"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://becbabeqq0sxi"]
+[gd_scene load_steps=13 format=4 uid="uid://becbabeqq0sxi"]
 
 [ext_resource type="Script" path="res://scenes/cutscenes/cutscene.gd" id="1_loeim"]
 [ext_resource type="TileSet" uid="uid://i7mf02rj7f2i" path="res://src/resources/tilesets/tileset_v2.tres" id="1_rykkp"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://n5sw70p50pt0" path="res://scenes/cutscenes/circle_05.png" id="3_xd0jk"]
 [ext_resource type="Texture2D" uid="uid://t7ilpk605un7" path="res://scenes/cutscenes/moon-dif-512.png" id="4_0r7ij"]
 [ext_resource type="Texture2D" uid="uid://t1fjwojxck3x" path="res://assets/visual/elves/elf.png" id="4_w16bk"]
+[ext_resource type="PackedScene" uid="uid://drbd61gd5hgi5" path="res://scenes/effects/light.tscn" id="5_up1v6"]
 [ext_resource type="PackedScene" uid="uid://ovdnxm75ikx8" path="res://scenes/effects/snow_fall.tscn" id="6_2kjqi"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_s4eib"]
@@ -54,7 +55,10 @@ _data = {
 process_mode = 3
 script = ExtResource("1_loeim")
 animation_player = NodePath("AnimationPlayer")
-input_delay = 3.0
+input_delay = 6.0
+
+[node name="DayNight" type="CanvasModulate" parent="."]
+color = Color(0.133333, 0.137255, 0.466667, 1)
 
 [node name="TileMaps" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -76,18 +80,25 @@ position = Vector2(600, 930)
 
 [node name="Glow" type="Sprite2D" parent="TileMaps/Moon"]
 modulate = Color(1, 1, 1, 0.501961)
+light_mask = 32
 scale = Vector2(3, 3)
 texture = ExtResource("3_xd0jk")
 
 [node name="Texture" type="Sprite2D" parent="TileMaps/Moon"]
 modulate = Color(1, 1, 1, 0.501961)
+light_mask = 32
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_0r7ij")
 
 [node name="Color" type="Sprite2D" parent="TileMaps/Moon"]
 modulate = Color(1, 1, 1, 0.619608)
+light_mask = 32
 material = SubResource("CanvasItemMaterial_s4eib")
 texture = ExtResource("3_xd0jk")
+
+[node name="Light" parent="TileMaps/Moon" instance=ExtResource("5_up1v6")]
+energy = 2.0
+texture_scale = 2.0
 
 [node name="Ground" type="TileMapLayer" parent="TileMaps"]
 light_mask = 2
@@ -96,9 +107,12 @@ tile_set = ExtResource("1_rykkp")
 metadata/_edit_lock_ = true
 
 [node name="Elf" type="Sprite2D" parent="TileMaps"]
+light_mask = 8
 position = Vector2(1133, 912)
 texture = ExtResource("4_w16bk")
 flip_h = true
+
+[node name="Light" parent="TileMaps/Elf" instance=ExtResource("5_up1v6")]
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 visible = false
