@@ -4,7 +4,7 @@ const CURR_ROOM: String = "current_room"
 const GENERATED_ROOMS: String = "generated_rooms"
 const PLAY_TIME: String = "play_time"
 const DAY_TIME: String = "day_time"
-const STARTING_MAP: String = "santa's_lair.tscn"
+const STARTING_MAP: String = "first.tscn"
 const INITIAL_LOAD: String = "initial_load"
 
 func _ready() -> void:
