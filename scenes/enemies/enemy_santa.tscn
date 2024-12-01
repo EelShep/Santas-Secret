@@ -1,15 +1,19 @@
-[gd_scene load_steps=30 format=3 uid="uid://cdnnrc4h5o3jj"]
+[gd_scene load_steps=35 format=3 uid="uid://bgfvyu2b5koci"]
 
 [ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_pdiin"]
 [ext_resource type="Script" path="res://src/scripts/components/hurt_area.gd" id="2_dbj8c"]
 [ext_resource type="Script" path="res://src/scripts/components/hit_area.gd" id="3_siw0p"]
 [ext_resource type="Texture2D" uid="uid://b0oiq6wot8wkh" path="res://assets/visual/sprites/entity/EmoteSpritesheet.png" id="4_rxjkg"]
-[ext_resource type="Texture2D" uid="uid://c0vd0piurk4aq" path="res://assets/visual/sprites/entity/enemy/Santa sprite.png" id="5_5hgeb"]
+[ext_resource type="Texture2D" uid="uid://cmqs70ljqkjfp" path="res://assets/visual/sprites/entity/enemy/SantaSpritesheet.png" id="5_1oiba"]
 [ext_resource type="Texture2D" uid="uid://dno4b7kwdmt0d" path="res://assets/visual/effects/light.png" id="6_gyrn8"]
 [ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="7_0sgmq"]
 [ext_resource type="AudioStream" uid="uid://cm3o6e878527i" path="res://src/resources/audio/sound_effects/entity/footsteps_snow.tres" id="8_iw57g"]
 [ext_resource type="AudioStream" uid="uid://ndyn0kv2ackv" path="res://assets/audio/sound_effects/placeholder/404792__owlstorm__retro-video-game-sfx-hit-2.wav" id="9_i1ayt"]
 [ext_resource type="AudioStream" uid="uid://0e4thg6lcgha" path="res://assets/audio/sound_effects/placeholder/455216__matrixxx__cartoon-stunned-01.wav" id="10_8uhpo"]
+[ext_resource type="AudioStream" uid="uid://2ou7hdyim20i" path="res://assets/audio/sound_effects/entity/enemy/enemy_alerted_01.wav" id="11_esdbo"]
+[ext_resource type="AudioStream" uid="uid://d0w7jotnm2d36" path="res://assets/audio/sound_effects/entity/enemy/enemy_alerted_02.wav" id="12_4l7p4"]
+[ext_resource type="AudioStream" uid="uid://dj0x4g0p6swsu" path="res://assets/audio/sound_effects/entity/enemy/enemy_alerted_03.wav" id="13_xy37a"]
+[ext_resource type="AudioStream" uid="uid://duk7u2b1v870i" path="res://assets/audio/sound_effects/entity/enemy/enemy_alerted_04.wav" id="14_mw6me"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_txiud"]
 size = Vector2(42, 49)
@@ -109,10 +113,23 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(1, 3), Vector2i(2, 3)]
+}
 
 [sub_resource type="Animation" id="Animation_xtw38"]
 resource_name = "Idle"
-length = 0.6
+length = 0.5
+loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -121,10 +138,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [1, 2, 3, 4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_x4njb"]
@@ -139,10 +156,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0]
+"values": [14, 15]
 }
 
 [sub_resource type="Animation" id="Animation_7ho02"]
@@ -157,12 +174,24 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(2, 3)]
 }
 
 [sub_resource type="Animation" id="Animation_wmsy5"]
 resource_name = "Run"
-length = 0.6
+length = 0.4
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -172,10 +201,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0]
+"values": [11, 10, 9, 8]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -184,12 +213,9 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.2, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
 "values": [{
-"args": [],
-"method": &"footstep"
-}, {
 "args": [],
 "method": &"footstep"
 }]
@@ -223,7 +249,15 @@ _data = {
 "Stun": SubResource("Animation_gsaho")
 }
 
-[node name="Santa" type="CharacterBody2D" node_paths=PackedStringArray("hit_area", "hurt_area", "emote_sprite", "footstep_player", "throw_player", "stun_player")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bqc0j"]
+random_pitch = 1.05
+streams_count = 4
+stream_0/stream = ExtResource("11_esdbo")
+stream_1/stream = ExtResource("12_4l7p4")
+stream_2/stream = ExtResource("13_xy37a")
+stream_3/stream = ExtResource("14_mw6me")
+
+[node name="Santa" type="CharacterBody2D" node_paths=PackedStringArray("hit_area", "hurt_area", "emote_sprite", "footstep_player", "throw_player", "stun_player", "alert_sfx")]
 collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_pdiin")
@@ -233,6 +267,7 @@ emote_sprite = NodePath("EmoteSprite")
 footstep_player = NodePath("AudioPlayers/FootstepSFX")
 throw_player = NodePath("AudioPlayers/ThrowPlayer")
 stun_player = NodePath("AudioPlayers/StunPlayer")
+alert_sfx = NodePath("AudioPlayers/AlertSFX")
 can_fire = true
 annotation_color = Color(1, 1, 1, 1)
 fire_cooldown_time = 2.0
@@ -273,7 +308,10 @@ autoplay = "default"
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 32
 position = Vector2(0, -48)
-texture = ExtResource("5_5hgeb")
+texture = ExtResource("5_1oiba")
+hframes = 6
+vframes = 4
+frame = 20
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -338,5 +376,10 @@ bus = &"SFX"
 [node name="StunPlayer" type="AudioStreamPlayer2D" parent="AudioPlayers"]
 stream = ExtResource("10_8uhpo")
 volume_db = -12.0
+pitch_scale = 0.9
+bus = &"SFX"
+
+[node name="AlertSFX" type="AudioStreamPlayer2D" parent="AudioPlayers"]
+stream = SubResource("AudioStreamRandomizer_bqc0j")
 pitch_scale = 0.9
 bus = &"SFX"

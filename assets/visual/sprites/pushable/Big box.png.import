@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2bycbiqhcsq0"
-path="res://.godot/imported/Wooden_Crate.png-4874a54d384604add76099bc367104ca.ctex"
+uid="uid://k8t26f4j5mhn"
+path="res://.godot/imported/Big box.png-7ba6be04dcf97b3ee33fb63011218a87.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/visual/sprites/placeholder/Wooden_Crate.png"
-dest_files=["res://.godot/imported/Wooden_Crate.png-4874a54d384604add76099bc367104ca.ctex"]
+source_file="res://assets/visual/sprites/pushable/Big box.png"
+dest_files=["res://.godot/imported/Big box.png-7ba6be04dcf97b3ee33fb63011218a87.ctex"]
 
 [params]
 

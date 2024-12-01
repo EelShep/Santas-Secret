@@ -28,6 +28,7 @@ var can_pick = false
 @export var footstep_player: AudioStreamPlayer2D
 @export var throw_player: AudioStreamPlayer2D
 @export var stun_player: AudioStreamPlayer2D
+@export var alert_sfx: AudioStreamPlayer2D
 @export_category("Settings")
 #
 	#if Input.is_action_just_pressed(GameConst.INPUT_JUMP) and (on_floor_ct or double_jump):
@@ -53,9 +54,10 @@ var can_pick = false
 		#speed = SPEED_MIN
 
 
-
+@export var is_santa: bool = false
 func _ready() -> void:
-	hurt_area.damaged.connect(_on_hurt_area_damaged)
+	if not is_santa:
+		hurt_area.damaged.connect(_on_hurt_area_damaged)
 	on_enter()
 	marker = $TargetMarker.duplicate()
 	#marker.show()
@@ -220,6 +222,7 @@ func check_player(delta):
 					prints("activating", self)
 					reset_planning()
 					if emote_sprite: emote_sprite.play("Alert")
+					if alert_sfx: alert_sfx.play()
 					patrolling = false
 					active = true
 		if can_fire:
