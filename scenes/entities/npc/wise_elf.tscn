@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8poqf3ui4x"]
+[gd_scene load_steps=13 format=3 uid="uid://b8poqf3ui4x"]
 
 [ext_resource type="Script" path="res://scenes/entities/npc/npc.gd" id="1_sgwom"]
 [ext_resource type="Texture2D" uid="uid://n7mvdcj6tbj6" path="res://assets/visual/sprites/entity/npc/Mentor elf idle.png" id="2_ser75"]
 [ext_resource type="Texture2D" uid="uid://bumaphwc1qrit" path="res://assets/visual/sprites/entity/npc/dialogue_bubble.png" id="3_acd5m"]
+[ext_resource type="PackedScene" uid="uid://drbd61gd5hgi5" path="res://scenes/effects/light.tscn" id="4_505am"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u0oqg"]
 atlas = ExtResource("2_ser75")
@@ -85,3 +86,5 @@ debug_color = Color(0.146935, 0.519077, 1, 0.42)
 [node name="Dialogue" type="Sprite2D" parent="."]
 position = Vector2(49, -74)
 texture = ExtResource("3_acd5m")
+
+[node name="Light" parent="." instance=ExtResource("4_505am")]
