@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://dxrsmlpj3e2oo"]
+[gd_scene load_steps=5 format=4 uid="uid://dxrsmlpj3e2oo"]
 
 [ext_resource type="PackedScene" uid="uid://ujuwg0fbq72c" path="res://scenes/levels/map_template.tscn" id="1_sh834"]
 [ext_resource type="PackedScene" uid="uid://bekyigy3vc8qp" path="res://scenes/enemies/enemy_dark_worker_elf.tscn" id="2_gmrbq"]
 [ext_resource type="PackedScene" uid="uid://cleihgq3o5id1" path="res://scenes/throwable/spawner.tscn" id="3_ig06f"]
+[ext_resource type="PackedScene" uid="uid://ckank5xl1ccdj" path="res://scenes/interactables/checkpoint/checkpoint.tscn" id="4_o70rj"]
 
 [node name="LB1" instance=ExtResource("1_sh834")]
 
@@ -26,3 +27,6 @@ position = Vector2(807, 509)
 
 [node name="Spawner" parent="." index="5" instance=ExtResource("3_ig06f")]
 position = Vector2(98, 478)
+
+[node name="Checkpoint" parent="." index="6" instance=ExtResource("4_o70rj")]
+position = Vector2(107, 384)
