@@ -20,7 +20,7 @@ tile_map_data = PackedByteArray("AAAdAAEAAQADAAUAAAAdAAAAAQADAAMAAAAcAAEAAQADAAU
 position = Vector2(125, 191)
 
 [node name="DarkWorkerElf2" parent="Enemies" index="1" instance=ExtResource("2_ah2pb")]
-position = Vector2(686, 510)
+position = Vector2(689, 503)
 
 [node name="Spawner" parent="." index="5" instance=ExtResource("3_7sfvi")]
 position = Vector2(474, 246)
