@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dfhmpvhih8rks"]
+[gd_scene load_steps=13 format=3 uid="uid://dfhmpvhih8rks"]
 
 [ext_resource type="Script" path="res://scenes/cutscenes/elf_conversion.gd" id="1_2nnan"]
 [ext_resource type="Shader" path="res://scenes/cutscenes/recolor-elf.gdshader" id="1_7bvjx"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c18hbrc2feaxn" path="res://assets/visual/elves/elf-eyes-bad.png" id="6_vgadc"]
 [ext_resource type="Texture2D" uid="uid://cem8p4k4b0g38" path="res://scenes/enemies/Circle.png" id="8_qbo5s"]
 [ext_resource type="AudioStream" uid="uid://ndyn0kv2ackv" path="res://assets/audio/sound_effects/placeholder/404792__owlstorm__retro-video-game-sfx-hit-2.wav" id="9_l8nlm"]
+[ext_resource type="PackedScene" uid="uid://drbd61gd5hgi5" path="res://scenes/effects/light.tscn" id="10_6aaj3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6dd8o"]
 shader = ExtResource("1_7bvjx")
@@ -27,21 +28,25 @@ script = ExtResource("1_2nnan")
 audio_player = NodePath("AudioPlayer")
 
 [node name="base" type="Sprite2D" parent="."]
+light_mask = 32
 material = SubResource("ShaderMaterial_6dd8o")
 position = Vector2(0, -16)
 texture = ExtResource("3_mcltu")
 
 [node name="skin" type="Sprite2D" parent="."]
+light_mask = 32
 material = SubResource("ShaderMaterial_6dd8o")
 position = Vector2(0, -16)
 texture = ExtResource("4_igi07")
 
 [node name="eyes" type="Sprite2D" parent="."]
+light_mask = 32
 position = Vector2(0, -16)
 texture = ExtResource("5_0v2oo")
 
 [node name="eyes-dark" type="Sprite2D" parent="."]
 visible = false
+light_mask = 32
 position = Vector2(0, -16)
 texture = ExtResource("6_vgadc")
 
@@ -68,3 +73,8 @@ color_ramp = SubResource("Gradient_ncbut")
 
 [node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_l8nlm")
+
+[node name="Light" parent="." instance=ExtResource("10_6aaj3")]
+position = Vector2(0, -11)
+energy = 0.5
+texture_scale = 0.5
