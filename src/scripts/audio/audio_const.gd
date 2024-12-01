@@ -25,6 +25,7 @@ const UI_SFX_CLOSE: int = 4
 #region Music
 const MUSIC_TITLE: int = -1
 const MUSIC_TRACK_0: int = 0
+const MUSIC_BOSS_THEME: int = 1
 #endregion
 #region Resources
 const RES_INDOOR_FOOTSTEPS: Resource = preload("res://src/resources/audio/sound_effects/entity/footsteps_indoors.tres")

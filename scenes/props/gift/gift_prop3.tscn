@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b27nhmgf8r07s" path="res://scenes/props/gift/bows.png" id="3_e2s2s"]
 
 [node name="GiftProp" type="Node2D"]
+z_index = -6
 script = ExtResource("1_pchen")
 stack_height = 24
 height = 24

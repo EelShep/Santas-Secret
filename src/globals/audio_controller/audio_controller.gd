@@ -20,6 +20,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _ready() -> void:
 	Events.main_menu_ready.connect(on_events_main_menu_ready)
+	Events.credits_ready.connect(on_events_main_menu_ready)
 	Events.game_ready.connect(on_events_game_ready)
 	Events.map_ready.connect(on_events_map_ready)
 	

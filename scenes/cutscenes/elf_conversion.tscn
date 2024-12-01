@@ -68,4 +68,3 @@ color_ramp = SubResource("Gradient_ncbut")
 
 [node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_l8nlm")
-volume_db = 5.0

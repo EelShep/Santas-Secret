@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cpto4d4anmhf3"]
 
-[ext_resource type="Script" path="res://scenes/entities/objects/object_1.gd" id="1_sst1j"]
+[ext_resource type="Script" path="res://scenes/throwable/throwable.gd" id="1_sst1j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ass1t"]
 size = Vector2(24, 22)
