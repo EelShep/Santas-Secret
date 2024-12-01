@@ -9,11 +9,12 @@ func _ready() -> void:
 	Events.trigger_event.connect(_on_events_trigger_event)
 	Events.trigger_dialogue.connect(_on_events_trigger_dialogue)
 	
-	Events.game_ready.connect(func() -> void: boss_active = false)
+	Events.game_ready.connect(reset_data)
 	Events.boss_activated.connect(func() -> void: boss_active = true)
 
 
 func reset_data() -> void:
+	boss_active = false
 	events.clear()
 
 
@@ -34,5 +35,10 @@ func _on_events_trigger_event(event_id: int) -> void:
 	
 	if not events.has(event_id):
 		events.append(event_id)
-	
+
 	print(event_id)
+
+func has_event(event_id: int) -> bool:
+	if events.has(event_id):
+		return true
+	return false

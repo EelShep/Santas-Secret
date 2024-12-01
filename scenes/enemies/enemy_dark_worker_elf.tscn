@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bekyigy3vc8qp"]
+[gd_scene load_steps=35 format=3 uid="uid://bekyigy3vc8qp"]
 
 [ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_osdn3"]
 [ext_resource type="Script" path="res://src/scripts/components/hurt_area.gd" id="2_jdrho"]
@@ -10,6 +10,10 @@
 [ext_resource type="AudioStream" uid="uid://cm3o6e878527i" path="res://src/resources/audio/sound_effects/entity/footsteps_snow.tres" id="6_koopx"]
 [ext_resource type="AudioStream" uid="uid://ndyn0kv2ackv" path="res://assets/audio/sound_effects/placeholder/404792__owlstorm__retro-video-game-sfx-hit-2.wav" id="9_apmi2"]
 [ext_resource type="AudioStream" uid="uid://0e4thg6lcgha" path="res://assets/audio/sound_effects/placeholder/455216__matrixxx__cartoon-stunned-01.wav" id="10_fqll3"]
+[ext_resource type="AudioStream" uid="uid://2ou7hdyim20i" path="res://assets/audio/sound_effects/entity/enemy/enemy_alerted_01.wav" id="11_v83ur"]
+[ext_resource type="AudioStream" uid="uid://d0w7jotnm2d36" path="res://assets/audio/sound_effects/entity/enemy/enemy_alerted_02.wav" id="12_gognh"]
+[ext_resource type="AudioStream" uid="uid://dj0x4g0p6swsu" path="res://assets/audio/sound_effects/entity/enemy/enemy_alerted_03.wav" id="13_mkifk"]
+[ext_resource type="AudioStream" uid="uid://duk7u2b1v870i" path="res://assets/audio/sound_effects/entity/enemy/enemy_alerted_04.wav" id="14_pdwjq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_txiud"]
 size = Vector2(20, 32)
@@ -222,7 +226,15 @@ _data = {
 "Stun": SubResource("Animation_ilkxr")
 }
 
-[node name="DarkWorkerElf" type="CharacterBody2D" node_paths=PackedStringArray("hit_area", "hurt_area", "emote_sprite", "footstep_player", "throw_player", "stun_player")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xssdp"]
+random_pitch = 1.05
+streams_count = 4
+stream_0/stream = ExtResource("11_v83ur")
+stream_1/stream = ExtResource("12_gognh")
+stream_2/stream = ExtResource("13_mkifk")
+stream_3/stream = ExtResource("14_pdwjq")
+
+[node name="DarkWorkerElf" type="CharacterBody2D" node_paths=PackedStringArray("hit_area", "hurt_area", "emote_sprite", "footstep_player", "throw_player", "stun_player", "alert_sfx")]
 collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_osdn3")
@@ -232,6 +244,7 @@ emote_sprite = NodePath("EmoteSprite")
 footstep_player = NodePath("AudioPlayers/FootstepSFX")
 throw_player = NodePath("AudioPlayers/ThrowPlayer")
 stun_player = NodePath("AudioPlayers/StunPlayer")
+alert_sfx = NodePath("AudioPlayers/AlertSFX")
 can_fire = true
 annotation_color = Color(1, 1, 1, 1)
 fire_cooldown_time = 2.0
@@ -338,5 +351,10 @@ bus = &"SFX"
 [node name="StunPlayer" type="AudioStreamPlayer2D" parent="AudioPlayers"]
 stream = ExtResource("10_fqll3")
 volume_db = -12.0
+pitch_scale = 0.9
+bus = &"SFX"
+
+[node name="AlertSFX" type="AudioStreamPlayer2D" parent="AudioPlayers"]
+stream = SubResource("AudioStreamRandomizer_xssdp")
 pitch_scale = 0.9
 bus = &"SFX"

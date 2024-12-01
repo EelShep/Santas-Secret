@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://peqgxbs0l0la"]
+[gd_scene load_steps=13 format=4 uid="uid://peqgxbs0l0la"]
 
 [ext_resource type="PackedScene" uid="uid://ujuwg0fbq72c" path="res://scenes/levels/map_template.tscn" id="1_40too"]
 [ext_resource type="TileSet" uid="uid://i7mf02rj7f2i" path="res://src/resources/tilesets/tileset_v2.tres" id="2_ja2gy"]
@@ -17,6 +17,9 @@ radius = 58.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2cbmr"]
 size = Vector2(46, 280)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_go31c"]
+radius = 104.307
 
 [node name="FirstLevel" instance=ExtResource("1_40too")]
 
@@ -81,3 +84,10 @@ shape = SubResource("RectangleShape2D_2cbmr")
 
 [node name="Spawner" parent="." index="8" instance=ExtResource("8_j4upv")]
 position = Vector2(528, 504)
+
+[node name="Trigger" parent="." index="9" instance=ExtResource("5_kn5ml")]
+position = Vector2(904, 480)
+event = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger" index="0"]
+shape = SubResource("CircleShape2D_go31c")
