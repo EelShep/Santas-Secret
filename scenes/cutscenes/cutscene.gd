@@ -17,6 +17,8 @@ func proceed_to_game() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if OS.has_feature("editor"):
+		input_allowed = true
 	var to_convert = []
 	for i in get_children():
 		if i is ElfConversion:

@@ -26,7 +26,9 @@ func _on_game_new_second(play_time: float) -> void:
 func on_day_night(hour: float) -> void:
 	displayed_label = day_night_label
 	displayed_label.show()
-	
+	if hour == Game.MIDNIGHT_HOUR:
+		display_message("The Morning fast approaches", 6.5)
+	if not OS.has_feature("editor"): return
 	if hour == Game.NIGHT_FALL_HOUR: displayed_label.text = "The sun has fallen" 
 	elif hour == Game.SUN_RISE_HOUR: displayed_label.text = "The sun has risen"
 	elif hour == Game.GAME_OVER_HOUR: displayed_label.text = "Game Over time reached"
