@@ -2,6 +2,7 @@ extends Node
 
 signal main_menu_ready
 signal game_ready
+signal credits_ready
 signal game_quit
 
 signal can_pause(value: bool)

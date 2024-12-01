@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dom4jt7ptglky"]
+[gd_scene load_steps=13 format=3 uid="uid://dom4jt7ptglky"]
 
 [ext_resource type="Script" path="res://src/globals/audio_controller/audio_controller.gd" id="1_a2i5f"]
 [ext_resource type="Script" path="res://src/scripts/audio/sfx_controller.gd" id="2_5xwsq"]
+[ext_resource type="AudioStream" uid="uid://k3nxjec8smph" path="res://assets/audio/music/Title Theme mp3.mp3" id="3_b7fao"]
 [ext_resource type="Script" path="res://src/scripts/audio/music_controller.gd" id="3_fum7x"]
-[ext_resource type="AudioStream" uid="uid://c4wkqkdvvj7ok" path="res://assets/audio/music/placeholder/JDSherbert - Ambiences Music Pack - Cosmic Star.ogg" id="4_14rgq"]
-[ext_resource type="AudioStream" uid="uid://qp8knl04xpdv" path="res://assets/audio/music/placeholder/JDSherbert - Ambiences Music Pack - Bloodrat Sewers.ogg" id="5_bv782"]
+[ext_resource type="AudioStream" uid="uid://7d6tf4yp024h" path="res://assets/audio/music/Day Theme mp3.mp3" id="4_mpli4"]
+[ext_resource type="AudioStream" uid="uid://bdslq7uys5i8l" path="res://assets/audio/music/Boss Theme mp3.mp3" id="5_ydu84"]
 [ext_resource type="AudioStream" uid="uid://d3snylwuv3g3d" path="res://assets/audio/sound_effects/entity/player/player_death_01.wav" id="6_38lo0"]
 [ext_resource type="AudioStream" uid="uid://3kxxe3hnhn8v" path="res://assets/audio/sound_effects/placeholder_ui/UIAffirmative2.ogg" id="6_psvmj"]
 [ext_resource type="AudioStream" uid="uid://c46ufrduegfcn" path="res://assets/audio/sound_effects/placeholder_ui/UIAffirmative1.ogg" id="7_ahxc0"]
@@ -19,8 +20,9 @@ script = ExtResource("1_a2i5f")
 [node name="MusicController" type="Node" parent="."]
 script = ExtResource("3_fum7x")
 music = {
--1: ExtResource("4_14rgq"),
-0: ExtResource("5_bv782")
+-1: ExtResource("3_b7fao"),
+0: ExtResource("4_mpli4"),
+1: ExtResource("5_ydu84")
 }
 
 [node name="SFXController" type="Node" parent="."]

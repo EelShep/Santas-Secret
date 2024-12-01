@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cleihgq3o5id1"]
+
+[ext_resource type="Script" path="res://scenes/throwable/spawner.gd" id="1_jqcr0"]
+[ext_resource type="PackedScene" uid="uid://c1cmjfr0y5tal" path="res://scenes/throwable/gold_ornament.tscn" id="2_dgyce"]
+
+[node name="Spawner" type="Node2D"]
+script = ExtResource("1_jqcr0")
+spawnable = ExtResource("2_dgyce")

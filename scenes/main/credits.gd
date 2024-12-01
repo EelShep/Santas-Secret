@@ -32,6 +32,7 @@ func _input(event: InputEvent) -> void:
 				proceed_to_menu()
 
 func _ready() -> void:
+	Events.credits_ready.emit()
 	AudioController.play_music(AudioConst.MUSIC_TITLE)
 	input_delay.timeout.connect(_on_input_delay_timeout)
 	animation_player.animation_finished.connect(_on_animation_finished)
