@@ -7,6 +7,8 @@ const DAY_TIME: String = "day_time"
 const STARTING_MAP: String = "first.tscn"
 const INITIAL_LOAD: String = "initial_load"
 
+var current_map: String = STARTING_MAP
+
 func _ready() -> void:
 	Events.main_menu_ready.connect(_on_events_main_menu_ready)
 
@@ -18,6 +20,7 @@ func reset_data() -> void:
 
 func reset_save() -> void:
 	FileAccess.open(SaveData.SAVE_PATH, FileAccess.WRITE).store_string("")
+	current_map = STARTING_MAP
 
 
 func get_data():
