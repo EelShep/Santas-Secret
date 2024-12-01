@@ -74,6 +74,7 @@ func _ready() -> void:
 	if file == "": 
 		reset_save()
 	load_save()
+	
 
 	day_night.setup(self)
 	
@@ -138,7 +139,7 @@ func save_game():
 	save_manager.set_value(GameData.GENERATED_ROOMS, generated_rooms)
 	save_manager.set_value(GameData.DAY_TIME, day_night.time)
 	save_manager.set_value(GameData.PLAY_TIME, play_time)
-	save_manager.set_value(GameData.CURR_ROOM, starting_map)
+	save_manager.set_value(GameData.CURR_ROOM, MetSys.get_current_room_name())
 	save_manager.set_value(GameData.INITIAL_LOAD, initial_load)
 	
 	save_manager.save_as_text(SaveData.SAVE_PATH)

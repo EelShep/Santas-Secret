@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/main/met_game.gd" id="1_tjrnh"]
 [ext_resource type="Script" path="res://scenes/levels/day_night.gd" id="2_ldkdj"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/enemy_santa.tscn" id="2_mfnrp"]
+[ext_resource type="PackedScene" uid="uid://bgfvyu2b5koci" path="res://scenes/enemies/enemy_santa.tscn" id="2_mfnrp"]
 [ext_resource type="Gradient" uid="uid://dv75y3trn3ns7" path="res://src/resources/daynight-gradient-texture.tres" id="3_5mp8n"]
 [ext_resource type="Script" path="res://scenes/ui/game_ui.gd" id="5_vgo4j"]
 [ext_resource type="PackedScene" uid="uid://cscdh3qxydpea" path="res://scenes/ui/pause_ui.tscn" id="6_3kgi4"]
