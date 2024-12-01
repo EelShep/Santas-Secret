@@ -268,6 +268,7 @@ footstep_player = NodePath("AudioPlayers/FootstepSFX")
 throw_player = NodePath("AudioPlayers/ThrowPlayer")
 stun_player = NodePath("AudioPlayers/StunPlayer")
 alert_sfx = NodePath("AudioPlayers/AlertSFX")
+is_santa = true
 can_fire = true
 annotation_color = Color(1, 1, 1, 1)
 fire_cooldown_time = 2.0
@@ -302,7 +303,6 @@ shape = SubResource("RectangleShape2D_8rjkw")
 position = Vector2(0, -119)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_c241t")
-animation = &"Alert"
 autoplay = "default"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
