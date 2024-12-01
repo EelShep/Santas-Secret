@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cmagxypqs3wo1"]
+[gd_scene load_steps=12 format=3 uid="uid://b8poqf3ui4x"]
 
 [ext_resource type="Script" path="res://scenes/entities/npc/npc.gd" id="1_sgwom"]
 [ext_resource type="Texture2D" uid="uid://n7mvdcj6tbj6" path="res://assets/visual/sprites/entity/npc/Mentor elf idle.png" id="2_ser75"]
+[ext_resource type="Texture2D" uid="uid://bumaphwc1qrit" path="res://assets/visual/sprites/entity/npc/dialogue_bubble.png" id="3_acd5m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u0oqg"]
 atlas = ExtResource("2_ser75")
@@ -56,13 +57,14 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q75f"]
 radius = 140.0
 
-[node name="WiseElf" type="Area2D" node_paths=PackedStringArray("sprite", "action_timer")]
+[node name="WiseElf" type="Area2D" node_paths=PackedStringArray("sprite", "action_timer", "dialogue_sprite")]
 z_index = 1
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_sgwom")
 sprite = NodePath("Sprite2D")
 action_timer = NodePath("ActionTimer")
+dialogue_sprite = NodePath("Dialogue")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 light_mask = 32
@@ -79,3 +81,7 @@ autostart = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5q75f")
 debug_color = Color(0.146935, 0.519077, 1, 0.42)
+
+[node name="Dialogue" type="Sprite2D" parent="."]
+position = Vector2(49, -74)
+texture = ExtResource("3_acd5m")

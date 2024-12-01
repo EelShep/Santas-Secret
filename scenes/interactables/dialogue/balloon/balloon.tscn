@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://73jm5qjy52vq"]
+[gd_scene load_steps=15 format=3 uid="uid://73jm5qjy52vq"]
 
 [ext_resource type="Script" path="res://scenes/interactables/dialogue/balloon/balloon.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="Texture2D" uid="uid://b4uo0r461qb04" path="res://assets/visual/sprites/ui/9-patch.png" id="2_d5825"]
 [ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="3_72ixx"]
+[ext_resource type="AudioStream" uid="uid://pc7pehocka2c" path="res://assets/audio/sound_effects/cutscene&dialogue/dialogue_short_01.wav" id="7_q5rxo"]
+[ext_resource type="AudioStream" uid="uid://y3j16mwrrpwv" path="res://assets/audio/sound_effects/cutscene&dialogue/dialogue_short_02.wav" id="8_rhbnx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -92,10 +94,17 @@ corner_radius_bottom_left = 1
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[node name="Balloon" type="CanvasLayer"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jjgxf"]
+random_pitch = 1.05
+streams_count = 2
+stream_0/stream = ExtResource("7_q5rxo")
+stream_1/stream = ExtResource("8_rhbnx")
+
+[node name="Balloon" type="CanvasLayer" node_paths=PackedStringArray("talk_sfx")]
 process_mode = 3
 layer = 100
 script = ExtResource("1_36de5")
+talk_sfx = NodePath("TalkSFX")
 
 [node name="Balloon" type="Control" parent="."]
 unique_name_in_owner = true
@@ -217,6 +226,9 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_b7h82")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_syigy")
 theme_override_styles/normal = SubResource("StyleBoxFlat_syigy")
 text = "Response example"
+
+[node name="TalkSFX" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_jjgxf")
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
 [connection signal="response_selected" from="Balloon/Responses/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]

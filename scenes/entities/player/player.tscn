@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cus86duxmepnn"]
+[gd_scene load_steps=23 format=3 uid="uid://cus86duxmepnn"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_euw2l"]
 [ext_resource type="Texture2D" uid="uid://ckbe6wd0liblc" path="res://assets/visual/sprites/entity/player/Player_Spritesheet_v2.png" id="2_v3ml3"]
@@ -7,6 +7,10 @@
 [ext_resource type="Script" path="res://src/scripts/components/hurt_area.gd" id="5_takns"]
 [ext_resource type="AudioStream" uid="uid://cm3o6e878527i" path="res://src/resources/audio/sound_effects/entity/footsteps_snow.tres" id="6_rsh1v"]
 [ext_resource type="AudioStream" uid="uid://d2k4vayhadn2v" path="res://assets/audio/sound_effects/placeholder/369010__flying_deer_fx__getting-hit-eeeh-02-mouth-fx-man-voice.wav" id="7_0lqkm"]
+[ext_resource type="AudioStream" uid="uid://b6e3672raqu3l" path="res://assets/audio/sound_effects/entity/jump/jump_01.wav" id="8_fwqhs"]
+[ext_resource type="AudioStream" uid="uid://ddnoqoo7du81t" path="res://assets/audio/sound_effects/entity/jump/jump_02.wav" id="9_kkhrm"]
+[ext_resource type="AudioStream" uid="uid://cumcp8quc8s34" path="res://assets/audio/sound_effects/entity/jump/jump_03.wav" id="10_87vl2"]
+[ext_resource type="AudioStream" uid="uid://c21odpc4ehmbl" path="res://assets/audio/sound_effects/entity/jump/jump_04.wav" id="11_sj5xq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vb85q"]
 size = Vector2(16, 40)
@@ -148,7 +152,15 @@ size = Vector2(20, 32)
 [sub_resource type="CircleShape2D" id="CircleShape2D_nu3fp"]
 radius = 30.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hurt_area", "interaction_finder", "footstep_player", "stun_player")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_36odt"]
+random_pitch = 1.05
+streams_count = 4
+stream_0/stream = ExtResource("8_fwqhs")
+stream_1/stream = ExtResource("9_kkhrm")
+stream_2/stream = ExtResource("10_87vl2")
+stream_3/stream = ExtResource("11_sj5xq")
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hurt_area", "interaction_finder", "footstep_player", "stun_player", "jump_player")]
 z_index = 2
 collision_layer = 2
 collision_mask = 49
@@ -157,6 +169,7 @@ hurt_area = NodePath("Components/HurtArea")
 interaction_finder = NodePath("Components/InteractionFinder")
 footstep_player = NodePath("AudioComponents/FootstepSFX")
 stun_player = NodePath("AudioComponents/StunPlayer")
+jump_player = NodePath("AudioComponents/JumpPlayer")
 push_force = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -223,6 +236,12 @@ bus = &"SFX"
 
 [node name="StunPlayer" type="AudioStreamPlayer2D" parent="AudioComponents"]
 stream = ExtResource("7_0lqkm")
+volume_db = -12.0
+pitch_scale = 1.05
+bus = &"SFX"
+
+[node name="JumpPlayer" type="AudioStreamPlayer2D" parent="AudioComponents"]
+stream = SubResource("AudioStreamRandomizer_36odt")
 volume_db = -12.0
 pitch_scale = 1.05
 bus = &"SFX"

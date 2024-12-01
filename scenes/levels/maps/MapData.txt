@@ -1,5 +1,5 @@
 [-6,-5,0]
-1,0,1,0|||start.tscn
+1,0,1,0|||lobby_area_3.tscn
 [-5,-5,0]
 1,1,1,1|||FactoryArea1.tscn
 [-4,-5,0]
@@ -11,7 +11,7 @@
 [-6,-6,0]
 1,0,0,0|||DeadEnd2.tscn
 [-6,-4,0]
-1,1,0,0|||lobby_area_3.tscn
+1,1,0,0|||first.tscn
 [-5,-4,0]
 1,0,1,1|||lobby_area_2.tscn
 [-4,-4,0]
