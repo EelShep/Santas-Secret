@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cdkfvx081psyy"]
 
 [ext_resource type="Script" path="res://scenes/interactables/dialogue/dialogue.gd" id="1_onluw"]
-[ext_resource type="PackedScene" uid="uid://bc8380257i3sy" path="res://scenes/interactables/dialogue/balloon/balloon_top.tscn" id="2_clnou"]
-[ext_resource type="Resource" uid="uid://6uoi1lk4u0ck" path="res://src/resources/dialogue/dialogue.dialogue" id="3_n8kwk"]
+[ext_resource type="PackedScene" uid="uid://c58rbowo44rl0" path="res://scenes/interactables/dialogue/balloon/balloon_top.tscn" id="2_clnou"]
+[ext_resource type="Resource" uid="uid://6uoi1lk4u0ck" path="res://src/resources/dialogue/dialogue.dialogue" id="3_kiesd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qxtot"]
 radius = 40.0
@@ -12,7 +12,7 @@ collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_onluw")
 dialog_balloon = ExtResource("2_clnou")
-dialogue_resource = ExtResource("3_n8kwk")
+dialogue_resource = ExtResource("3_kiesd")
 canvas_layer = NodePath("CanvasLayer")
 prompt_control = NodePath("CanvasLayer/MarginContainer/PromptControl")
 
