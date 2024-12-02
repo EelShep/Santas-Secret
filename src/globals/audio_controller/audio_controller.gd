@@ -24,6 +24,8 @@ func _ready() -> void:
 	Events.game_ready.connect(on_events_game_ready)
 	Events.map_ready.connect(on_events_map_ready)
 	
+	Events.boss_activated.connect(on_events_boss_activated)
+	
 	AudioServer.set_bus_volume_db(AudioConst.BUS_SFX_IDX, -15.0)
 
 	
@@ -50,6 +52,10 @@ func on_events_main_menu_ready() -> void:
 
 func on_events_game_ready() -> void:
 	music_controller.play_music(AudioConst.MUSIC_TRACK_0)
+	reset_music_effects()
+
+func on_events_boss_activated() -> void:
+	music_controller.play_music(AudioConst.MUSIC_BOSS_THEME)
 	reset_music_effects()
 	
 func on_events_map_ready(area: int) -> void:

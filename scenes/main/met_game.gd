@@ -74,6 +74,7 @@ func _ready() -> void:
 	if file == "": 
 		reset_save()
 	load_save()
+	
 
 	day_night.setup(self)
 	
@@ -132,13 +133,13 @@ func reload_scene() -> void:
 	get_tree().reload_current_scene()
 
 #region SAVE FUNCTIONS
-func save_game():
+func save_game(save_map: bool = false):
 	reset_map_starting_coords()
 	var save_manager := SaveManager.new()
 	save_manager.set_value(GameData.GENERATED_ROOMS, generated_rooms)
 	save_manager.set_value(GameData.DAY_TIME, day_night.time)
 	save_manager.set_value(GameData.PLAY_TIME, play_time)
-	save_manager.set_value(GameData.CURR_ROOM, starting_map)
+	save_manager.set_value(GameData.CURR_ROOM, GameData.current_map)
 	save_manager.set_value(GameData.INITIAL_LOAD, initial_load)
 	
 	save_manager.save_as_text(SaveData.SAVE_PATH)
@@ -202,6 +203,7 @@ func _on_day_night_time_tick(day:int, hour:int, minute:int) -> void:
 #region Signal Functions
 func _on_events_checkpoint_activated() -> void:
 	game_ui.display_message("Checkpoint Activated")
+	GameData.current_map = MetSys.get_current_room_name()
 	save_game()
 
 func _on_events_dialogue_toggle(value: bool) -> void:

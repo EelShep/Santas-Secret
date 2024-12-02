@@ -1,10 +1,10 @@
 ~ start
 
 Wise Old Elf: I can’t believe it It is you, the chosen one
-Player: What?
+Buddy: What?
 Wise Old Elf: Quick there’s no time
 Wise Old Elf: Santa’s planning something you must stop him.
-Player: Helloo I just got here okay...
+Buddy: Helloo I just got here okay...
 Wise Old Elf: Quick pick up that toy on the floor
 Wise Old Elf: Throw it at the Evil Elves to stun them
 % Wise Old Elf: Do you understand?
@@ -38,9 +38,20 @@ Wise Old Elf: Throw it using [Left Click]
 ~ start_complete
 
 Wise Old Elf: You must protect us brave elf by going deep into Santa’s base before the morning rises and he erases the evidence of such evil that lies…
-Player: Hey I came here looking for a job okay. Not this shit
+Buddy: Hey I came here looking for a job okay. Not this shit
 Wise Old Elf: I’ll give a billion Christmas cookies-
-Player: Deal 
+Buddy: Deal 
+
+=> END
+
+~ santa
+
+Santa: What are you doing here!?!?
+Buddy: Oh Shit!
+Santa: You've seen too much..
+Santa: Prepare to DIE!!!!!
+Wise Old Elf: Run Buddy!!
+Wise Old Elf: Flee this building and reveal what you have seen!!
 
 => END
 
