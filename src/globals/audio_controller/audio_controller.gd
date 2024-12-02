@@ -22,7 +22,9 @@ func _ready() -> void:
 	Events.main_menu_ready.connect(on_events_main_menu_ready)
 	Events.credits_ready.connect(on_events_main_menu_ready)
 	Events.game_ready.connect(on_events_game_ready)
-	Events.map_ready.connect(on_events_map_ready)
+	#NOTE Events.map_ready.connect(on_events_map_ready)
+	
+	Events.boss_activated.connect(on_events_boss_activated)
 	
 	Events.boss_activated.connect(on_events_boss_activated)
 	
@@ -58,8 +60,8 @@ func on_events_boss_activated() -> void:
 	music_controller.play_music(AudioConst.MUSIC_BOSS_THEME)
 	reset_music_effects()
 	
-func on_events_map_ready(area: int) -> void:
-	music_controller.play_music(area)
+'func on_events_map_ready(area: int) -> void:
+	music_controller.play_music(area)'
 #endregion
 
 func reset_music_effects() -> void:
